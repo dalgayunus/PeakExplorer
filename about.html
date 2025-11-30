@@ -1,0 +1,475 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haqqımızda | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="about-page">
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html" class="active">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-hero about-hero">
+        <div class="page-hero-content">
+            <h1 data-lang-az="Haqqımızda" data-lang-en="About Us" data-lang-ru="О нас" data-lang-tr="Hakkımızda">Haqqımızda</h1>
+            <p data-lang-az="PeakExplorer - Azərbaycanın dağ turizmi lideri" data-lang-en="PeakExplorer - Azerbaijan's mountain tourism leader" data-lang-ru="PeakExplorer - лидер горного туризма Азербайджана" data-lang-tr="PeakExplorer - Azerbaycan'ın dağ turizmi lideri">PeakExplorer - Azərbaycanın dağ turizmi lideri</p>
+        </div>
+    </section>
+
+    
+    <section class="about-story">
+        <div class="about-story-container">
+            <div class="story-content">
+                <span class="section-label" data-lang-az="Hekayəmiz" data-lang-en="Our Story" data-lang-ru="Наша история" data-lang-tr="Hikayemiz">Hekayəmiz</span>
+                <h2 data-lang-az="2015-ci ildən dağları sevənlərə xidmət edirik" data-lang-en="Serving mountain lovers since 2015" data-lang-ru="Служим любителям гор с 2015 года" data-lang-tr="2015'ten beri dağ severlere hizmet ediyoruz">2015-ci ildən dağları sevənlərə xidmət edirik</h2>
+                <p data-lang-az="PeakExplorer, Azərbaycanın möhtəşəm dağ mənzərələrini dünyaya tanıtmaq məqsədi ilə bir qrup həvəsli alpinist tərəfindən qurulub. İlk günümüzdən bəri minlərlə turisti dağların sehrli dünyası ilə tanış etdik." data-lang-en="PeakExplorer was founded by a group of passionate alpinists with the goal of introducing Azerbaijan's magnificent mountain landscapes to the world. Since our first day, we have introduced thousands of tourists to the magical world of mountains." data-lang-ru="PeakExplorer был основан группой увлеченных альпинистов с целью познакомить мир с великолепными горными пейзажами Азербайджана. С первого дня мы познакомили тысячи туристов с волшебным миром гор." data-lang-tr="PeakExplorer, Azerbaycan'ın muhteşem dağ manzaralarını dünyaya tanıtmak amacıyla tutkulu bir grup dağcı tarafından kuruldu. İlk günümüzden beri binlerce turisti dağların büyülü dünyasıyla tanıştırdık.">PeakExplorer, Azərbaycanın möhtəşəm dağ mənzərələrini dünyaya tanıtmaq məqsədi ilə bir qrup həvəsli alpinist tərəfindən qurulub. İlk günümüzdən bəri minlərlə turisti dağların sehrli dünyası ilə tanış etdik.</p>
+                <p data-lang-az="Missiyamız hər kəsə təhlükəsiz və unudulmaz dağ macərası yaşatmaqdır. Peşəkar komandamız, keyfiyyətli avadanlıqlarımız və diqqətli planlaşdırmamızla sizə ən yaxşı xidməti təqdim edirik." data-lang-en="Our mission is to provide everyone with a safe and unforgettable mountain adventure. With our professional team, quality equipment and careful planning, we offer you the best service." data-lang-ru="Наша миссия - обеспечить каждому безопасное и незабываемое горное приключение. С нашей профессиональной командой, качественным оборудованием и тщательным планированием мы предлагаем вам лучший сервис." data-lang-tr="Misyonumuz herkese güvenli ve unutulmaz bir dağ macerası yaşatmaktır. Profesyonel ekibimiz, kaliteli ekipmanlarımız ve dikkatli planlamanızla size en iyi hizmeti sunuyoruz.">Missiyamız hər kəsə təhlükəsiz və unudulmaz dağ macərası yaşatmaqdır. Peşəkar komandamız, keyfiyyətli avadanlıqlarımız və diqqətli planlaşdırmamızla sizə ən yaxşı xidməti təqdim edirik.</p>
+            </div>
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600" alt="PeakExplorer Team">
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about-stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-icon">🏔️</span>
+                <span class="stat-number">10+</span>
+                <span class="stat-label" data-lang-az="İl Təcrübə" data-lang-en="Years Experience" data-lang-ru="Лет опыта" data-lang-tr="Yıl Deneyim">İl Təcrübə</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">👥</span>
+                <span class="stat-number">5000+</span>
+                <span class="stat-label" data-lang-az="Məmnun Müştəri" data-lang-en="Happy Customers" data-lang-ru="Довольных клиентов" data-lang-tr="Mutlu Müşteri">Məmnun Müştəri</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🎯</span>
+                <span class="stat-number">1000+</span>
+                <span class="stat-label" data-lang-az="Uğurlu Tur" data-lang-en="Successful Tours" data-lang-ru="Успешных туров" data-lang-tr="Başarılı Tur">Uğurlu Tur</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-number">50+</span>
+                <span class="stat-label" data-lang-az="Peşəkar Bələdçi" data-lang-en="Professional Guides" data-lang-ru="Профессиональных гидов" data-lang-tr="Profesyonel Rehber">Peşəkar Bələdçi</span>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about-values">
+        <div class="values-container">
+            <div class="values-header">
+                <span class="section-label" data-lang-az="Dəyərlərimiz" data-lang-en="Our Values" data-lang-ru="Наши ценности" data-lang-tr="Değerlerimiz">Dəyərlərimiz</span>
+                <h2 data-lang-az="Nəyə inanırıq" data-lang-en="What we believe in" data-lang-ru="Во что мы верим" data-lang-tr="Neye inanıyoruz">Nəyə inanırıq</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-icon">🛡️</span>
+                    <h3 data-lang-az="Təhlükəsizlik" data-lang-en="Safety" data-lang-ru="Безопасность" data-lang-tr="Güvenlik">Təhlükəsizlik</h3>
+                    <p data-lang-az="İştirakçılarımızın təhlükəsizliyi hər şeydən öncə gəlir. Bütün turlarımız sertifikatlı bələdçilər tərəfindən aparılır və tam sığorta ilə təmin edilir." data-lang-en="The safety of our participants comes before everything. All our tours are conducted by certified guides and fully insured." data-lang-ru="Безопасность наших участников превыше всего. Все наши туры проводятся сертифицированными гидами и полностью застрахованы." data-lang-tr="Katılımcılarımızın güvenliği her şeyden önce gelir. Tüm turlarımız sertifikalı rehberler tarafından yürütülür ve tam sigortalıdır.">İştirakçılarımızın təhlükəsizliyi hər şeydən öncə gəlir. Bütün turlarımız sertifikatlı bələdçilər tərəfindən aparılır və tam sığorta ilə təmin edilir.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">⭐</span>
+                    <h3 data-lang-az="Keyfiyyət" data-lang-en="Quality" data-lang-ru="Качество" data-lang-tr="Kalite">Keyfiyyət</h3>
+                    <p data-lang-az="Ən yaxşı avadanlıq, ən təcrübəli bələdçilər və ən diqqətli planlaşdırma ilə sizə premium xidmət təqdim edirik." data-lang-en="We provide premium service with the best equipment, most experienced guides and most careful planning." data-lang-ru="Мы предоставляем премиум-сервис с лучшим оборудованием, самыми опытными гидами и тщательным планированием." data-lang-tr="En iyi ekipman, en deneyimli rehberler ve en dikkatli planlama ile size premium hizmet sunuyoruz.">Ən yaxşı avadanlıq, ən təcrübəli bələdçilər və ən diqqətli planlaşdırma ilə sizə premium xidmət təqdim edirik.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🌿</span>
+                    <h3 data-lang-az="Ekoloji Məsuliyyət" data-lang-en="Eco Responsibility" data-lang-ru="Экологическая ответственность" data-lang-tr="Ekolojik Sorumluluk">Ekoloji Məsuliyyət</h3>
+                    <p data-lang-az="Təbiəti qorumaq bizim borcumuzdur. 'İz qoyma' prinsipinə əməl edir, yerli ekosistemləri qoruyuruq." data-lang-en="Protecting nature is our duty. We follow the 'leave no trace' principle and protect local ecosystems." data-lang-ru="Защита природы - наш долг. Мы следуем принципу 'не оставлять следов' и защищаем местные экосистемы." data-lang-tr="Doğayı korumak bizim görevimizdir. 'İz bırakma' ilkesine uyuyor, yerel ekosistemleri koruyoruz.">Təbiəti qorumaq bizim borcumuzdur. 'İz qoyma' prinsipinə əməl edir, yerli ekosistemləri qoruyuruq.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">❤️</span>
+                    <h3 data-lang-az="Həvəs" data-lang-en="Passion" data-lang-ru="Страсть" data-lang-tr="Tutku">Həvəs</h3>
+                    <p data-lang-az="Dağları sevirik və bu sevgini sizinlə bölüşmək istəyirik. Hər tur bizim üçün yeni bir macəradır." data-lang-en="We love mountains and want to share this love with you. Every tour is a new adventure for us." data-lang-ru="Мы любим горы и хотим поделиться этой любовью с вами. Каждый тур для нас - новое приключение." data-lang-tr="Dağları seviyoruz ve bu sevgiyi sizinle paylaşmak istiyoruz. Her tur bizim için yeni bir maceradır.">Dağları sevirik və bu sevgini sizinlə bölüşmək istəyirik. Hər tur bizim üçün yeni bir macəradır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about-team">
+        <div class="team-container">
+            <div class="team-header">
+                <span class="section-label" data-lang-az="Komandamız" data-lang-en="Our Team" data-lang-ru="Наша команда" data-lang-tr="Ekibimiz">Komandamız</span>
+                <h2 data-lang-az="Peşəkar bələdçilərimizlə tanış olun" data-lang-en="Meet our professional guides" data-lang-ru="Познакомьтесь с нашими профессиональными гидами" data-lang-tr="Profesyonel rehberlerimizle tanışın">Peşəkar bələdçilərimizlə tanış olun</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-card" onclick="openGuideModal('elchin')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300" alt="Elçin Məmmədov">
+                    </div>
+                    <div class="team-info">
+                        <h3>Elçin Məmmədov</h3>
+                        <span class="team-role" data-lang-az="Baş Bələdçi" data-lang-en="Head Guide" data-lang-ru="Главный гид" data-lang-tr="Baş Rehber">Baş Bələdçi</span>
+                        <p data-lang-az="15 il təcrübə • Alpinizm mütəxəssisi" data-lang-en="15 years experience • Alpinism specialist" data-lang-ru="15 лет опыта • Специалист по альпинизму" data-lang-tr="15 yıl deneyim • Alpinizm uzmanı">15 il təcrübə • Alpinizm mütəxəssisi</p>
+                    </div>
+                </div>
+                <div class="team-card" onclick="openGuideModal('leyla')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300" alt="Leyla Həsənova">
+                    </div>
+                    <div class="team-info">
+                        <h3>Leyla Həsənova</h3>
+                        <span class="team-role" data-lang-az="Trekking Bələdçisi" data-lang-en="Trekking Guide" data-lang-ru="Гид по треккингу" data-lang-tr="Trekking Rehberi">Trekking Bələdçisi</span>
+                        <p data-lang-az="8 il təcrübə • Ekoturizm eksperti" data-lang-en="8 years experience • Ecotourism expert" data-lang-ru="8 лет опыта • Эксперт по экотуризму" data-lang-tr="8 yıl deneyim • Ekoturizm uzmanı">8 il təcrübə • Ekoturizm eksperti</p>
+                    </div>
+                </div>
+                <div class="team-card" onclick="openGuideModal('rashad')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300" alt="Rəşad Əliyev">
+                    </div>
+                    <div class="team-info">
+                        <h3>Rəşad Əliyev</h3>
+                        <span class="team-role" data-lang-az="Qış Turları Bələdçisi" data-lang-en="Winter Tours Guide" data-lang-ru="Гид по зимним турам" data-lang-tr="Kış Turları Rehberi">Qış Turları Bələdçisi</span>
+                        <p data-lang-az="10 il təcrübə • Xizək instruktoru" data-lang-en="10 years experience • Ski instructor" data-lang-ru="10 лет опыта • Инструктор по лыжам" data-lang-tr="10 yıl deneyim • Kayak eğitmeni">10 il təcrübə • Xizək instruktoru</p>
+                    </div>
+                </div>
+                <div class="team-card" onclick="openGuideModal('nigar')">
+                    <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300" alt="Nigar Quliyeva">
+                    </div>
+                    <div class="team-info">
+                        <h3>Nigar Quliyeva</h3>
+                        <span class="team-role" data-lang-az="Mədəni Turlar Bələdçisi" data-lang-en="Cultural Tours Guide" data-lang-ru="Гид по культурным турам" data-lang-tr="Kültür Turları Rehberi">Mədəni Turlar Bələdçisi</span>
+                        <p data-lang-az="6 il təcrübə • Tarixçi" data-lang-en="6 years experience • Historian" data-lang-ru="6 лет опыта • Историк" data-lang-tr="6 yıl deneyim • Tarihçi">6 il təcrübə • Tarixçi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <div class="guide-modal" id="guideModal">
+        <div class="guide-modal-content">
+            <button class="modal-close" onclick="closeGuideModal()">✕</button>
+            <div class="guide-modal-body">
+                <div class="guide-modal-image">
+                    <img id="guideModalImage" src="" alt="">
+                </div>
+                <div class="guide-modal-info">
+                    <h2 id="guideModalName"></h2>
+                    <span class="guide-modal-role" id="guideModalRole"></span>
+                    <div class="guide-modal-stats">
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalExp"></span>
+                            <span class="guide-stat-label" data-lang-az="İl Təcrübə" data-lang-en="Years Experience" data-lang-ru="Лет опыта" data-lang-tr="Yıl Deneyim">İl Təcrübə</span>
+                        </div>
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalTours"></span>
+                            <span class="guide-stat-label" data-lang-az="Tur" data-lang-en="Tours" data-lang-ru="Туров" data-lang-tr="Tur">Tur</span>
+                        </div>
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalRating"></span>
+                            <span class="guide-stat-label" data-lang-az="Reytinq" data-lang-en="Rating" data-lang-ru="Рейтинг" data-lang-tr="Puan">Reytinq</span>
+                        </div>
+                    </div>
+                    <p class="guide-modal-bio" id="guideModalBio"></p>
+                    <div class="guide-modal-certs">
+                        <h4 data-lang-az="Sertifikatlar" data-lang-en="Certifications" data-lang-ru="Сертификаты" data-lang-tr="Sertifikalar">Sertifikatlar</h4>
+                        <ul id="guideModalCerts"></ul>
+                    </div>
+                    <div class="guide-modal-langs">
+                        <h4 data-lang-az="Dillər" data-lang-en="Languages" data-lang-ru="Языки" data-lang-tr="Diller">Dillər</h4>
+                        <div id="guideModalLangs"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <section class="about-cta">
+        <div class="cta-content">
+            <h2 data-lang-az="Bizimlə səyahətə hazırsınız?" data-lang-en="Ready for an adventure with us?" data-lang-ru="Готовы к приключению с нами?" data-lang-tr="Bizimle maceraya hazır mısınız?">Bizimlə səyahətə hazırsınız?</h2>
+            <p data-lang-az="İndi qeydiyyatdan keçin və növbəti turumuza qoşulun" data-lang-en="Register now and join our next tour" data-lang-ru="Зарегистрируйтесь сейчас и присоединяйтесь к нашему следующему туру" data-lang-tr="Şimdi kaydolun ve bir sonraki turumuza katılın">İndi qeydiyyatdan keçin və növbəti turumuza qoşulun</p>
+            <div class="cta-buttons">
+                <a href="index (2).html#tours" class="btn btn-primary" data-lang-az="Turları Gör" data-lang-en="View Tours" data-lang-ru="Посмотреть туры" data-lang-tr="Turları Gör">Turları Gör</a>
+                <a href="contact.html" class="btn btn-secondary" data-lang-az="Əlaqə" data-lang-en="Contact" data-lang-ru="Контакты" data-lang-tr="İletişim">Əlaqə</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang-az="© 2025 PeakExplorer. Bütün hüquqlar qorunur." data-lang-en="© 2025 PeakExplorer. All rights reserved." data-lang-ru="© 2025 PeakExplorer. Все права защищены." data-lang-tr="© 2025 PeakExplorer. Tüm hakları saklıdır.">© 2025 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        const guidesData = {
+            elchin: {
+                name: 'Elçin Məmmədov',
+                role: { az: 'Baş Bələdçi', en: 'Head Guide', ru: 'Главный гид', tr: 'Baş Rehber' },
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
+                experience: 15,
+                tours: 450,
+                rating: '4.9',
+                bio: {
+                    az: 'Elçin 15 ildən artıqdır ki, dağ turizmində fəaliyyət göstərir. Bazardüzü zirvəsini 20 dəfədən çox fəth edib. Beynəlxalq alpinizm sertifikatlarına malikdir və bir neçə xilasetmə əməliyyatında iştirak edib. Azərbaycan Alpinizm Federasiyasının üzvüdür.',
+                    en: 'Elchin has been active in mountain tourism for over 15 years. He has conquered Bazarduzu peak more than 20 times. He holds international alpinism certificates and has participated in several rescue operations. He is a member of the Azerbaijan Alpinism Federation.',
+                    ru: 'Эльчин работает в горном туризме более 15 лет. Он покорил вершину Базардюзю более 20 раз. Имеет международные сертификаты по альпинизму и участвовал в нескольких спасательных операциях. Член Федерации альпинизма Азербайджана.',
+                    tr: 'Elçin 15 yılı aşkın süredir dağ turizminde aktif. Bazardüzü zirvesini 20\'den fazla kez fethetti. Uluslararası dağcılık sertifikalarına sahip ve birçok kurtarma operasyonuna katıldı. Azerbaycan Dağcılık Federasyonu üyesidir.'
+                },
+                certs: ['UIAGM Alpinizm Sertifikatı', 'İlk Yardım Sertifikatı', 'Xilasetmə Təlimi', 'Hava Proqnozu Mütəxəssisi'],
+                languages: ['🇦🇿 Azərbaycan', '🇷🇺 Русский', '🇬🇧 English']
+            },
+            leyla: {
+                name: 'Leyla Həsənova',
+                role: { az: 'Trekking Bələdçisi', en: 'Trekking Guide', ru: 'Гид по треккингу', tr: 'Trekking Rehberi' },
+                image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400',
+                experience: 8,
+                tours: 280,
+                rating: '4.8',
+                bio: {
+                    az: 'Leyla ekoturizm və təbiət mühafizəsi sahəsində mütəxəssisdir. Xınalıq, Lahıc və digər tarixi kəndlərə turlar təşkil edir. Biologiya üzrə magistr dərəcəsinə malikdir və dağ florası haqqında geniş biliyə sahibdir.',
+                    en: 'Leyla is a specialist in ecotourism and nature conservation. She organizes tours to Khinalig, Lahij and other historical villages. She holds a master\'s degree in biology and has extensive knowledge about mountain flora.',
+                    ru: 'Лейла - специалист по экотуризму и охране природы. Организует туры в Хыналыг, Лагич и другие исторические села. Имеет степень магистра биологии и обширные знания о горной флоре.',
+                    tr: 'Leyla ekoturizm ve doğa koruma uzmanıdır. Hınalık, Lahıc ve diğer tarihi köylere turlar düzenler. Biyoloji alanında yüksek lisans derecesine sahip ve dağ florası hakkında geniş bilgiye sahiptir.'
+                },
+                certs: ['Ekoturizm Sertifikatı', 'İlk Yardım Sertifikatı', 'Botanika Eksperti', 'Fotoqrafiya Kursu'],
+                languages: ['🇦🇿 Azərbaycan', '🇬🇧 English', '🇹🇷 Türkçe']
+            },
+            rashad: {
+                name: 'Rəşad Əliyev',
+                role: { az: 'Qış Turları Bələdçisi', en: 'Winter Tours Guide', ru: 'Гид по зимним турам', tr: 'Kış Turları Rehberi' },
+                image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400',
+                experience: 10,
+                tours: 320,
+                rating: '4.9',
+                bio: {
+                    az: 'Rəşad professional xizəkçi və qış idmanları mütəxəssisidir. Şahdağ və Tufandağ kurortlarında 10 il instruktor kimi çalışıb. Qar uçqunları və qış təhlükəsizliyi üzrə sertifikatlara malikdir.',
+                    en: 'Rashad is a professional skier and winter sports specialist. He has worked as an instructor at Shahdag and Tufandag resorts for 10 years. He holds certifications in avalanche safety and winter safety.',
+                    ru: 'Рашад - профессиональный лыжник и специалист по зимним видам спорта. 10 лет работал инструктором на курортах Шахдаг и Туфандаг. Имеет сертификаты по лавинной и зимней безопасности.',
+                    tr: 'Reşad profesyonel kayakçı ve kış sporları uzmanıdır. Şahdağ ve Tufandağ tatil köylerinde 10 yıl eğitmen olarak çalıştı. Çığ ve kış güvenliği sertifikalarına sahiptir.'
+                },
+                certs: ['FIS Xizək Instruktoru', 'Çığ Təhlükəsizliyi', 'Dağ Xilasetməsi', 'İlk Yardım'],
+                languages: ['🇦🇿 Azərbaycan', '🇷🇺 Русский', '🇬🇧 English']
+            },
+            nigar: {
+                name: 'Nigar Quliyeva',
+                role: { az: 'Mədəni Turlar Bələdçisi', en: 'Cultural Tours Guide', ru: 'Гид по культурным турам', tr: 'Kültür Turları Rehberi' },
+                image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400',
+                experience: 6,
+                tours: 180,
+                rating: '4.7',
+                bio: {
+                    az: 'Nigar tarix üzrə doktorantura tələbəsidir və Azərbaycanın qədim mədəniyyəti haqqında dərin biliyə malikdir. Qobustan, Xınalıq və digər tarixi məkanlara mədəni turlar təşkil edir. 4 dildə ekskursiya apara bilir.',
+                    en: 'Nigar is a PhD student in history and has deep knowledge about Azerbaijan\'s ancient culture. She organizes cultural tours to Gobustan, Khinalig and other historical places. She can conduct excursions in 4 languages.',
+                    ru: 'Нигяр - аспирант исторического факультета, глубоко знает древнюю культуру Азербайджана. Организует культурные туры в Гобустан, Хыналыг и другие исторические места. Может проводить экскурсии на 4 языках.',
+                    tr: 'Nigar tarih doktora öğrencisidir ve Azerbaycan\'ın kadim kültürü hakkında derin bilgiye sahiptir. Gobustan, Hınalık ve diğer tarihi mekanlara kültür turları düzenler. 4 dilde tur yapabilir.'
+                },
+                certs: ['Turizm Gid Lisenziyası', 'Arxeologiya Kursu', 'İlk Yardım', 'Fotoqrafiya'],
+                languages: ['🇦🇿 Azərbaycan', '🇷🇺 Русский', '🇬🇧 English', '🇹🇷 Türkçe']
+            }
+        };
+        let currentLanguage = localStorage.getItem('language') || 'az';
+        
+        const langFlags = { 'az': '🇦🇿', 'en': '🇬🇧', 'ru': '🇷🇺', 'tr': '🇹🇷' };
+        const langNames = { 'az': 'AZ', 'en': 'EN', 'ru': 'RU', 'tr': 'TR' };
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            const langBtn = document.getElementById('langDropdownBtn');
+            if (langBtn) {
+                langBtn.querySelector('.lang-current').textContent = langNames[lang];
+            }
+            
+            document.querySelectorAll('[data-lang-az]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`) || el.getAttribute('data-lang-az');
+                if (text) el.textContent = text;
+            });
+            
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+        }
+        function openGuideModal(guideId) {
+            const guide = guidesData[guideId];
+            if (!guide) return;
+
+            document.getElementById('guideModalImage').src = guide.image;
+            document.getElementById('guideModalName').textContent = guide.name;
+            document.getElementById('guideModalRole').textContent = guide.role[currentLanguage] || guide.role.az;
+            document.getElementById('guideModalExp').textContent = guide.experience;
+            document.getElementById('guideModalTours').textContent = guide.tours;
+            document.getElementById('guideModalRating').textContent = '⭐ ' + guide.rating;
+            document.getElementById('guideModalBio').textContent = guide.bio[currentLanguage] || guide.bio.az;
+            
+            document.getElementById('guideModalCerts').innerHTML = guide.certs.map(cert => `<li>✓ ${cert}</li>`).join('');
+            document.getElementById('guideModalLangs').innerHTML = guide.languages.map(lang => `<span class="lang-tag">${lang}</span>`).join('');
+
+            document.getElementById('guideModal').classList.add('active');
+        }
+
+        function closeGuideModal() {
+            document.getElementById('guideModal').classList.remove('active');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage(currentLanguage);
+            document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.closest('.nav-dropdown');
+                    const isActive = dropdown.classList.contains('active');
+                    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+                    if (!isActive) dropdown.classList.add('active');
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-dropdown')) {
+                    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+                }
+            });
+            
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+            });
+            document.getElementById('guideModal').addEventListener('click', function(e) {
+                if (e.target === this) closeGuideModal();
+            });
+        });
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2392 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dağ Məlumatları | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="mountain-hero" id="mountainHero">
+        <div class="hero-overlay"></div>
+        <div class="mountain-hero-content">
+            <span class="back-link">
+                <a href="index (2).html#map">← Xəritəyə Qayıt</a>
+            </span>
+            <h1 id="heroMountainName">Dağ Adı</h1>
+            <div class="hero-meta">
+                <span class="hero-altitude" id="heroAltitude">
+                    <span class="meta-icon">📏</span> 0000 m
+                </span>
+                <span class="hero-difficulty" id="heroDifficulty">
+                    <span class="meta-icon">⚡</span> Çətinlik
+                </span>
+            </div>
+            
+            
+            <div class="weather-widget" id="weatherWidget">
+                <div class="weather-current" id="weatherCurrent">
+                    <div class="weather-icon" id="weatherIcon">🌤️</div>
+                    <div class="weather-info">
+                        <span class="weather-temp" id="weatherTemp">--°C</span>
+                        <span class="weather-desc" id="weatherDesc">Yüklənir...</span>
+                    </div>
+                </div>
+                <div class="weather-forecast" id="weatherForecast">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="mountain-description-section">
+        <div class="container">
+            <div class="description-grid">
+                <div class="description-main">
+                    <h2>Haqqında</h2>
+                    <p id="mountainFullDescription">
+                        Dağ haqqında ətraflı məlumat...
+                    </p>
+                    
+                    <div class="quick-info">
+                        <div class="quick-info-item">
+                            <span class="qi-icon">🏔️</span>
+                            <div>
+                                <strong>Hündürlük</strong>
+                                <span id="qiAltitude">0000 m</span>
+                            </div>
+                        </div>
+                        <div class="quick-info-item">
+                            <span class="qi-icon">📍</span>
+                            <div>
+                                <strong>Rayon</strong>
+                                <span id="qiLocation">Məkan</span>
+                            </div>
+                        </div>
+                        <div class="quick-info-item">
+                            <span class="qi-icon">⏱️</span>
+                            <div>
+                                <strong>Ən yaxşı vaxt</strong>
+                                <span id="qiBestTime">May - Sentyabr</span>
+                            </div>
+                        </div>
+                        <div class="quick-info-item">
+                            <span class="qi-icon">👥</span>
+                            <div>
+                                <strong>Qrup ölçüsü</strong>
+                                <span id="qiGroupSize">5-15 nəfər</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="description-sidebar">
+                    <div class="booking-card">
+                        <h3>Tur Sifariş Et</h3>
+                        <div class="booking-price">
+                            <span class="price-amount" id="tourPrice">₼350</span>
+                            <span class="price-from">-dən başlayaraq</span>
+                        </div>
+                        <button class="booking-btn" onclick="openTourBookingModal()">İndi Sifariş Et</button>
+                        <p class="booking-note">✓ Pulsuz ləğv imkanı</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="details-section hotels-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Gecələmə</span>
+                <h2 class="section-title">🏨 Yaxın Otellər</h2>
+            </div>
+            
+            <div class="details-grid" id="hotelsGrid">
+                
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="details-section restaurants-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Qidalanma</span>
+                <h2 class="section-title">🍽️ Restoranlar</h2>
+            </div>
+            
+            <div class="details-grid" id="restaurantsGrid">
+                
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="details-section activities-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Əyləncə</span>
+                <h2 class="section-title">🎯 Fəaliyyətlər</h2>
+            </div>
+            
+            <div class="activities-grid" id="activitiesGrid">
+                
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="details-section transport-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Çatma yolları</span>
+                <h2 class="section-title">🚗 Nəqliyyat</h2>
+            </div>
+            
+            <div class="transport-grid" id="transportGrid">
+                
+            </div>
+            
+            <div class="route-info-cards" id="routeInfoCards">
+                
+            </div>
+        </div>
+    </section>
+
+    
+    <div class="restaurant-modal" id="restaurantModal">
+        <div class="restaurant-modal-content">
+            <button class="modal-close" id="closeRestaurantModal">✕</button>
+            
+            <div class="restaurant-image" id="restModalImage"></div>
+            
+            <div class="restaurant-details">
+                <div class="rest-header">
+                    <h2 id="restModalName">Restoran Adı</h2>
+                    <div class="rest-rating">
+                        <span class="rating-stars" id="restModalStars">⭐⭐⭐⭐⭐</span>
+                        <span class="rating-number" id="restModalRating">4.5</span>
+                    </div>
+                </div>
+                
+                <div class="rest-tags">
+                    <span class="rest-cuisine" id="restModalCuisine">Mətbəx</span>
+                    <span class="rest-price" id="restModalPrice">₼₼</span>
+                </div>
+                
+                <p class="rest-description" id="restModalDescription">
+                    Restoran haqqında məlumat...
+                </p>
+                
+                <div class="rest-info-grid">
+                    <div class="rest-info-item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <strong>Ünvan</strong>
+                            <p id="restModalAddress">Ünvan</p>
+                        </div>
+                    </div>
+                    <div class="rest-info-item">
+                        <span class="info-icon">📞</span>
+                        <div>
+                            <strong>Telefon</strong>
+                            <p id="restModalPhone">+994 XX XXX XX XX</p>
+                        </div>
+                    </div>
+                    <div class="rest-info-item">
+                        <span class="info-icon">🕐</span>
+                        <div>
+                            <strong>İş saatları</strong>
+                            <p id="restModalHours">09:00 - 22:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rest-features">
+                    <h4>Xüsusiyyətlər</h4>
+                    <div class="features-list" id="restModalFeatures">
+                        
+                    </div>
+                </div>
+                
+                <div class="rest-actions">
+                    <a href="#" class="rest-action-btn call-btn" id="restCallBtn">
+                        <span>📞</span> Zəng Et
+                    </a>
+                    <a href="#" class="rest-action-btn directions-btn" id="restDirectionsBtn" target="_blank">
+                        <span>🗺️</span> Yol Tarifi
+                    </a>
+                    <button class="rest-action-btn reserve-btn" id="restReserveBtn">
+                        <span>📅</span> Masa Rezerv Et
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="reservation-form" id="reservationForm" style="display: none;">
+                <h3>📅 Masa Rezervasiyası</h3>
+                <form id="tableReservationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tarix</label>
+                            <input type="date" id="reserveDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Saat</label>
+                            <select id="reserveTime" required>
+                                <option value="">Seçin</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                                <option value="21:00">21:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Qonaq Sayı</label>
+                            <select id="reserveGuests" required>
+                                <option value="1">1 nəfər</option>
+                                <option value="2" selected>2 nəfər</option>
+                                <option value="3">3 nəfər</option>
+                                <option value="4">4 nəfər</option>
+                                <option value="5">5 nəfər</option>
+                                <option value="6">6+ nəfər</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ad Soyad</label>
+                            <input type="text" id="reserveName" required placeholder="Adınız">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" id="reservePhone" required placeholder="+994 XX XXX XX XX">
+                    </div>
+                    <div class="form-group">
+                        <label>Qeyd (opsional)</label>
+                        <textarea id="reserveNote" rows="2" placeholder="Xüsusi istəklər..."></textarea>
+                    </div>
+                    <div class="reservation-actions">
+                        <button type="button" class="cancel-reserve-btn" id="cancelReserve">Ləğv Et</button>
+                        <button type="submit" class="confirm-reserve-btn">Rezerv Et</button>
+                    </div>
+                </form>
+            </div>
+            
+            
+            <div class="reservation-confirmed" id="reservationConfirmed" style="display: none;">
+                <div class="confirm-icon">✓</div>
+                <h3>Rezervasiya Qəbul Edildi!</h3>
+                <p>Təsdiq üçün restoran sizinlə əlaqə saxlayacaq.</p>
+                <div class="confirm-details">
+                    <p><strong>Restoran:</strong> <span id="confirmRestName">-</span></p>
+                    <p><strong>Tarix:</strong> <span id="confirmDate">-</span></p>
+                    <p><strong>Saat:</strong> <span id="confirmTime">-</span></p>
+                    <p><strong>Qonaq:</strong> <span id="confirmGuests">-</span></p>
+                </div>
+                <button class="close-confirm-btn" onclick="closeRestaurantModal()">Bağla</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-modal-content">
+            <button class="modal-close" id="closeBookingModal">✕</button>
+            
+            
+            <div class="booking-step" id="bookingStep1">
+                <div class="modal-header">
+                    <h2>🏨 Otel Sifarişi</h2>
+                    <p id="selectedHotelName">Otel adı</p>
+                </div>
+                
+                <form class="booking-form" id="hotelBookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Giriş Tarixi</label>
+                            <input type="date" id="checkInDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Çıxış Tarixi</label>
+                            <input type="date" id="checkOutDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Qonaq Sayı</label>
+                            <select id="guestCount" required>
+                                <option value="1">1 nəfər</option>
+                                <option value="2" selected>2 nəfər</option>
+                                <option value="3">3 nəfər</option>
+                                <option value="4">4 nəfər</option>
+                                <option value="5">5+ nəfər</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Otaq Sayı</label>
+                            <select id="roomCount" required>
+                                <option value="1" selected>1 otaq</option>
+                                <option value="2">2 otaq</option>
+                                <option value="3">3 otaq</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Ad Soyad</label>
+                        <input type="text" id="guestName" required placeholder="Tam adınız">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>E-poçt</label>
+                            <input type="email" id="guestEmail" required placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="tel" id="guestPhone" required placeholder="+994 XX XXX XX XX">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Xüsusi İstəklər (opsional)</label>
+                        <textarea id="specialRequests" rows="2" placeholder="Əlavə istəkləriniz..."></textarea>
+                    </div>
+                    
+                    <div class="booking-summary">
+                        <div class="summary-row">
+                            <span>Otel:</span>
+                            <span id="summaryHotel">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Gecə sayı:</span>
+                            <span id="summaryNights">0 gecə</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Qonaq:</span>
+                            <span id="summaryGuests">2 nəfər</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Cəmi:</span>
+                            <span id="summaryTotal">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="proceed-btn">Ödənişə Keç →</button>
+                </form>
+            </div>
+            
+            
+            <div class="booking-step" id="bookingStep2" style="display: none;">
+                <div class="modal-header">
+                    <h2>💳 Ödəniş</h2>
+                    <p>Təhlükəsiz ödəniş</p>
+                </div>
+                
+                <div class="payment-methods">
+                    <label class="payment-method active">
+                        <input type="radio" name="paymentMethod" value="card" checked>
+                        <span class="method-icon">💳</span>
+                        <span>Bank Kartı</span>
+                    </label>
+                    <label class="payment-method">
+                        <input type="radio" name="paymentMethod" value="cash">
+                        <span class="method-icon">💵</span>
+                        <span>Nağd</span>
+                    </label>
+                </div>
+                
+                <form class="payment-form" id="paymentForm">
+                    <div class="card-payment" id="cardPayment">
+                        <div class="form-group">
+                            <label>Kart Nömrəsi</label>
+                            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Son İstifadə</label>
+                                <input type="text" id="cardExpiry" placeholder="AA/İİ" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="text" id="cardCvv" placeholder="***" maxlength="3">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Kart Sahibinin Adı</label>
+                            <input type="text" id="cardHolder" placeholder="AD SOYAD">
+                        </div>
+                    </div>
+                    
+                    <div class="cash-payment" id="cashPayment" style="display: none;">
+                        <div class="cash-info">
+                            <span class="cash-icon">💵</span>
+                            <p>Nağd ödəniş oteldə qeydiyyat zamanı həyata keçiriləcək.</p>
+                            <p class="cash-note">Qeyd: Bron təsdiq üçün e-poçt göndəriləcək.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-summary">
+                        <div class="summary-row">
+                            <span>Otel:</span>
+                            <span id="paymentHotel">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tarix:</span>
+                            <span id="paymentDates">-</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Ödəniləcək məbləğ:</span>
+                            <span id="paymentTotal">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-actions">
+                        <button type="button" class="back-btn" id="backToBooking">← Geri</button>
+                        <button type="submit" class="pay-btn">Ödənişi Tamamla</button>
+                    </div>
+                </form>
+            </div>
+            
+            
+            <div class="booking-step" id="bookingStep3" style="display: none;">
+                <div class="confirmation-content">
+                    <div class="success-icon">✓</div>
+                    <h2>Sifariş Uğurla Tamamlandı!</h2>
+                    <p>Təşəkkür edirik! Sifarişiniz qəbul edildi.</p>
+                    
+                    <div class="confirmation-details">
+                        <div class="conf-row">
+                            <span>Sifariş №:</span>
+                            <span id="orderNumber">DT-000000</span>
+                        </div>
+                        <div class="conf-row">
+                            <span>Otel:</span>
+                            <span id="confHotel">-</span>
+                        </div>
+                        <div class="conf-row">
+                            <span>Tarix:</span>
+                            <span id="confDates">-</span>
+                        </div>
+                        <div class="conf-row">
+                            <span>Məbləğ:</span>
+                            <span id="confAmount">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <p class="conf-email">Təsdiq e-poçtu <strong id="confEmail">email@example.com</strong> ünvanına göndərildi.</p>
+                    
+                    <button class="close-conf-btn" onclick="closeBookingModal()">Bağla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="transport-modal" id="transportModal">
+        <div class="transport-modal-content">
+            <button class="modal-close" onclick="closeTransportModal()">✕</button>
+            <div class="transport-modal-header">
+                <span class="transport-modal-icon" id="transportModalIcon">🚗</span>
+                <h2 id="transportModalName">Nəqliyyat</h2>
+            </div>
+            <div class="transport-modal-body">
+                <p class="transport-modal-desc" id="transportModalDesc"></p>
+                
+                <div class="transport-modal-details">
+                    <div class="transport-detail">
+                        <span class="detail-icon">⏱️</span>
+                        <div>
+                            <span class="detail-label">Təxmini Müddət</span>
+                            <span class="detail-value" id="transportModalDuration"></span>
+                        </div>
+                    </div>
+                    <div class="transport-detail">
+                        <span class="detail-icon">💰</span>
+                        <div>
+                            <span class="detail-label">Təxmini Qiymət</span>
+                            <span class="detail-value" id="transportModalPrice"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transport-route-section">
+                    <h4>📍 Marşrut</h4>
+                    <div class="transport-route" id="transportModalRoute"></div>
+                </div>
+                
+                <div class="transport-tips-section">
+                    <h4>💡 Faydalı Məlumatlar</h4>
+                    <ul id="transportModalTips"></ul>
+                </div>
+                
+                <div class="transport-contacts-section" id="transportContactsSection">
+                    <h4>📞 Əlaqə</h4>
+                    <div id="transportModalContacts"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="tour-booking-modal" id="tourBookingModal">
+        <div class="tour-booking-content">
+            <button class="modal-close" onclick="closeTourBookingModal()">✕</button>
+            
+            <div class="booking-step" id="tourStep1">
+                <div class="modal-header">
+                    <h2>🎫 Tur Sifarişi</h2>
+                    <p id="tourBookingName">Dağ Turu</p>
+                </div>
+                
+                <form id="tourOrderForm">
+                    <div class="form-group">
+                        <label>Tarix</label>
+                        <input type="date" id="tourDate" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>İştirakçı Sayı</label>
+                            <select id="tourParticipants" required>
+                                <option value="1">1 nəfər</option>
+                                <option value="2" selected>2 nəfər</option>
+                                <option value="3">3 nəfər</option>
+                                <option value="4">4 nəfər</option>
+                                <option value="5">5 nəfər</option>
+                                <option value="6">6+ nəfər</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tur Tipi</label>
+                            <select id="tourType" required>
+                                <option value="standard">Standart</option>
+                                <option value="vip">VIP</option>
+                                <option value="group">Qrup</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Ad Soyad</label>
+                        <input type="text" id="tourGuestName" required placeholder="Tam adınız">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>E-poçt</label>
+                            <input type="email" id="tourGuestEmail" required placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="tel" id="tourGuestPhone" required placeholder="+994 XX XXX XX XX">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Xüsusi İstəklər (opsional)</label>
+                        <textarea id="tourRequests" rows="2" placeholder="Əlavə istəkləriniz..."></textarea>
+                    </div>
+                    
+                    <div class="booking-summary">
+                        <div class="summary-row">
+                            <span>Tur:</span>
+                            <span id="summaryTourName">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>İştirakçı:</span>
+                            <span id="summaryParticipants">2 nəfər</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Cəmi:</span>
+                            <span id="summaryTourTotal">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="proceed-btn">Sifarişi Təsdiqlə</button>
+                </form>
+            </div>
+            
+            <div class="booking-step" id="tourStep2" style="display: none;">
+                <div class="modal-header">
+                    <h2>💳 Ödəniş</h2>
+                    <p>Sifarişinizi tamamlamaq üçün ödəniş məlumatlarını daxil edin</p>
+                </div>
+                
+                <div class="payment-summary">
+                    <div class="summary-row">
+                        <span>Tur:</span>
+                        <span id="paymentTourNameMD">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>İştirakçı:</span>
+                        <span id="paymentParticipantsMD">-</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Ödəniləcək məbləğ:</span>
+                        <span id="paymentAmountMD">₼0</span>
+                    </div>
+                </div>
+                
+                <form id="paymentFormMD">
+                    <div class="form-group">
+                        <label>Kart nömrəsi</label>
+                        <input type="text" id="cardNumberMD" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Son istifadə tarixi</label>
+                            <input type="text" id="cardExpiryMD" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" id="cardCVVMD" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Kart sahibinin adı</label>
+                        <input type="text" id="cardNameMD" placeholder="AD SOYAD" required>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="paymentCardMD" name="paymentMethodMD" value="card" checked>
+                            <label for="paymentCardMD">
+                                <span>💳</span>
+                                <span>Bank kartı</span>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="paymentCashMD" name="paymentMethodMD" value="cash">
+                            <label for="paymentCashMD">
+                                <span>💵</span>
+                                <span>Nağd ödəniş</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-note" id="cashPaymentNoteMD" style="display: none;">
+                        <p>ℹ️ Nağd ödəniş seçildi. Tur günü ödəniş edə bilərsiniz.</p>
+                    </div>
+                    
+                    <button type="submit" class="proceed-btn">Ödənişi Tamamla</button>
+                    <button type="button" class="back-btn" onclick="goBackToTourFormMD()">Geri</button>
+                </form>
+            </div>
+            
+            <div class="booking-step" id="tourStep3" style="display: none;">
+                <div class="confirmation-content">
+                    <div class="success-icon">✓</div>
+                    <h2>Sifariş Qəbul Edildi!</h2>
+                    <p>Təşəkkür edirik! Sifarişiniz qəbul edildi.</p>
+                    
+                    <div class="confirmation-details">
+                        <div class="conf-row">
+                            <span>Sifariş №:</span>
+                            <span id="tourOrderNumber">DT-000000</span>
+                        </div>
+                        <div class="conf-row">
+                            <span>Tur:</span>
+                            <span id="confTourName">-</span>
+                        </div>
+                        <div class="conf-row">
+                            <span>Tarix:</span>
+                            <span id="confTourDate">-</span>
+                        </div>
+                        <div class="conf-row">
+                            <span>İştirakçı:</span>
+                            <span id="confTourParticipants">-</span>
+                        </div>
+                        <div class="conf-row">
+                            <span>Məbləğ:</span>
+                            <span id="confTourAmount">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <p class="conf-email">Təsdiq e-poçtu <strong id="confTourEmail">email@example.com</strong> ünvanına göndərildi.</p>
+                    <p class="conf-note">Əməkdaşlarımız tezliklə sizinlə əlaqə saxlayacaq.</p>
+                    
+                    <button class="close-conf-btn" onclick="closeTourBookingModal()">Bağla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="activity-modal" id="activityModal">
+        <div class="activity-modal-content">
+            <button class="modal-close" onclick="closeActivityModal()">✕</button>
+            <div class="activity-modal-header">
+                <span class="activity-modal-icon" id="activityModalIcon">🏔️</span>
+                <h2 id="activityModalName">Fəaliyyət</h2>
+            </div>
+            <div class="activity-modal-body">
+                <p class="activity-modal-desc" id="activityModalDesc"></p>
+                <div class="activity-modal-details">
+                    <div class="activity-detail">
+                        <span class="detail-icon">⏱️</span>
+                        <div>
+                            <span class="detail-label">Müddət</span>
+                            <span class="detail-value" id="activityModalDuration"></span>
+                        </div>
+                    </div>
+                    <div class="activity-detail">
+                        <span class="detail-icon">📊</span>
+                        <div>
+                            <span class="detail-label">Çətinlik</span>
+                            <span class="detail-value" id="activityModalDifficulty"></span>
+                        </div>
+                    </div>
+                    <div class="activity-detail">
+                        <span class="detail-icon">💰</span>
+                        <div>
+                            <span class="detail-label">Qiymət</span>
+                            <span class="detail-value" id="activityModalPrice"></span>
+                        </div>
+                    </div>
+                    <div class="activity-detail">
+                        <span class="detail-icon">👥</span>
+                        <div>
+                            <span class="detail-label">Qrup</span>
+                            <span class="detail-value" id="activityModalGroup"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-modal-requirements">
+                    <h4>Tələblər</h4>
+                    <ul id="activityModalRequirements"></ul>
+                </div>
+                <div class="activity-modal-equipment">
+                    <h4>Lazımi Avadanlıq</h4>
+                    <div id="activityModalEquipment"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-icon">⛰️</span>
+                <span class="logo-text">PeakExplorer</span>
+                <p>Azərbaycanın dağ zirvələrini bizimlə kəşf edin.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Keçidlər</h4>
+                <a href="index (2).html#home">Ana Səhifə</a>
+                <a href="index (2).html#map">Xəritə</a>
+                <a href="index (2).html#mountains">Dağlar</a>
+                <a href="index (2).html#contact">Əlaqə</a>
+            </div>
+            
+            <div class="footer-social">
+                <h4>Sosial Şəbəkələr</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">🐦</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        const WEATHER_API_KEY = '';
+        const weatherConditions = {
+            0: { icon: '☀️', desc: 'Açıq hava' },
+            1: { icon: '🌤️', desc: 'Əsasən açıq' },
+            2: { icon: '⛅', desc: 'Qismən buludlu' },
+            3: { icon: '☁️', desc: 'Buludlu' },
+            45: { icon: '🌫️', desc: 'Dumanlı' },
+            48: { icon: '🌫️', desc: 'Qırağı' },
+            51: { icon: '🌧️', desc: 'Yüngül yağış' },
+            53: { icon: '🌧️', desc: 'Orta yağış' },
+            55: { icon: '🌧️', desc: 'Güclü yağış' },
+            61: { icon: '🌧️', desc: 'Yüngül yağış' },
+            63: { icon: '🌧️', desc: 'Orta yağış' },
+            65: { icon: '🌧️', desc: 'Güclü yağış' },
+            71: { icon: '🌨️', desc: 'Yüngül qar' },
+            73: { icon: '🌨️', desc: 'Orta qar' },
+            75: { icon: '❄️', desc: 'Güclü qar' },
+            77: { icon: '🌨️', desc: 'Qar dənələri' },
+            80: { icon: '🌧️', desc: 'Yağış' },
+            81: { icon: '🌧️', desc: 'Orta yağış' },
+            82: { icon: '⛈️', desc: 'Güclü yağış' },
+            85: { icon: '🌨️', desc: 'Yüngül qar' },
+            86: { icon: '❄️', desc: 'Güclü qar' },
+            95: { icon: '⛈️', desc: 'Tufan' },
+            96: { icon: '⛈️', desc: 'Tufan (dolu ilə)' },
+            99: { icon: '⛈️', desc: 'Güclü tufan' }
+        };
+        
+        const dayNames = ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'];
+        
+        async function loadWeatherData(lat, lon) {
+            const weatherWidget = document.getElementById('weatherWidget');
+            const weatherIcon = document.getElementById('weatherIcon');
+            const weatherTemp = document.getElementById('weatherTemp');
+            const weatherDesc = document.getElementById('weatherDesc');
+            const weatherForecast = document.getElementById('weatherForecast');
+            
+            try {
+                const response = await fetch(
+                    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=14`
+                );
+                
+                if (!response.ok) throw new Error('Weather API error');
+                
+                const data = await response.json();
+                const currentTemp = Math.round(data.current.temperature_2m);
+                const currentCode = data.current.weather_code;
+                const currentCondition = weatherConditions[currentCode] || { icon: '🌡️', desc: 'Məlumat yoxdur' };
+                
+                weatherIcon.textContent = currentCondition.icon;
+                weatherTemp.textContent = `${currentTemp}°C`;
+                weatherDesc.textContent = currentCondition.desc;
+                let forecastHTML = '<div class="forecast-title">📅 2 Həftəlik Hava Proqnozu</div><div class="forecast-days">';
+                
+                data.daily.time.forEach((date, index) => {
+                    const dayDate = new Date(date);
+                    const dayName = index === 0 ? 'Bu gün' : (index === 1 ? 'Sabah' : dayNames[dayDate.getDay()]);
+                    const dayCode = data.daily.weather_code[index];
+                    const dayCondition = weatherConditions[dayCode] || { icon: '🌡️', desc: '' };
+                    const maxTemp = Math.round(data.daily.temperature_2m_max[index]);
+                    const minTemp = Math.round(data.daily.temperature_2m_min[index]);
+                    
+                    forecastHTML += `
+                        <div class="forecast-day">
+                            <span class="forecast-day-name">${dayName}</span>
+                            <span class="forecast-day-icon">${dayCondition.icon}</span>
+                            <div class="forecast-day-temps">
+                                <span class="forecast-day-high">${maxTemp}°</span>
+                                <span class="forecast-day-low">${minTemp}°</span>
+                            </div>
+                            <span class="forecast-day-desc">${dayCondition.desc}</span>
+                        </div>
+                    `;
+                });
+                
+                forecastHTML += '</div>';
+                weatherForecast.innerHTML = forecastHTML;
+                
+            } catch (error) {
+                console.error('Weather loading error:', error);
+                weatherIcon.textContent = '🌡️';
+                weatherTemp.textContent = '--°C';
+                weatherDesc.textContent = 'Yüklənə bilmədi';
+                weatherForecast.innerHTML = '<div class="forecast-title">Hava məlumatı əldə edilə bilmədi</div>';
+            }
+        }
+        function showNotification(message, type = 'info') {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <span class="notification-message">${message}</span>
+                <button class="notification-close" onclick="this.parentElement.remove()">✕</button>
+            `;
+            
+            document.body.appendChild(notification);
+            setTimeout(() => notification.classList.add('show'), 10);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+        const mountainsData = {
+            'bazarduzu': {
+                id: 'bazarduzu',
+                name: 'Bazardüzü',
+                coords: [41.2206, 47.8642],
+                altitude: '4466 m',
+                difficulty: 'Mürəkkəb',
+                difficultyClass: 'hard',
+                location: 'Qusar rayonu',
+                bestTime: 'İyul - Sentyabr',
+                groupSize: '5-10 nəfər',
+                price: '₼1200',
+                description: 'Bazardüzü — Azərbaycanın ən hündür zirvəsi olub, Böyük Qafqaz silsiləsində, Rusiya ilə sərhəddə yerləşir. Zirvənin hündürlüyü 4466 metrdir. Bu dağ alpinistlər üçün ən çətin və maraqlı marşrutlardan biridir. Zirvəyə qalxış adətən 2-3 gün çəkir və professional avadanlıq tələb edir. Dağın ətrafında nadir flora və fauna növləri mövcuddur.',
+                heroImage: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070',
+                hotels: [
+                    { name: 'Şahdağ Resort', rating: 5, price: '₼250/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['Spa', 'Restoran', 'Transfer'] },
+                    { name: 'Qusar Park Hotel', rating: 4, price: '₼120/gecə', image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400', features: ['WiFi', 'Parking', 'Səhər yeməyi'] },
+                    { name: 'Ləzə Guest House', rating: 3, price: '₼50/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['Ev yeməyi', 'Bələdçi'] }
+                ],
+                restaurants: [
+                    { name: 'Qusar Milli Mətbəx', cuisine: 'Azərbaycan', price: '₼₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400' },
+                    { name: 'Dağ Restoranı', cuisine: 'Yerli', price: '₼', image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400' }
+                ],
+                activities: [
+                    { name: 'Alpinizm', icon: '🧗', description: 'Professional alpinizm turu' },
+                    { name: 'Trekking', icon: '🥾', description: 'Dağ yürüşləri' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Mənzərə fotoqrafiyası' },
+                    { name: 'Düşərgə', icon: '⛺', description: 'Çadır düşərgəsi' }
+                ],
+                transport: ['Jeep transfer (Qusar)', 'Dağ bələdçisi ilə', 'At ilə yük daşıma'],
+                routes: [
+                    { type: 'Avtomobil', duration: '4-5 saat', path: 'Bakı → Qusar → Ləzə kəndi', icon: '🚗' },
+                    { type: 'Piyada', duration: '2-3 gün', path: 'Ləzə düşərgəsi → Bazardüzü zirvəsi', icon: '🥾' }
+                ]
+            },
+            'shahdag': {
+                id: 'shahdag',
+                name: 'Şahdağ',
+                coords: [41.3222, 48.1347],
+                altitude: '4243 m',
+                difficulty: 'Orta',
+                difficultyClass: 'medium',
+                location: 'Qusar rayonu',
+                bestTime: 'Bütün il',
+                groupSize: '2-20 nəfər',
+                price: '₼450',
+                description: 'Şahdağ — Azərbaycanın ən məşhur qış turizm mərkəzidir. Müasir xizək infrastrukturu, kanat yolları və lüks otellər ilə turistləri cəlb edir. Qış mövsümündə xizək və snowboard, yay mövsümündə isə trekking və paraqlaydinq imkanları var. Kurort zonası 1500-2500 metr yüksəklikdə yerləşir.',
+                heroImage: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=2083',
+                hotels: [
+                    { name: 'Şahdağ Hotel', rating: 5, price: '₼350/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['Xizək lift', 'Spa', 'Restoran'] },
+                    { name: 'Pik Palace', rating: 5, price: '₼400/gecə', image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400', features: ['Lüks', 'Hovuz', 'Fitness'] },
+                    { name: 'Zirve Hotel', rating: 4, price: '₼180/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['WiFi', 'Parking', 'Restoran'] },
+                    { name: 'Park Chalet', rating: 4, price: '₼220/gecə', image: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=400', features: ['Şömine', 'Mənzərə', 'Sauna'] }
+                ],
+                restaurants: [
+                    { name: 'Altitude Restaurant', cuisine: 'Beynəlxalq', price: '₼₼₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400', phone: '+994 12 345 67 89', address: 'Şahdağ Kurort, Qusar', hours: '08:00 - 23:00', rating: 4.8, description: 'Dağ zirvəsində yerləşən lüks restoran. Panoramik mənzərə, beynəlxalq mətbəx və peşəkar xidmət.', features: ['Panoramik mənzərə', 'Canlı musiqi', 'VIP otaqlar', 'WiFi'] },
+                    { name: 'Şahdağ Lounge', cuisine: 'Fusion', price: '₼₼', image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400', phone: '+994 12 456 78 90', address: 'Pik Palace Hotel, Şahdağ', hours: '10:00 - 24:00', rating: 4.5, description: 'Modern dizayn və rahat atmosfer. Fusion mətbəxi və geniş kokteyl seçimi.', features: ['Bar', 'Kokteyllər', 'Lounge zona', 'Şömine'] },
+                    { name: 'Dağ Evi', cuisine: 'Azərbaycan', price: '₼₼', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400', phone: '+994 12 567 89 01', address: 'Qusar şəhəri, Mərkəz', hours: '09:00 - 22:00', rating: 4.7, description: 'Ənənəvi Azərbaycan mətbəxi. Təzə yerli məhsullar və ailə reseptləri.', features: ['Milli yeməklər', 'Ailə dostu', 'Veranda', 'Parking'] }
+                ],
+                activities: [
+                    { name: 'Xizək', icon: '⛷️', description: 'Qış xizəyi' },
+                    { name: 'Snowboard', icon: '🏂', description: 'Snowboard sürüşü' },
+                    { name: 'Paraqlaydinq', icon: '🪂', description: 'Hava idmanı' },
+                    { name: 'Trekking', icon: '🥾', description: 'Yay yürüşləri' },
+                    { name: 'ATV Turu', icon: '🏍️', description: 'Dağ ATV gəzintisi' }
+                ],
+                transport: ['Avtobus (Bakı-Qusar)', 'Taksi', 'Şəxsi avtomobil', 'Transfer xidməti'],
+                routes: [
+                    { type: 'Avtomobil', duration: '3 saat', path: 'Bakı → Qusar → Şahdağ Kurort', icon: '🚗' },
+                    { type: 'Kanat yolu', duration: '15 dəq', path: 'Kurort → Zirvə stansiyası', icon: '🚡' }
+                ]
+            },
+            'tufandag': {
+                id: 'tufandag',
+                name: 'Tufandağ',
+                coords: [40.9833, 47.8667],
+                altitude: '4191 m',
+                difficulty: 'Asan',
+                difficultyClass: 'easy',
+                location: 'Qəbələ rayonu',
+                bestTime: 'Bütün il',
+                groupSize: '1-30 nəfər',
+                price: '₼200',
+                description: 'Tufandağ — Qəbələ rayonunda yerləşən müasir turizm mərkəzidir. Azərbaycanın ən uzun kanat yolu burada yerləşir. Yay və qış mövsümündə fəaliyyət göstərir. Ətrafda gözəl meşələr, şəlalələr və tarixi abidələr var.',
+                heroImage: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=2076',
+                hotels: [
+                    { name: 'Qafqaz Resort', rating: 5, price: '₼280/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['Hovuz', 'Spa', 'Restoran'] },
+                    { name: 'Qafqaz Riverside', rating: 5, price: '₼320/gecə', image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400', features: ['Çay kənarı', 'Balıqçılıq'] },
+                    { name: 'Chenot Palace', rating: 5, price: '₼500/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['Detox', 'Wellness'] },
+                    { name: 'Marxal Resort', rating: 4, price: '₼150/gecə', image: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=400', features: ['Ailə dostu', 'Oyun meydançası'] }
+                ],
+                restaurants: [
+                    { name: 'Qazmaq Restaurant', cuisine: 'Azərbaycan', price: '₼₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400', phone: '+994 24 205 55 55', address: 'Qafqaz Resort, Qəbələ', hours: '07:00 - 23:00', rating: 4.6, description: 'Ənənəvi Azərbaycan mətbəxinin ən yaxşı nümunələri. Təndirdə bişmiş yeməklər.', features: ['Açıq veranda', 'Canlı musiqi', 'Uşaq menyusu', 'Parking'] },
+                    { name: 'Riverside Cafe', cuisine: 'Avropa', price: '₼₼', image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400', phone: '+994 24 206 66 66', address: 'Qafqaz Riverside, Qəbələ', hours: '08:00 - 22:00', rating: 4.4, description: 'Çay kənarında romantik atmosfer. İtalyan və Fransız mətbəxi.', features: ['Çay mənzərəsi', 'Romantik', 'WiFi', 'Terras'] },
+                    { name: 'Dədə Qorqud', cuisine: 'Milli', price: '₼', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400', phone: '+994 24 207 77 77', address: 'Qəbələ şəhəri, Mərkəz', hours: '10:00 - 21:00', rating: 4.8, description: 'Qədim reseptlərlə hazırlanan milli yeməklər. Qutab, dolma, piti.', features: ['Milli mətbəx', 'Uyğun qiymət', 'Ailə dostu', 'Take-away'] }
+                ],
+                activities: [
+                    { name: 'Kanat yolu', icon: '🚡', description: 'Panoramik kanat yolu' },
+                    { name: 'Xizək', icon: '⛷️', description: 'Qış xizəyi' },
+                    { name: 'Zipline', icon: '🎿', description: 'Ekstrem zipline' },
+                    { name: 'At gəzintisi', icon: '🐴', description: 'Dağ gəzintisi' },
+                    { name: 'Paraqlaydinq', icon: '🪂', description: 'Tandem uçuş' }
+                ],
+                transport: ['Avtobus (Bakı-Qəbələ)', 'Taksi', 'Şəxsi avtomobil'],
+                routes: [
+                    { type: 'Avtomobil', duration: '2.5 saat', path: 'Bakı → Şəmkir → Qəbələ → Tufandağ', icon: '🚗' },
+                    { type: 'Kanat yolu', duration: '20 dəq', path: 'Aşağı stansiya → Yuxarı stansiya', icon: '🚡' }
+                ]
+            },
+            'babadag': {
+                id: 'babadag',
+                name: 'Babadağ',
+                coords: [41.1667, 48.6167],
+                altitude: '3629 m',
+                difficulty: 'Orta',
+                difficultyClass: 'medium',
+                location: 'Quba rayonu',
+                bestTime: 'May - Oktyabr',
+                groupSize: '5-20 nəfər',
+                price: '₼300',
+                description: 'Babadağ — Azərbaycanda müqəddəs sayılan dağlardan biridir. Hər il minlərlə zəvvar buraya ziyarətə gəlir. Dağın zirvəsində qədim ibadətgah yerləşir. Təbiət mənzərələri və mənəvi atmosfer turistləri cəlb edir.',
+                heroImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070',
+                hotels: [
+                    { name: 'Quba Palace Hotel', rating: 5, price: '₼200/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['Spa', 'Restoran', 'Hovuz'] },
+                    { name: 'Rixos Quba', rating: 5, price: '₼350/gecə', image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400', features: ['All-inclusive', 'Aquapark'] },
+                    { name: 'Quba Olympic Complex', rating: 4, price: '₼100/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['İdman zalı', 'Hovuz'] }
+                ],
+                restaurants: [
+                    { name: 'Quba Milli Mətbəx', cuisine: 'Azərbaycan', price: '₼₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400', phone: '+994 23 335 55 55', address: 'Quba şəhəri, Heydər Əliyev pr.', hours: '09:00 - 22:00', rating: 4.7, description: 'Quba bölgəsinin ən məşhur restoranı. Xınqal, quymaq və digər yerli yeməklər.', features: ['Milli mətbəx', 'Geniş salon', 'Toy mərasimləri', 'Parking'] },
+                    { name: 'Apple Garden', cuisine: 'Yerli', price: '₼', image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400' },
+                    { name: 'Sahil Restaurant', cuisine: 'Balıq', price: '₼₼', image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400' }
+                ],
+                activities: [
+                    { name: 'Ziyarət', icon: '🙏', description: 'Müqəddəs yerin ziyarəti' },
+                    { name: 'Trekking', icon: '🥾', description: 'Dağ yürüşü' },
+                    { name: 'Meditasiya', icon: '🧘', description: 'Mənəvi təcrübə' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Təbiət fotoqrafiyası' }
+                ],
+                transport: ['Taksi (Quba)', 'Şəxsi avtomobil', 'Piyada'],
+                routes: [
+                    { type: 'Avtomobil', duration: '3 saat', path: 'Bakı → Quba → Babadağ ətəyi', icon: '🚗' },
+                    { type: 'Piyada', duration: '4-5 saat', path: 'Babadağ ətəyi → Zirvə', icon: '🥾' }
+                ]
+            },
+            'khinaliq': {
+                id: 'khinaliq',
+                name: 'Xınalıq',
+                coords: [41.1833, 48.1167],
+                altitude: '2350 m',
+                difficulty: 'Orta',
+                difficultyClass: 'medium',
+                location: 'Quba rayonu',
+                bestTime: 'May - Sentyabr',
+                groupSize: '5-15 nəfər',
+                price: '₼350',
+                description: 'Xınalıq — dünyanın ən qədim yaşayış yerlərindən biridir. 5000 illik tarixə malikdir. Burada yaşayan xınalıqlılar öz unikal dillərini və mədəniyyətlərini qoruyub saxlayıblar. Kənd UNESCO-nun qeyri-maddi mədəni irs siyahısına daxildir.',
+                heroImage: 'https://images.unsplash.com/photo-1464278533981-50106e6176b1?q=80&w=2074',
+                hotels: [
+                    { name: 'Xınalıq Guest House', rating: 3, price: '₼40/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['Ev yeməyi', 'Bələdçi'] },
+                    { name: 'Yerli evlər', rating: 3, price: '₼30/gecə', image: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=400', features: ['Autentik', 'Ailə yanında'] },
+                    { name: 'Quba Palace Hotel', rating: 5, price: '₼200/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['Qubada', 'Lüks'] }
+                ],
+                restaurants: [
+                    { name: 'Yerli ev yeməkləri', cuisine: 'Xınalıq', price: '₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400' },
+                    { name: 'Xınalıq çayxanası', cuisine: 'Çay', price: '₼', image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400' }
+                ],
+                activities: [
+                    { name: 'Mədəni tur', icon: '🏛️', description: 'Kənd turu' },
+                    { name: 'Etnoqrafiya', icon: '🎭', description: 'Mədəniyyət öyrənmə' },
+                    { name: 'Trekking', icon: '🥾', description: 'Dağ yürüşü' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Sənədli foto' },
+                    { name: 'Sənətkarlıq', icon: '🧶', description: 'Yerli sənət' }
+                ],
+                transport: ['Jeep (Quba)', '4x4 avtomobil'],
+                routes: [
+                    { type: 'Avtomobil', duration: '4 saat', path: 'Bakı → Quba → Xınalıq', icon: '🚗' },
+                    { type: 'Piyada', duration: '1 gün', path: 'Qrız kəndi → Xınalıq', icon: '🥾' }
+                ]
+            },
+            'qobustan': {
+                id: 'qobustan',
+                name: 'Böyükdaş',
+                coords: [40.0906, 49.3717],
+                altitude: '400 m',
+                difficulty: 'Asan',
+                difficultyClass: 'easy',
+                location: 'Qobustan rayonu',
+                bestTime: 'Bütün il',
+                groupSize: '1-50 nəfər',
+                price: '₼50',
+                description: 'Qobustan Milli Parkı — qədim qayaüstü rəsmlər və palçıq vulkanları ilə məşhur ərazidir. UNESCO Dünya İrsi siyahısına daxildir. Burada 6000 ildən çox yaşı olan petroqliflər, qədim insan məskənləri və unikal geoloji formasiyalar mövcuddur.',
+                heroImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2074',
+                hotels: [
+                    { name: 'Bakı otelləri', rating: 4, price: '₼100/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['Şəhər mərkəzi'] },
+                    { name: 'Qobustan yaxınlığı', rating: 3, price: '₼60/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['Yerli'] }
+                ],
+                restaurants: [
+                    { name: 'Qobustan Cafe', cuisine: 'Azərbaycan', price: '₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400', phone: '+994 12 444 55 66', address: 'Qobustan Milli Parkı yaxınlığı', hours: '08:00 - 20:00', rating: 4.2, description: 'Park yaxınlığında kiçik ailə restoranı. Sadə və ləzzətli yeməklər.', features: ['Yerli mətbəx', 'Uyğun qiymət', 'Parking'] },
+                    { name: 'Bakı restoranları', cuisine: 'Müxtəlif', price: '₼₼', image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=400', phone: '+994 12 555 66 77', address: 'Bakı şəhəri', hours: '10:00 - 24:00', rating: 4.5, description: 'Bakının məşhur restoranları. Geniş seçim.', features: ['Müxtəlif mətbəx', 'Şəhər mərkəzi', 'WiFi'] }
+                ],
+                activities: [
+                    { name: 'Muzey ziyarəti', icon: '🏛️', description: 'İnteraktiv muzey' },
+                    { name: 'Petroqliflər', icon: '🪨', description: 'Qayaüstü rəsmlər' },
+                    { name: 'Vulkanlar', icon: '🌋', description: 'Palçıq vulkanları' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Landşaft foto' }
+                ],
+                transport: ['Avtobus', 'Taksi', 'Şəxsi avtomobil', 'Tur avtobusu'],
+                routes: [
+                    { type: 'Avtomobil', duration: '1 saat', path: 'Bakı → Qobustan', icon: '🚗' }
+                ]
+            },
+            'kapaz': {
+                id: 'kapaz',
+                name: 'Kəpəz',
+                coords: [40.5167, 46.3167],
+                altitude: '3066 m',
+                difficulty: 'Orta',
+                difficultyClass: 'medium',
+                location: 'Göygöl rayonu',
+                bestTime: 'May - Oktyabr',
+                groupSize: '3-15 nəfər',
+                price: '₼250',
+                description: 'Kəpəz — Göygöl gölünün yaxınlığında yerləşən gözəl dağ. Təbiət mənzərələri və gözəl göl görünüşü ilə məşhurdur. Trekking və fotoqrafiya üçün ideal yerdir.',
+                heroImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070',
+                hotels: [
+                    { name: 'Göygöl Resort', rating: 4, price: '₼150/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['Göl yaxınlığı', 'Restoran'] },
+                    { name: 'Göygöl Guest House', rating: 3, price: '₼80/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['Ev yeməyi', 'Parking'] }
+                ],
+                restaurants: [
+                    { name: 'Göygöl Restoran', cuisine: 'Azərbaycan', price: '₼₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400', phone: '+994 22 234 56 78', address: 'Göygöl rayonu', hours: '09:00 - 21:00', rating: 4.3, description: 'Göl yaxınlığında restoran. Təzə balıq və yerli yeməklər.', features: ['Göl mənzərəsi', 'Balıq', 'Parking'] }
+                ],
+                activities: [
+                    { name: 'Trekking', icon: '🥾', description: 'Dağ yürüşü' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Göl və dağ foto' },
+                    { name: 'Göl gəzintisi', icon: '🚣', description: 'Qayıq səfəri' }
+                ],
+                transport: ['Avtobus (Bakı-Göygöl)', 'Taksi', 'Şəxsi avtomobil'],
+                routes: [
+                    { type: 'Avtomobil', duration: '3 saat', path: 'Bakı → Göygöl → Kəpəz', icon: '🚗' }
+                ]
+            },
+            'murovdag': {
+                id: 'murovdag',
+                name: 'Murovdağ',
+                coords: [40.1833, 46.2167],
+                altitude: '3724 m',
+                difficulty: 'Mürəkkəb',
+                difficultyClass: 'hard',
+                location: 'Kəlbəcər rayonu',
+                bestTime: 'İyun - Sentyabr',
+                groupSize: '5-12 nəfər',
+                price: '₼800',
+                description: 'Murovdağ — Kiçik Qafqazın ən hündür zirvəsi. Professional alpinistlər üçün çətin marşrut. Təbiət mənzərələri və nadir flora növləri ilə məşhurdur.',
+                heroImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070',
+                hotels: [
+                    { name: 'Kəlbəcər otelləri', rating: 3, price: '₼100/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['Yerli'] }
+                ],
+                restaurants: [
+                    { name: 'Yerli restoranlar', cuisine: 'Azərbaycan', price: '₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400' }
+                ],
+                activities: [
+                    { name: 'Alpinizm', icon: '🧗', description: 'Professional alpinizm' },
+                    { name: 'Trekking', icon: '🥾', description: 'Dağ yürüşü' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Təbiət foto' }
+                ],
+                transport: ['Jeep', 'Dağ bələdçisi ilə'],
+                routes: [
+                    { type: 'Avtomobil', duration: '5-6 saat', path: 'Bakı → Kəlbəcər → Murovdağ', icon: '🚗' }
+                ]
+            },
+            'qizilqaya': {
+                id: 'qizilqaya',
+                name: 'Qızılqaya',
+                coords: [40.2833, 46.1167],
+                altitude: '3726 m',
+                difficulty: 'Mürəkkəb',
+                difficultyClass: 'hard',
+                location: 'Kəlbəcər rayonu',
+                bestTime: 'İyun - Sentyabr',
+                groupSize: '5-10 nəfər',
+                price: '₼750',
+                description: 'Qızılqaya — qızılı rəngli qayaları ilə tanınan dağ. Günəş doğuşu və qürubu zamanı qızılı rəng alır. Professional alpinistlər üçün çətin marşrut.',
+                heroImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070',
+                hotels: [
+                    { name: 'Kəlbəcər otelləri', rating: 3, price: '₼100/gecə', image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400', features: ['Yerli'] }
+                ],
+                restaurants: [
+                    { name: 'Yerli restoranlar', cuisine: 'Azərbaycan', price: '₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400' }
+                ],
+                activities: [
+                    { name: 'Alpinizm', icon: '🧗', description: 'Professional alpinizm' },
+                    { name: 'Trekking', icon: '🥾', description: 'Dağ yürüşü' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Qızılı qaya foto' }
+                ],
+                transport: ['Jeep', 'Dağ bələdçisi ilə'],
+                routes: [
+                    { type: 'Avtomobil', duration: '5-6 saat', path: 'Bakı → Kəlbəcər → Qızılqaya', icon: '🚗' }
+                ]
+            }
+        };
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mountainId = urlParams.get('id') || 'shahdag';
+            
+            const mountain = mountainsData[mountainId];
+            
+            if (mountain) {
+                loadMountainDetails(mountain);
+            } else {
+                loadDefaultMountain(mountainId);
+            }
+        });
+
+        function loadDefaultMountain(mountainId) {
+            const defaultMountain = {
+                id: mountainId,
+                name: mountainId.charAt(0).toUpperCase() + mountainId.slice(1).replace(/-/g, ' '),
+                altitude: 'Məlumat yoxdur',
+                difficulty: 'Məlumat yoxdur',
+                difficultyClass: 'medium',
+                location: 'Azərbaycan',
+                bestTime: 'Mövsümə görə',
+                groupSize: '3-15 nəfər',
+                price: '₼200',
+                description: 'Bu dağ haqqında ətraflı məlumat üçün bizimlə əlaqə saxlayın.',
+                heroImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070',
+                hotels: [
+                    { name: 'Yaxın otellər', rating: 4, price: '₼100/gecə', image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400', features: ['WiFi', 'Parking', 'Restoran'] }
+                ],
+                restaurants: [
+                    { name: 'Yerli restoranlar', cuisine: 'Azərbaycan', price: '₼₼', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400', phone: '+994 12 000 00 00', address: 'Yerli', hours: '09:00 - 22:00', rating: 4.0, description: 'Yerli mətbəx və qonaqpərvərlik.', features: ['Milli mətbəx', 'Parking'] }
+                ],
+                activities: [
+                    { name: 'Trekking', icon: '🥾', description: 'Dağ yürüşü' },
+                    { name: 'Foto-tur', icon: '📸', description: 'Mənzərə fotoqrafiyası' },
+                    { name: 'Təbiət', icon: '🌿', description: 'Təbiət kəşfiyyatı' }
+                ],
+                transport: ['Avtobus', 'Taksi', 'Şəxsi avtomobil'],
+                routes: [
+                    { type: 'Avtomobil', duration: 'Dəyişkən', path: 'Bakı → ' + mountainId.charAt(0).toUpperCase() + mountainId.slice(1).replace(/-/g, ' '), icon: '🚗' }
+                ]
+            };
+            loadMountainDetails(defaultMountain);
+        }
+
+        function loadMountainDetails(mountain) {
+            document.getElementById('mountainHero').style.backgroundImage = `url('${mountain.heroImage}')`;
+            document.getElementById('heroMountainName').textContent = mountain.name;
+            document.getElementById('heroAltitude').innerHTML = `<span class="meta-icon">📏</span> ${mountain.altitude}`;
+            document.getElementById('heroDifficulty').innerHTML = `<span class="meta-icon">⚡</span> ${mountain.difficulty}`;
+            document.getElementById('heroDifficulty').className = `hero-difficulty ${mountain.difficultyClass}`;
+            if (mountain.coords) {
+                loadWeatherData(mountain.coords[0], mountain.coords[1]);
+            }
+            document.getElementById('mountainFullDescription').textContent = mountain.description;
+            document.getElementById('qiAltitude').textContent = mountain.altitude;
+            document.getElementById('qiLocation').textContent = mountain.location;
+            document.getElementById('qiBestTime').textContent = mountain.bestTime;
+            document.getElementById('qiGroupSize').textContent = mountain.groupSize;
+            document.getElementById('tourPrice').textContent = mountain.price;
+            document.title = `${mountain.name} | PeakExplorer`;
+            const hotelsGrid = document.getElementById('hotelsGrid');
+            hotelsGrid.innerHTML = mountain.hotels.map((hotel, index) => `
+                <div class="detail-card hotel-card">
+                    <div class="card-image" style="background-image: url('${hotel.image}')"></div>
+                    <div class="card-body">
+                        <h3>${hotel.name}</h3>
+                        <div class="card-rating">${'⭐'.repeat(hotel.rating)}</div>
+                        <p class="card-price">${hotel.price}</p>
+                        <div class="card-features">
+                            ${hotel.features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                        <button class="book-hotel-btn" onclick="openBookingModal('${hotel.name}', '${hotel.price}', ${hotel.rating})">
+                            Sifariş Et
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            window.currentRestaurants = mountain.restaurants;
+            
+            const restaurantsGrid = document.getElementById('restaurantsGrid');
+            restaurantsGrid.innerHTML = mountain.restaurants.map((rest, index) => `
+                <div class="detail-card restaurant-card clickable" onclick="openRestaurantModal(${index})">
+                    <div class="card-image" style="background-image: url('${rest.image}')">
+                        ${rest.rating ? `<span class="card-rating-badge">⭐ ${rest.rating}</span>` : ''}
+                    </div>
+                    <div class="card-body">
+                        <h3>${rest.name}</h3>
+                        <p class="card-cuisine">${rest.cuisine}</p>
+                        <p class="card-phone">${rest.phone || ''}</p>
+                        <button class="view-details-btn">Ətraflı Bax</button>
+                    </div>
+                </div>
+            `).join('');
+            const activitiesGrid = document.getElementById('activitiesGrid');
+            activitiesGrid.innerHTML = mountain.activities.map(act => `
+                <div class="activity-card clickable" onclick="openActivityModal('${act.name}')">
+                    <span class="activity-icon">${act.icon}</span>
+                    <h3>${act.name}</h3>
+                    <p>${act.description}</p>
+                </div>
+            `).join('');
+            window.currentTransportData = mountain.transport;
+            window.currentRoutes = mountain.routes;
+            const transportGrid = document.getElementById('transportGrid');
+            transportGrid.innerHTML = mountain.transport.map((t, index) => `
+                <div class="transport-item clickable" onclick="openTransportModal('${t}', ${index})">
+                    <span class="transport-icon">${getTransportIcon(t)}</span>
+                    <span>${t}</span>
+                </div>
+            `).join('');
+            const routeInfoCards = document.getElementById('routeInfoCards');
+            routeInfoCards.innerHTML = mountain.routes.map(route => `
+                <div class="route-card">
+                    <span class="route-icon">${route.icon}</span>
+                    <div class="route-details">
+                        <h4>${route.type}</h4>
+                        <p class="route-duration">⏱️ ${route.duration}</p>
+                        <p class="route-path">📍 ${route.path}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        let selectedRestaurant = null;
+
+        function openRestaurantModal(index) {
+            const rest = window.currentRestaurants[index];
+            if (!rest) return;
+            
+            selectedRestaurant = rest;
+            document.getElementById('restModalImage').style.backgroundImage = `url('${rest.image}')`;
+            document.getElementById('restModalName').textContent = rest.name;
+            document.getElementById('restModalCuisine').textContent = rest.cuisine;
+            document.getElementById('restModalPrice').textContent = rest.price;
+            document.getElementById('restModalDescription').textContent = rest.description || 'Restoran haqqında ətraflı məlumat.';
+            document.getElementById('restModalAddress').textContent = rest.address || 'Ünvan mövcud deyil';
+            document.getElementById('restModalPhone').textContent = rest.phone || 'Telefon mövcud deyil';
+            document.getElementById('restModalHours').textContent = rest.hours || 'İş saatları mövcud deyil';
+            const rating = rest.rating || 4.0;
+            document.getElementById('restModalRating').textContent = rating;
+            const fullStars = Math.floor(rating);
+            document.getElementById('restModalStars').textContent = '⭐'.repeat(fullStars);
+            const featuresContainer = document.getElementById('restModalFeatures');
+            if (rest.features && rest.features.length > 0) {
+                featuresContainer.innerHTML = rest.features.map(f => `<span class="feature-tag">${f}</span>`).join('');
+            } else {
+                featuresContainer.innerHTML = '<span class="feature-tag">Restoran</span>';
+            }
+            document.getElementById('restCallBtn').href = `tel:${rest.phone?.replace(/\s/g, '') || ''}`;
+            const address = encodeURIComponent(rest.address || rest.name);
+            document.getElementById('restDirectionsBtn').href = `https://www.google.com/maps/search/?api=1&query=${address}`;
+            document.querySelector('.restaurant-details').style.display = 'block';
+            document.getElementById('reservationForm').style.display = 'none';
+            document.getElementById('reservationConfirmed').style.display = 'none';
+            document.getElementById('restaurantModal').classList.add('active');
+        }
+
+        function closeRestaurantModal() {
+            document.getElementById('restaurantModal').classList.remove('active');
+        }
+        document.getElementById('restReserveBtn').addEventListener('click', function() {
+            document.querySelector('.restaurant-details').style.display = 'none';
+            document.getElementById('reservationForm').style.display = 'block';
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('reserveDate').min = today;
+            document.getElementById('reserveDate').value = today;
+        });
+
+        document.getElementById('cancelReserve').addEventListener('click', function() {
+            document.querySelector('.restaurant-details').style.display = 'block';
+            document.getElementById('reservationForm').style.display = 'none';
+        });
+        document.getElementById('tableReservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const reservationData = {
+                restaurant: selectedRestaurant.name,
+                date: document.getElementById('reserveDate').value,
+                time: document.getElementById('reserveTime').value,
+                guests: document.getElementById('reserveGuests').value,
+                name: document.getElementById('reserveName').value,
+                phone: document.getElementById('reservePhone').value,
+                note: document.getElementById('reserveNote').value
+            };
+            document.getElementById('confirmRestName').textContent = reservationData.restaurant;
+            document.getElementById('confirmDate').textContent = new Date(reservationData.date).toLocaleDateString('az-AZ');
+            document.getElementById('confirmTime').textContent = reservationData.time;
+            document.getElementById('confirmGuests').textContent = reservationData.guests + ' nəfər';
+            
+            document.getElementById('reservationForm').style.display = 'none';
+            document.getElementById('reservationConfirmed').style.display = 'block';
+            document.getElementById('tableReservationForm').reset();
+        });
+        document.getElementById('restaurantModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRestaurantModal();
+            }
+        });
+
+        document.getElementById('closeRestaurantModal').addEventListener('click', closeRestaurantModal);
+        let selectedHotel = null;
+        let bookingData = {};
+
+        function openBookingModal(hotelName, hotelPrice, hotelRating) {
+            selectedHotel = {
+                name: hotelName,
+                price: hotelPrice,
+                rating: hotelRating,
+                pricePerNight: parseInt(hotelPrice.replace(/[^\d]/g, '')) || 100
+            };
+            
+            document.getElementById('selectedHotelName').textContent = hotelName;
+            document.getElementById('summaryHotel').textContent = hotelName;
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const dayAfter = new Date(today);
+            dayAfter.setDate(dayAfter.getDate() + 2);
+            
+            document.getElementById('checkInDate').min = today.toISOString().split('T')[0];
+            document.getElementById('checkInDate').value = tomorrow.toISOString().split('T')[0];
+            document.getElementById('checkOutDate').min = tomorrow.toISOString().split('T')[0];
+            document.getElementById('checkOutDate').value = dayAfter.toISOString().split('T')[0];
+            
+            updateBookingSummary();
+            document.getElementById('bookingModal').classList.add('active');
+            document.getElementById('bookingStep1').style.display = 'block';
+            document.getElementById('bookingStep2').style.display = 'none';
+            document.getElementById('bookingStep3').style.display = 'none';
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function updateBookingSummary() {
+            const checkIn = new Date(document.getElementById('checkInDate').value);
+            const checkOut = new Date(document.getElementById('checkOutDate').value);
+            const guests = document.getElementById('guestCount').value;
+            const rooms = document.getElementById('roomCount').value;
+            
+            const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+            const total = nights * selectedHotel.pricePerNight * rooms;
+            
+            document.getElementById('summaryNights').textContent = `${nights} gecə`;
+            document.getElementById('summaryGuests').textContent = `${guests} nəfər, ${rooms} otaq`;
+            document.getElementById('summaryTotal').textContent = `₼${total}`;
+            
+            bookingData = {
+                hotel: selectedHotel.name,
+                checkIn: checkIn,
+                checkOut: checkOut,
+                nights: nights,
+                guests: guests,
+                rooms: rooms,
+                total: total
+            };
+        }
+        document.getElementById('checkInDate').addEventListener('change', function() {
+            const checkIn = new Date(this.value);
+            const minCheckOut = new Date(checkIn);
+            minCheckOut.setDate(minCheckOut.getDate() + 1);
+            document.getElementById('checkOutDate').min = minCheckOut.toISOString().split('T')[0];
+            
+            if (new Date(document.getElementById('checkOutDate').value) <= checkIn) {
+                document.getElementById('checkOutDate').value = minCheckOut.toISOString().split('T')[0];
+            }
+            updateBookingSummary();
+        });
+
+        document.getElementById('checkOutDate').addEventListener('change', updateBookingSummary);
+        document.getElementById('guestCount').addEventListener('change', updateBookingSummary);
+        document.getElementById('roomCount').addEventListener('change', updateBookingSummary);
+        document.getElementById('hotelBookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            bookingData.name = document.getElementById('guestName').value;
+            bookingData.email = document.getElementById('guestEmail').value;
+            bookingData.phone = document.getElementById('guestPhone').value;
+            bookingData.requests = document.getElementById('specialRequests').value;
+            document.getElementById('paymentHotel').textContent = bookingData.hotel;
+            document.getElementById('paymentDates').textContent = 
+                `${bookingData.checkIn.toLocaleDateString('az-AZ')} - ${bookingData.checkOut.toLocaleDateString('az-AZ')}`;
+            document.getElementById('paymentTotal').textContent = `₼${bookingData.total}`;
+            document.getElementById('bookingStep1').style.display = 'none';
+            document.getElementById('bookingStep2').style.display = 'block';
+        });
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                this.parentElement.classList.add('active');
+                
+                if (this.value === 'card') {
+                    document.getElementById('cardPayment').style.display = 'block';
+                    document.getElementById('cashPayment').style.display = 'none';
+                } else {
+                    document.getElementById('cardPayment').style.display = 'none';
+                    document.getElementById('cashPayment').style.display = 'block';
+                }
+            });
+        });
+        document.getElementById('backToBooking').addEventListener('click', function() {
+            document.getElementById('bookingStep1').style.display = 'block';
+            document.getElementById('bookingStep2').style.display = 'none';
+        });
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/\D/g, '');
+            let formatted = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formatted;
+        });
+        document.getElementById('cardExpiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2);
+            }
+            e.target.value = value;
+        });
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+            if (paymentMethod === 'card') {
+                const cardNumber = document.getElementById('cardNumber').value;
+                const expiry = document.getElementById('cardExpiry').value;
+                const cvv = document.getElementById('cardCvv').value;
+                const holder = document.getElementById('cardHolder').value;
+                
+                if (!cardNumber || !expiry || !cvv || !holder) {
+                    alert('Zəhmət olmasa bütün kart məlumatlarını doldurun');
+                    return;
+                }
+            }
+            const orderNumber = 'DT-' + Date.now().toString().slice(-6);
+            document.getElementById('orderNumber').textContent = orderNumber;
+            document.getElementById('confHotel').textContent = bookingData.hotel;
+            document.getElementById('confDates').textContent = 
+                `${bookingData.checkIn.toLocaleDateString('az-AZ')} - ${bookingData.checkOut.toLocaleDateString('az-AZ')}`;
+            document.getElementById('confAmount').textContent = `₼${bookingData.total}`;
+            document.getElementById('confEmail').textContent = bookingData.email;
+            saveBooking(orderNumber, paymentMethod);
+            
+            document.getElementById('bookingStep2').style.display = 'none';
+            document.getElementById('bookingStep3').style.display = 'block';
+        });
+        function saveBooking(orderNumber, paymentMethod) {
+            const CURRENT_USER_KEY = 'peakexplorer_current_user';
+            const USERS_KEY = 'peakexplorer_users';
+            
+            const currentUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+                
+                const booking = {
+                    id: orderNumber,
+                    tourName: bookingData.hotel,
+                    date: `${bookingData.checkIn.toLocaleDateString('az-AZ')} - ${bookingData.checkOut.toLocaleDateString('az-AZ')}`,
+                    participants: bookingData.guests,
+                    price: bookingData.total,
+                    status: paymentMethod === 'card' ? 'confirmed' : 'pending',
+                    createdAt: new Date().toISOString()
+                };
+                
+                user.bookings = user.bookings || [];
+                user.bookings.push(booking);
+                
+                localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+                const userIndex = users.findIndex(u => u.id === user.id);
+                if (userIndex !== -1) {
+                    users[userIndex].bookings = user.bookings;
+                    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                }
+            }
+        }
+        document.getElementById('bookingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBookingModal();
+            }
+        });
+
+        document.getElementById('closeBookingModal').addEventListener('click', closeBookingModal);
+        const activitiesData = {
+            'Alpinizm': {
+                icon: '🧗',
+                desc: 'Alpinizm dağların zirvələrinə qalxmaq sənətidir. Professional avadanlıq və təcrübə tələb edir.',
+                duration: '2-7 gün',
+                difficulty: 'Mürəkkəb',
+                price: '₼500-1500',
+                group: '5-12 nəfər',
+                requirements: ['Fiziki hazırlıq', 'Əsas alpinizm təcrübəsi', 'Tibbi arayış', '18 yaşdan yuxarı'],
+                equipment: ['İp', 'Karabinlər', 'Alpinizm ayaqqabısı', 'Kaska', 'Buz baltası']
+            },
+            'Trekking': {
+                icon: '🥾',
+                desc: 'Uzun məsafəli piyada gəzintilər dağ cığırları boyunca.',
+                duration: '1-5 gün',
+                difficulty: 'Orta',
+                price: '₼100-400',
+                group: '5-20 nəfər',
+                requirements: ['Yaxşı fiziki forma', 'Rahat gəzinti ayaqqabısı'],
+                equipment: ['Trekking çubuqları', 'Bel çantası', 'Su qabı', 'Günəş eynəyi']
+            },
+            'Foto-tur': {
+                icon: '📸',
+                desc: 'Professional fotoqraflar müşayiəti ilə dağ mənzərələrinin çəkilişi.',
+                duration: '1-3 gün',
+                difficulty: 'Asan',
+                price: '₼200-600',
+                group: '3-10 nəfər',
+                requirements: ['Fotoaparat (istənilən növ)'],
+                equipment: ['Kamera', 'Tripod', 'Əlavə batareya', 'Yaddaş kartları']
+            },
+            'Düşərgə': {
+                icon: '⛺',
+                desc: 'Dağ ətəklərində çadır qurub gecələmək.',
+                duration: '1-4 gecə',
+                difficulty: 'Asan',
+                price: '₼80-250',
+                group: '4-15 nəfər',
+                requirements: ['Yuxu tulumu', 'İsti geyim'],
+                equipment: ['Çadır', 'Yuxu tulumu', 'Karimat', 'Fənər', 'Bıçaq']
+            },
+            'Xizək': {
+                icon: '⛷️',
+                desc: 'Qış mövsümündə dağ xizəyi.',
+                duration: '1-7 gün',
+                difficulty: 'Müxtəlif',
+                price: '₼150-800',
+                group: '1-20 nəfər',
+                requirements: ['Əsas xizək bacarığı'],
+                equipment: ['Xizək', 'Çubuqlar', 'Botlar', 'Kaska', 'Xizək geyimi']
+            },
+            'Snowboard': {
+                icon: '🏂',
+                desc: 'Qar üzərində sürüşmə taxtası ilə ekstremal idman.',
+                duration: '1-7 gün',
+                difficulty: 'Orta-Mürəkkəb',
+                price: '₼200-900',
+                group: '1-15 nəfər',
+                requirements: ['Balans bacarığı'],
+                equipment: ['Snowboard', 'Botlar', 'Kaska', 'Qoruyucu geyim']
+            },
+            'Paraqlaydinq': {
+                icon: '🪂',
+                desc: 'Dağ zirvələrindən paraşütlə uçuş.',
+                duration: '15-45 dəqiqə uçuş',
+                difficulty: 'Orta',
+                price: '₼150-350',
+                group: 'Fərdi/Tandem',
+                requirements: ['Çəki limiti: 40-100 kq', 'Ürək xəstəliyi olmamalı'],
+                equipment: ['Paraşüt (təmin edilir)', 'Kaska', 'Qoruyucu geyim']
+            },
+            'Kanat yolu': {
+                icon: '🚡',
+                desc: 'Panoramik kanat yolu ilə dağ mənzərələrini seyr etmək.',
+                duration: '15-30 dəqiqə',
+                difficulty: 'Asan',
+                price: '₼20-50',
+                group: '1-6 nəfər (kabin)',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['İsti geyim (qışda)']
+            },
+            'Zipline': {
+                icon: '🎿',
+                desc: 'Ekstremal zipline ilə dərələr üzərindən uçuş.',
+                duration: '5-15 dəqiqə',
+                difficulty: 'Orta',
+                price: '₼30-80',
+                group: 'Fərdi',
+                requirements: ['Çəki limiti: 40-120 kq'],
+                equipment: ['Kaska (təmin edilir)', 'Qoruyucu kəmər']
+            },
+            'At gəzintisi': {
+                icon: '🐴',
+                desc: 'Atla dağ gəzintisi.',
+                duration: '1-4 saat',
+                difficulty: 'Asan',
+                price: '₼50-150',
+                group: '2-10 nəfər',
+                requirements: ['Xüsusi təcrübə tələb olunmur'],
+                equipment: ['Rahat geyim', 'Kaska (təmin edilir)']
+            },
+            'ATV Turu': {
+                icon: '🏍️',
+                desc: 'ATV ilə dağ macərası.',
+                duration: '1-3 saat',
+                difficulty: 'Orta',
+                price: '₼80-200',
+                group: '2-8 nəfər',
+                requirements: ['Sürücülük vəsiqəsi (18+)'],
+                equipment: ['Kaska', 'Qoruyucu geyim']
+            },
+            'Ziyarət': {
+                icon: '🙏',
+                desc: 'Müqəddəs yerlərin ziyarəti.',
+                duration: '1 gün',
+                difficulty: 'Asan',
+                price: '₼50-100',
+                group: '5-30 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['Rahat ayaqqabı']
+            },
+            'Meditasiya': {
+                icon: '🧘',
+                desc: 'Dağ təbiətində mənəvi təcrübə.',
+                duration: '1-3 saat',
+                difficulty: 'Asan',
+                price: '₼30-80',
+                group: '5-15 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['Rahat geyim', 'Yoga xalçası']
+            },
+            'Mədəni tur': {
+                icon: '🏛️',
+                desc: 'Yerli mədəniyyət və tarix turu.',
+                duration: '3-6 saat',
+                difficulty: 'Asan',
+                price: '₼40-120',
+                group: '5-20 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['Kamera', 'Rahat ayaqqabı']
+            },
+            'Etnoqrafiya': {
+                icon: '🎭',
+                desc: 'Yerli adət-ənənələri öyrənmə.',
+                duration: '2-4 saat',
+                difficulty: 'Asan',
+                price: '₼30-80',
+                group: '5-15 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['Qeyd dəftəri', 'Kamera']
+            },
+            'Sənətkarlıq': {
+                icon: '🧶',
+                desc: 'Yerli sənət nümunələri ilə tanışlıq.',
+                duration: '2-3 saat',
+                difficulty: 'Asan',
+                price: '₼20-50',
+                group: '5-10 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: []
+            },
+            'Muzey ziyarəti': {
+                icon: '🏛️',
+                desc: 'Muzey və tarixi yerlərin ziyarəti.',
+                duration: '1-2 saat',
+                difficulty: 'Asan',
+                price: '₼5-20',
+                group: '1-50 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['Kamera']
+            },
+            'Petroqliflər': {
+                icon: '🪨',
+                desc: 'Qədim qayaüstü rəsmlərin tədqiqi.',
+                duration: '2-3 saat',
+                difficulty: 'Asan',
+                price: '₼10-30',
+                group: '5-30 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['Kamera', 'Günəş eynəyi']
+            },
+            'Vulkanlar': {
+                icon: '🌋',
+                desc: 'Palçıq vulkanlarının müşahidəsi.',
+                duration: '1-2 saat',
+                difficulty: 'Asan',
+                price: '₼10-25',
+                group: '5-30 nəfər',
+                requirements: ['Xüsusi tələb yoxdur'],
+                equipment: ['Rahat ayaqqabı']
+            }
+        };
+
+        function openActivityModal(activityName) {
+            const activity = activitiesData[activityName];
+            if (!activity) {
+                document.getElementById('activityModalIcon').textContent = '🏔️';
+                document.getElementById('activityModalName').textContent = activityName;
+                document.getElementById('activityModalDesc').textContent = 'Bu fəaliyyət haqqında ətraflı məlumat tezliklə əlavə olunacaq.';
+                document.getElementById('activityModalDuration').textContent = '-';
+                document.getElementById('activityModalDifficulty').textContent = '-';
+                document.getElementById('activityModalPrice').textContent = '-';
+                document.getElementById('activityModalGroup').textContent = '-';
+                document.getElementById('activityModalRequirements').innerHTML = '';
+                document.getElementById('activityModalEquipment').innerHTML = '';
+                document.getElementById('activityModal').classList.add('active');
+                return;
+            }
+
+            document.getElementById('activityModalIcon').textContent = activity.icon;
+            document.getElementById('activityModalName').textContent = activityName;
+            document.getElementById('activityModalDesc').textContent = activity.desc;
+            document.getElementById('activityModalDuration').textContent = activity.duration;
+            document.getElementById('activityModalDifficulty').textContent = activity.difficulty;
+            document.getElementById('activityModalPrice').textContent = activity.price;
+            document.getElementById('activityModalGroup').textContent = activity.group;
+            
+            document.getElementById('activityModalRequirements').innerHTML = activity.requirements.map(req => 
+                `<li>${req}</li>`
+            ).join('');
+            
+            document.getElementById('activityModalEquipment').innerHTML = activity.equipment.map(eq => 
+                `<span class="equipment-tag">${eq}</span>`
+            ).join('');
+
+            document.getElementById('activityModal').classList.add('active');
+        }
+
+        function closeActivityModal() {
+            document.getElementById('activityModal').classList.remove('active');
+        }
+
+        document.getElementById('activityModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeActivityModal();
+        });
+        let currentMountainData = null;
+        let tourBookingData = {};
+
+        function openTourBookingModal() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mountainId = urlParams.get('id') || 'shahdag';
+            currentMountainData = mountainsData[mountainId];
+            
+            if (!currentMountainData) {
+                currentMountainData = {
+                    name: mountainId,
+                    price: '₼350'
+                };
+            }
+
+            document.getElementById('tourBookingName').textContent = currentMountainData.name + ' Turu';
+            document.getElementById('summaryTourName').textContent = currentMountainData.name;
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('tourDate').min = tomorrow.toISOString().split('T')[0];
+            document.getElementById('tourDate').value = tomorrow.toISOString().split('T')[0];
+            
+            updateTourSummary();
+            
+            document.getElementById('tourBookingModal').classList.add('active');
+            document.getElementById('tourStep1').style.display = 'block';
+            document.getElementById('tourStep2').style.display = 'none';
+            document.getElementById('tourStep3').style.display = 'none';
+        }
+
+        function closeTourBookingModal() {
+            document.getElementById('tourBookingModal').classList.remove('active');
+        }
+
+        function updateTourSummary() {
+            const participants = parseInt(document.getElementById('tourParticipants').value) || 2;
+            const tourType = document.getElementById('tourType').value;
+            
+            let basePrice = parseInt(currentMountainData?.price?.replace(/[^\d]/g, '')) || 350;
+            if (tourType === 'vip') {
+                basePrice *= 1.5;
+            } else if (tourType === 'group' && participants >= 4) {
+                basePrice *= 0.9;
+            }
+            
+            const total = Math.round(basePrice * participants);
+            
+            document.getElementById('summaryParticipants').textContent = participants + ' nəfər';
+            document.getElementById('summaryTourTotal').textContent = '₼' + total;
+            
+            tourBookingData.total = total;
+            tourBookingData.participants = participants;
+        }
+        document.getElementById('tourParticipants')?.addEventListener('change', updateTourSummary);
+        document.getElementById('tourType')?.addEventListener('change', updateTourSummary);
+        document.getElementById('tourOrderForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            tourBookingData.tourName = currentMountainData?.name || 'Dağ Turu';
+            tourBookingData.date = document.getElementById('tourDate').value;
+            tourBookingData.name = document.getElementById('tourGuestName').value;
+            tourBookingData.email = document.getElementById('tourGuestEmail').value;
+            tourBookingData.phone = document.getElementById('tourGuestPhone').value;
+            tourBookingData.requests = document.getElementById('tourRequests').value;
+            tourBookingData.type = document.getElementById('tourType').value;
+            tourBookingData.orderNumber = 'DT-' + Date.now().toString().slice(-6);
+            
+            // Update payment step
+            document.getElementById('paymentTourNameMD').textContent = tourBookingData.tourName + ' Turu';
+            document.getElementById('paymentParticipantsMD').textContent = tourBookingData.participants + ' nəfər';
+            document.getElementById('paymentAmountMD').textContent = '₼' + tourBookingData.total;
+            
+            // Show payment step
+            document.getElementById('tourStep1').style.display = 'none';
+            document.getElementById('tourStep2').style.display = 'block';
+        });
+
+        function goBackToTourFormMD() {
+            document.getElementById('tourStep1').style.display = 'block';
+            document.getElementById('tourStep2').style.display = 'none';
+        }
+        
+        // Payment form handler for mountain-details
+        document.getElementById('paymentFormMD')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const paymentMethod = document.querySelector('input[name="paymentMethodMD"]:checked').value;
+            const cardNumber = document.getElementById('cardNumberMD').value;
+            const cardExpiry = document.getElementById('cardExpiryMD').value;
+            const cardCVV = document.getElementById('cardCVVMD').value;
+            const cardName = document.getElementById('cardNameMD').value;
+            
+            if (paymentMethod === 'card') {
+                if (!cardNumber || !cardExpiry || !cardCVV || !cardName) {
+                    showNotification('Zəhmət olmasa bütün ödəniş məlumatlarını daxil edin', 'error');
+                    return;
+                }
+            }
+            
+            // Update confirmation step
+            document.getElementById('tourOrderNumber').textContent = tourBookingData.orderNumber;
+            document.getElementById('confTourName').textContent = tourBookingData.tourName + ' Turu';
+            document.getElementById('confTourDate').textContent = new Date(tourBookingData.date).toLocaleDateString('az-AZ');
+            document.getElementById('confTourParticipants').textContent = tourBookingData.participants + ' nəfər';
+            document.getElementById('confTourAmount').textContent = '₼' + tourBookingData.total;
+            document.getElementById('confTourEmail').textContent = tourBookingData.email;
+            
+            // Save booking with payment info
+            tourBookingData.paymentMethod = paymentMethod;
+            if (paymentMethod === 'card') {
+                tourBookingData.cardLast4 = cardNumber.slice(-4);
+            }
+            saveTourBooking(tourBookingData.orderNumber);
+            
+            // Show confirmation step
+            document.getElementById('tourStep2').style.display = 'none';
+            document.getElementById('tourStep3').style.display = 'block';
+            showNotification('✅ Ödəniş uğurla tamamlandı!', 'success');
+        });
+        
+        // Payment method change handler
+        document.querySelectorAll('input[name="paymentMethodMD"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const cashNote = document.getElementById('cashPaymentNoteMD');
+                const cardFields = document.querySelectorAll('#cardNumberMD, #cardExpiryMD, #cardCVVMD, #cardNameMD');
+                
+                if (this.value === 'cash') {
+                    cashNote.style.display = 'block';
+                    cardFields.forEach(field => field.required = false);
+                } else {
+                    cashNote.style.display = 'none';
+                    cardFields.forEach(field => field.required = true);
+                }
+            });
+        });
+        
+        // Format card number
+        document.getElementById('cardNumberMD')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+        
+        // Format expiry date
+        document.getElementById('cardExpiryMD')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+        
+        // Only numbers for CVV
+        document.getElementById('cardCVVMD')?.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+        
+        function saveTourBooking(orderNumber) {
+            const CURRENT_USER_KEY = 'peakexplorer_current_user';
+            const USERS_KEY = 'peakexplorer_users';
+            
+            const currentUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+                
+                const booking = {
+                    id: orderNumber,
+                    tourName: tourBookingData.tourName + ' Turu',
+                    date: new Date(tourBookingData.date).toLocaleDateString('az-AZ'),
+                    participants: tourBookingData.participants,
+                    price: tourBookingData.total,
+                    status: 'pending',
+                    createdAt: new Date().toISOString()
+                };
+                
+                user.bookings = user.bookings || [];
+                user.bookings.push(booking);
+                
+                localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+                
+                const userIndex = users.findIndex(u => u.id === user.id);
+                if (userIndex !== -1) {
+                    users[userIndex].bookings = user.bookings;
+                    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+                }
+            }
+        }
+        document.getElementById('tourBookingModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTourBookingModal();
+            }
+        });
+        const transportData = {
+            'Jeep transfer': {
+                icon: '🚙',
+                desc: '4x4 jeep ilə dağ yollarında rahat səyahət. Professional sürücülər və təhlükəsiz avtomobillər.',
+                duration: '2-4 saat',
+                price: '₼80-150',
+                tips: [
+                    'Əvvəlcədən rezervasiya tövsiyə olunur',
+                    'Qrup üçün endirim mövcuddur',
+                    'Sürücü bələdçi kimi də xidmət göstərə bilər',
+                    'Yol boyu dayanacaqlar mümkündür'
+                ],
+                contacts: [
+                    { name: 'Qusar Jeep Transfer', phone: '+994 50 123 45 67' },
+                    { name: 'Dağ Yolları', phone: '+994 55 234 56 78' }
+                ]
+            },
+            'Avtobus': {
+                icon: '🚌',
+                desc: 'Rahat avtobus reysi ilə şəhərlərarası səyahət. Ən sərfəli seçim.',
+                duration: '3-5 saat',
+                price: '₼10-25',
+                tips: [
+                    'Bakı Avtovağzalından düzenli reysler',
+                    'Biletləri əvvəlcədən almaq tövsiyə olunur',
+                    'Yük üçün əlavə yer mövcuddur',
+                    'Kondisioner və WiFi var'
+                ],
+                contacts: [
+                    { name: 'Bakı Avtovağzalı', phone: '+994 12 119' }
+                ]
+            },
+            'Taksi': {
+                icon: '🚕',
+                desc: 'Fərdi taksi xidməti. Rahatlıq və çeviklik.',
+                duration: '2-4 saat',
+                price: '₼100-200',
+                tips: [
+                    'Bolt və Uber tətbiqləri mövcuddur',
+                    'Qiyməti əvvəlcədən razılaşdırın',
+                    'Uzun məsafə üçün sabit qiymət soruşun'
+                ],
+                contacts: [
+                    { name: 'Bolt', phone: 'Tətbiq vasitəsilə' },
+                    { name: 'Uber', phone: 'Tətbiq vasitəsilə' }
+                ]
+            },
+            'Şəxsi avtomobil': {
+                icon: '🚗',
+                desc: 'Öz avtomobilinizlə səyahət. Tam azadlıq və çeviklik.',
+                duration: 'Marşruta görə',
+                price: 'Yanacaq xərci',
+                tips: [
+                    'GPS naviqasiya istifadə edin',
+                    'Dağ yolları üçün 4x4 tövsiyə olunur',
+                    'Ehtiyat təkər və alətlər götürün',
+                    'Yanacaq stansiyalarını əvvəlcədən planlaşdırın'
+                ],
+                contacts: []
+            },
+            'Transfer xidməti': {
+                icon: '🚐',
+                desc: 'Otel və ya turoperator tərəfindən təşkil edilən transfer.',
+                duration: 'Marşruta görə',
+                price: '₼50-100',
+                tips: [
+                    'Otel bronunda daxil ola bilər',
+                    'Qrup transferləri daha sərfəlidir',
+                    'Vaxtında hazır olun'
+                ],
+                contacts: [
+                    { name: 'Otel resepsiyası', phone: 'Otelinizə müraciət edin' }
+                ]
+            },
+            'Kanat yolu': {
+                icon: '🚡',
+                desc: 'Panoramik kanat yolu ilə dağa qalxış. Heyrətamiz mənzərələr.',
+                duration: '15-30 dəqiqə',
+                price: '₼20-50',
+                tips: [
+                    'Hava şəraitindən asılıdır',
+                    'Biletləri yerində almaq olar',
+                    'Kamera götürməyi unutmayın',
+                    'Küləkli havalarda bağlı ola bilər'
+                ],
+                contacts: [
+                    { name: 'Şahdağ Kanat Yolu', phone: '+994 12 404 04 04' },
+                    { name: 'Tufandağ Kanat Yolu', phone: '+994 24 205 55 55' }
+                ]
+            },
+            '4x4 avtomobil': {
+                icon: '🚙',
+                desc: 'Çətin dağ yolları üçün 4x4 avtomobil icarəsi.',
+                duration: 'Marşruta görə',
+                price: '₼150-300/gün',
+                tips: [
+                    'Sürücülük vəsiqəsi tələb olunur',
+                    'Sığorta daxildir',
+                    'Yanacaq əlavə ödənilir',
+                    'Əvvəlcədən rezervasiya edin'
+                ],
+                contacts: [
+                    { name: 'Rent a Car Baku', phone: '+994 50 345 67 89' }
+                ]
+            },
+            'Piyada': {
+                icon: '🥾',
+                desc: 'Piyada trekking marşrutu. Təbiətlə baş-başa.',
+                duration: 'Marşruta görə',
+                price: 'Pulsuz',
+                tips: [
+                    'Rahat trekking ayaqqabısı geyinin',
+                    'Kifayət qədər su götürün',
+                    'Xəritə və ya GPS istifadə edin',
+                    'Hava proqnozunu yoxlayın',
+                    'Bələdçi ilə getmək tövsiyə olunur'
+                ],
+                contacts: []
+            },
+            'At ilə': {
+                icon: '🐴',
+                desc: 'Atla dağ səyahəti. Ənənəvi və romantik.',
+                duration: 'Marşruta görə',
+                price: '₼50-100',
+                tips: [
+                    'Təcrübə tələb olunmur',
+                    'Bələdçi ilə birlikdə',
+                    'Rahat geyim geyinin'
+                ],
+                contacts: [
+                    { name: 'Yerli bələdçilər', phone: 'Kənddə soruşun' }
+                ]
+            }
+        };
+
+        function getTransportIcon(transportName) {
+            const icons = {
+                'Jeep': '🚙',
+                'Avtobus': '🚌',
+                'Taksi': '🚕',
+                'Şəxsi': '🚗',
+                'Transfer': '🚐',
+                'Kanat': '🚡',
+                '4x4': '🚙',
+                'Piyada': '🥾',
+                'At': '🐴'
+            };
+            
+            for (const [key, icon] of Object.entries(icons)) {
+                if (transportName.toLowerCase().includes(key.toLowerCase())) {
+                    return icon;
+                }
+            }
+            return '🚗';
+        }
+
+        function findTransportData(transportName) {
+            if (transportData[transportName]) {
+                return transportData[transportName];
+            }
+            for (const [key, data] of Object.entries(transportData)) {
+                if (transportName.toLowerCase().includes(key.toLowerCase()) || 
+                    key.toLowerCase().includes(transportName.toLowerCase().split(' ')[0])) {
+                    return data;
+                }
+            }
+            return {
+                icon: getTransportIcon(transportName),
+                desc: `${transportName} ilə dağa çatmaq mümkündür.`,
+                duration: 'Marşruta görə dəyişir',
+                price: 'Sorğu ilə',
+                tips: ['Əvvəlcədən planlaşdırın', 'Yerli şərtləri öyrənin'],
+                contacts: []
+            };
+        }
+
+        function openTransportModal(transportName, index) {
+            const data = findTransportData(transportName);
+            const routes = window.currentRoutes || [];
+            
+            document.getElementById('transportModalIcon').textContent = data.icon;
+            document.getElementById('transportModalName').textContent = transportName;
+            document.getElementById('transportModalDesc').textContent = data.desc;
+            document.getElementById('transportModalDuration').textContent = data.duration;
+            document.getElementById('transportModalPrice').textContent = data.price;
+            const routeContainer = document.getElementById('transportModalRoute');
+            if (routes.length > 0) {
+                routeContainer.innerHTML = routes.map(r => `
+                    <div class="route-step">
+                        <span class="route-step-icon">${r.icon}</span>
+                        <div class="route-step-info">
+                            <strong>${r.type}</strong>
+                            <p>⏱️ ${r.duration}</p>
+                            <p>📍 ${r.path}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                routeContainer.innerHTML = '<p>Marşrut məlumatı mövcud deyil.</p>';
+            }
+            document.getElementById('transportModalTips').innerHTML = data.tips.map(tip => 
+                `<li>${tip}</li>`
+            ).join('');
+            const contactsSection = document.getElementById('transportContactsSection');
+            const contactsContainer = document.getElementById('transportModalContacts');
+            if (data.contacts && data.contacts.length > 0) {
+                contactsSection.style.display = 'block';
+                contactsContainer.innerHTML = data.contacts.map(c => `
+                    <div class="transport-contact">
+                        <span class="contact-name">${c.name}</span>
+                        <a href="tel:${c.phone.replace(/\s/g, '')}" class="contact-phone">${c.phone}</a>
+                    </div>
+                `).join('');
+            } else {
+                contactsSection.style.display = 'none';
+            }
+            
+            document.getElementById('transportModal').classList.add('active');
+        }
+
+        function closeTransportModal() {
+            document.getElementById('transportModal').classList.remove('active');
+        }
+
+        document.getElementById('transportModal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeTransportModal();
+        });
+        
+        const CURRENT_USER_KEY_NAV = 'peakexplorer_current_user';
+        function checkSessionNav() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY_NAV);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY_NAV);
+            window.location.reload();
+        }
+        checkSessionNav();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1117 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .blog-hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            padding: 150px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .blog-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .blog-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid var(--color-light);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-card-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .blog-card-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-accent);
+            color: var(--color-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.75rem;
+        }
+        
+        .blog-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        
+        .blog-card-excerpt {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .blog-author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .blog-author-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .blog-read-more {
+            color: var(--color-accent);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-read-more:hover {
+            color: var(--color-accent-dark);
+            gap: 0.75rem;
+        }
+        
+        /* Featured Post */
+        .featured-post {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+        }
+        
+        .featured-image {
+            height: 100%;
+            min-height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .featured-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-accent);
+            color: var(--color-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: fit-content;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .featured-excerpt {
+            color: var(--color-text-light);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+        
+        .featured-btn:hover {
+            background: var(--color-secondary);
+            transform: translateX(5px);
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-dark) 100%);
+            padding: 4rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+        }
+        
+        .newsletter-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-section p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background: var(--color-accent);
+            color: var(--color-dark);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--color-accent-dark);
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .featured-post {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-image {
+                min-height: 250px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html" class="active">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="blog-hero">
+        <h1>📝 Blog</h1>
+        <p>Dağ macəraları, səyahət məsləhətləri və Azərbaycanın gözəllikləri haqqında yazılar</p>
+    </section>
+
+    
+    <div class="blog-container">
+        
+        <div class="blog-categories">
+            <button class="category-btn active" data-category="all">Hamısı</button>
+            <button class="category-btn" data-category="adventure">Macəra</button>
+            <button class="category-btn" data-category="tips">Məsləhətlər</button>
+            <button class="category-btn" data-category="nature">Təbiət</button>
+            <button class="category-btn" data-category="culture">Mədəniyyət</button>
+        </div>
+
+        
+        <article class="featured-post">
+            <div class="featured-image" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070')"></div>
+            <div class="featured-content">
+                <span class="featured-badge">⭐ Seçilmiş Yazı</span>
+                <h2 class="featured-title">Bazardüzü: Azərbaycanın Zirvəsinə Səyahət</h2>
+                <p class="featured-excerpt">4466 metr hündürlükdə olan Bazardüzü zirvəsinə qalxış təcrübəsi, hazırlıq məsləhətləri və unudulmaz anlar. Bu səyahət həyatımın ən möhtəşəm macəralarından biri oldu...</p>
+                <a href="javascript:void(0)" class="featured-btn" onclick="openBlogPost('featured')">Davamını Oxu →</a>
+            </div>
+        </article>
+
+        
+        <div class="blog-grid">
+            <article class="blog-card" data-category="adventure">
+                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=2083')">
+                    <span class="blog-card-category">Macəra</span>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>📅 15 Noyabr 2024</span>
+                        <span>⏱️ 8 dəq oxuma</span>
+                    </div>
+                    <h3 class="blog-card-title">Şahdağda Qış Xizəyi: Başlayanlar üçün Bələdçi</h3>
+                    <p class="blog-card-excerpt">Şahdağ kurortunda xizək sürməyi öyrənmək istəyirsiniz? Bu yazıda başlayanlar üçün bütün lazımi məlumatları tapacaqsınız.</p>
+                    <div class="blog-card-footer">
+                        <div class="blog-author">
+                            <span class="blog-author-avatar">👨</span>
+                            <span class="blog-author-name">Əli Məmmədov</span>
+                        </div>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogPost('shahdag-ski')">Oxu →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card" data-category="tips">
+                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070')">
+                    <span class="blog-card-category">Məsləhətlər</span>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>📅 10 Noyabr 2024</span>
+                        <span>⏱️ 6 dəq oxuma</span>
+                    </div>
+                    <h3 class="blog-card-title">Dağ Yürüşünə Hazırlıq: Nə Götürməli?</h3>
+                    <p class="blog-card-excerpt">Dağ yürüşünə çıxmadan əvvəl çantanıza nə qoymalısınız? Təcrübəli alpinistlərdən məsləhətlər.</p>
+                    <div class="blog-card-footer">
+                        <div class="blog-author">
+                            <span class="blog-author-avatar">👩</span>
+                            <span class="blog-author-name">Leyla Əliyeva</span>
+                        </div>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogPost('hiking-prep')">Oxu →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card" data-category="nature">
+                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070')">
+                    <span class="blog-card-category">Təbiət</span>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>📅 5 Noyabr 2024</span>
+                        <span>⏱️ 10 dəq oxuma</span>
+                    </div>
+                    <h3 class="blog-card-title">Azərbaycanın Nadir Flora və Faunası</h3>
+                    <p class="blog-card-excerpt">Dağlarımızda yaşayan nadir heyvan növləri və unikal bitkilər haqqında maraqlı faktlar.</p>
+                    <div class="blog-card-footer">
+                        <div class="blog-author">
+                            <span class="blog-author-avatar">🧑‍🔬</span>
+                            <span class="blog-author-name">Dr. Kamran Hüseynov</span>
+                        </div>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogPost('flora-fauna')">Oxu →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card" data-category="culture">
+                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2084')">
+                    <span class="blog-card-category">Mədəniyyət</span>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>📅 1 Noyabr 2024</span>
+                        <span>⏱️ 7 dəq oxuma</span>
+                    </div>
+                    <h3 class="blog-card-title">Xınalıq: 5000 İllik Tarix</h3>
+                    <p class="blog-card-excerpt">Dünyanın ən qədim yaşayış yerlərindən biri olan Xınalıq kəndinin sirləri və mədəniyyəti.</p>
+                    <div class="blog-card-footer">
+                        <div class="blog-author">
+                            <span class="blog-author-avatar">👨‍🏫</span>
+                            <span class="blog-author-name">Prof. Elşən Quliyev</span>
+                        </div>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogPost('khinaliq')">Oxu →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card" data-category="adventure">
+                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=2076')">
+                    <span class="blog-card-category">Macəra</span>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>📅 25 Oktyabr 2024</span>
+                        <span>⏱️ 12 dəq oxuma</span>
+                    </div>
+                    <h3 class="blog-card-title">Tufandağ Kanat Yolunda Bir Gün</h3>
+                    <p class="blog-card-excerpt">Azərbaycanın ən uzun kanat yolunda səyahət və Qəbələnin möhtəşəm mənzərələri.</p>
+                    <div class="blog-card-footer">
+                        <div class="blog-author">
+                            <span class="blog-author-avatar">👩‍💼</span>
+                            <span class="blog-author-name">Aynur Həsənova</span>
+                        </div>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogPost('tufandag')">Oxu →</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="blog-card" data-category="tips">
+                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1533240332313-0db49b459ad6?q=80&w=2074')">
+                    <span class="blog-card-category">Məsləhətlər</span>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span>📅 20 Oktyabr 2024</span>
+                        <span>⏱️ 5 dəq oxuma</span>
+                    </div>
+                    <h3 class="blog-card-title">Dağda Təhlükəsizlik Qaydaları</h3>
+                    <p class="blog-card-excerpt">Dağ yürüşlərində təhlükəsizliyi təmin etmək üçün bilməli olduğunuz əsas qaydalar.</p>
+                    <div class="blog-card-footer">
+                        <div class="blog-author">
+                            <span class="blog-author-avatar">🧗</span>
+                            <span class="blog-author-name">Rəşad Əliyev</span>
+                        </div>
+                        <a href="javascript:void(0)" class="blog-read-more" onclick="openBlogPost('safety')">Oxu →</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        
+        <div class="newsletter-section">
+            <h2>📬 Yeniliklərdən Xəbərdar Olun</h2>
+            <p>Ən son blog yazıları və xüsusi təkliflər üçün email bülletenimizə abunə olun</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Email ünvanınız" required>
+                <button type="submit">Abunə Ol</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>⛰️ PeakExplorer</h3>
+                <p>Azərbaycanın dağlarını kəşf edin</p>
+            </div>
+            <div class="footer-section">
+                <h4>Səhifələr</h4>
+                <a href="index (2).html">Ana Səhifə</a>
+                <a href="index (2).html#mountains">Dağlar</a>
+                <a href="blog.html">Blog</a>
+            </div>
+            <div class="footer-section">
+                <h4>Əlaqə</h4>
+                <p>📧 info@peakexplorer.az</p>
+                <p>📞 +994 12 345 67 89</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    
+    <div class="blog-modal" id="blogModal">
+        <div class="blog-modal-content">
+            <button class="blog-modal-close" onclick="closeBlogModal()">✕</button>
+            <div class="blog-modal-image" id="modalImage"></div>
+            <div class="blog-modal-body">
+                <span class="blog-modal-category" id="modalCategory">Kateqoriya</span>
+                <h1 class="blog-modal-title" id="modalTitle">Başlıq</h1>
+                <div class="blog-modal-meta">
+                    <span id="modalDate">📅 Tarix</span>
+                    <span id="modalReadTime">⏱️ Oxuma vaxtı</span>
+                    <span id="modalAuthor">✍️ Müəllif</span>
+                </div>
+                <div class="blog-modal-text" id="modalText">
+                    Mətn...
+                </div>
+                <div class="blog-modal-tags">
+                    <span class="blog-tag">#dağlar</span>
+                    <span class="blog-tag">#səyahət</span>
+                    <span class="blog-tag">#Azərbaycan</span>
+                </div>
+                <div class="blog-modal-share">
+                    <span>Paylaş:</span>
+                    <button onclick="sharePost('facebook')">📘 Facebook</button>
+                    <button onclick="sharePost('twitter')">🐦 Twitter</button>
+                    <button onclick="sharePost('whatsapp')">💬 WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .blog-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        
+        .blog-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .blog-modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: white;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-modal-close:hover {
+            background: #ff4757;
+            color: white;
+        }
+        
+        .blog-modal-image {
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .blog-modal-body {
+            padding: 2rem;
+        }
+        
+        .blog-modal-category {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-modal-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .blog-modal-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        
+        .blog-modal-text {
+            color: var(--color-text);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .blog-modal-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .blog-modal-text h3 {
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .blog-modal-text ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .blog-modal-text li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-modal-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .blog-tag {
+            background: var(--color-light);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+        
+        .blog-modal-share {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            flex-wrap: wrap;
+        }
+        
+        .blog-modal-share span {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .blog-modal-share button {
+            background: var(--color-light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-modal-share button:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-modal-title {
+                font-size: 1.5rem;
+            }
+            
+            .blog-modal-image {
+                height: 200px;
+            }
+        }
+    </style>
+
+    <script>
+        const blogPosts = {
+            'featured': {
+                title: 'Bazardüzü: Azərbaycanın Zirvəsinə Səyahət',
+                category: 'Macəra',
+                date: '20 Noyabr 2024',
+                readTime: '15 dəq oxuma',
+                author: 'Tural Həsənov',
+                image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070',
+                content: `
+                    <p>4466 metr hündürlükdə olan Bazardüzü zirvəsinə qalxış təcrübəsi, hazırlıq məsləhətləri və unudulmaz anlar. Bu səyahət həyatımın ən möhtəşəm macəralarından biri oldu.</p>
+                    
+                    <h3>Hazırlıq Mərhələsi</h3>
+                    <p>Bazardüzü zirvəsinə qalxış üçün ciddi hazırlıq tələb olunur. Ən azı 3-4 ay əvvəldən fiziki hazırlığa başlamaq lazımdır. Gündəlik qaçış, dağ yürüşləri və güc məşqləri mütləqdir.</p>
+                    
+                    <h3>Lazımi Avadanlıq</h3>
+                    <ul>
+                        <li>Professional alpinizm çəkmələri</li>
+                        <li>Qış geyimləri və termal alt paltarları</li>
+                        <li>Alpinizm ipi və karabinlər</li>
+                        <li>Buz baltası və kramponlar</li>
+                        <li>Çadır və yataq torbası (-20°C)</li>
+                    </ul>
+                    
+                    <h3>Marşrut</h3>
+                    <p>Ləzə kəndindən başlayan marşrut 2-3 gün çəkir. İlk gün baza düşərgəsinə qədər yürüş, ikinci gün zirvəyə qalxış və geri dönüş.</p>
+                    
+                    <h3>Zirvədə</h3>
+                    <p>Zirvəyə çatdığınız an bütün yorğunluğu unudursunuz. 360 dərəcə panoramik mənzərə, Qafqaz silsiləsinin möhtəşəm görünüşü və Azərbaycanın ən hündür nöqtəsində olmaq hissi təsvirəgəlməzdir.</p>
+                `
+            },
+            'shahdag-ski': {
+                title: 'Şahdağda Qış Xizəyi: Başlayanlar üçün Bələdçi',
+                category: 'Macəra',
+                date: '15 Noyabr 2024',
+                readTime: '8 dəq oxuma',
+                author: 'Əli Məmmədov',
+                image: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?q=80&w=2083',
+                content: `
+                    <p>Şahdağ kurortunda xizək sürməyi öyrənmək istəyirsiniz? Bu yazıda başlayanlar üçün bütün lazımi məlumatları tapacaqsınız.</p>
+                    
+                    <h3>Şahdağ Haqqında</h3>
+                    <p>Şahdağ Azərbaycanın ən müasir qış idmanı kurortudur. 2012-ci ildə açılıb və hər il minlərlə turisti cəlb edir.</p>
+                    
+                    <h3>Xizək Dərsləri</h3>
+                    <p>Kurortda professional instruktorlar var. Başlayanlar üçün 2-3 saatlıq dərslər kifayətdir. Qiymət təxminən 50-80 AZN arasındadır.</p>
+                    
+                    <h3>Avadanlıq Kirayəsi</h3>
+                    <ul>
+                        <li>Xizək dəsti: 40-60 AZN/gün</li>
+                        <li>Snowboard: 50-70 AZN/gün</li>
+                        <li>Dəbilqə: 10 AZN/gün</li>
+                        <li>Geyim: 30-50 AZN/gün</li>
+                    </ul>
+                    
+                    <h3>Ən Yaxşı Vaxt</h3>
+                    <p>Dekabr-Mart ayları xizək üçün ən yaxşı dövrdür. Qar örtüyü bu aylarda ən qalın olur.</p>
+                `
+            },
+            'hiking-prep': {
+                title: 'Dağ Yürüşünə Hazırlıq: Nə Götürməli?',
+                category: 'Məsləhətlər',
+                date: '10 Noyabr 2024',
+                readTime: '6 dəq oxuma',
+                author: 'Leyla Əliyeva',
+                image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=2070',
+                content: `
+                    <p>Dağ yürüşünə çıxmadan əvvəl çantanıza nə qoymalısınız? Təcrübəli alpinistlərdən məsləhətlər.</p>
+                    
+                    <h3>Əsas Avadanlıq</h3>
+                    <ul>
+                        <li>Rahat trekking ayaqqabıları</li>
+                        <li>Su keçirməyən gödəkçə</li>
+                        <li>Trekking çubuqları</li>
+                        <li>Günəş eynəyi və şlyapa</li>
+                        <li>Baş lampası</li>
+                    </ul>
+                    
+                    <h3>Qidalanma</h3>
+                    <ul>
+                        <li>Ən azı 2 litr su</li>
+                        <li>Enerji barları</li>
+                        <li>Quru meyvələr</li>
+                        <li>Sendviçlər</li>
+                    </ul>
+                    
+                    <h3>Təhlükəsizlik</h3>
+                    <ul>
+                        <li>İlk yardım dəsti</li>
+                        <li>Fit (fitil)</li>
+                        <li>Xəritə və kompas</li>
+                        <li>Telefon + əlavə batareya</li>
+                    </ul>
+                `
+            },
+            'flora-fauna': {
+                title: 'Azərbaycanın Nadir Flora və Faunası',
+                category: 'Təbiət',
+                date: '5 Noyabr 2024',
+                readTime: '10 dəq oxuma',
+                author: 'Dr. Kamran Hüseynov',
+                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070',
+                content: `
+                    <p>Dağlarımızda yaşayan nadir heyvan növləri və unikal bitkilər haqqında maraqlı faktlar.</p>
+                    
+                    <h3>Nadir Heyvanlar</h3>
+                    <p>Azərbaycan dağlarında bir çox nadir heyvan növü yaşayır:</p>
+                    <ul>
+                        <li><strong>Qafqaz bəbiri</strong> - Ən nadir böyük pişik növü</li>
+                        <li><strong>Bezoar keçisi</strong> - Dağ keçilərinin əcdadı</li>
+                        <li><strong>Qafqaz tetrası</strong> - Endemik quş növü</li>
+                        <li><strong>Cüyür</strong> - Nadir maral növü</li>
+                    </ul>
+                    
+                    <h3>Unikal Bitkilər</h3>
+                    <p>Azərbaycanın dağ florasında 4500-dən çox bitki növü var. Bunların 950-si endemikdir.</p>
+                    
+                    <h3>Qorunan Ərazilər</h3>
+                    <p>Bu nadir növləri qorumaq üçün bir neçə milli park yaradılıb: Şahdağ, Hirkan, Qobustan və s.</p>
+                `
+            },
+            'khinaliq': {
+                title: 'Xınalıq: 5000 İllik Tarix',
+                category: 'Mədəniyyət',
+                date: '1 Noyabr 2024',
+                readTime: '7 dəq oxuma',
+                author: 'Prof. Elşən Quliyev',
+                image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2084',
+                content: `
+                    <p>Dünyanın ən qədim yaşayış yerlərindən biri olan Xınalıq kəndinin sirləri və mədəniyyəti.</p>
+                    
+                    <h3>Tarixi</h3>
+                    <p>Xınalıq kəndi 5000 ildən çox tarixə malikdir. Dəniz səviyyəsindən 2350 metr yüksəklikdə yerləşir.</p>
+                    
+                    <h3>Unikal Dil</h3>
+                    <p>Xınalıq dili dünyada yalnız bu kənddə danışılır. Təxminən 2000 nəfər bu dildə danışır.</p>
+                    
+                    <h3>Mədəniyyət</h3>
+                    <p>Xınalıqlılar öz ənənəvi həyat tərzini qoruyub saxlayıblar. Xalça toxuculuğu, maldarlıq və əkinçilik əsas məşğuliyyətləridir.</p>
+                    
+                    <h3>Ziyarət</h3>
+                    <p>Kəndə Qubadan 2-3 saatlıq yolla çatmaq olar. Yay ayları ziyarət üçün ən yaxşı vaxtdır.</p>
+                `
+            },
+            'tufandag': {
+                title: 'Tufandağ Kanat Yolunda Bir Gün',
+                category: 'Macəra',
+                date: '25 Oktyabr 2024',
+                readTime: '12 dəq oxuma',
+                author: 'Aynur Həsənova',
+                image: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=2076',
+                content: `
+                    <p>Azərbaycanın ən uzun kanat yolunda səyahət və Qəbələnin möhtəşəm mənzərələri.</p>
+                    
+                    <h3>Kanat Yolu</h3>
+                    <p>Tufandağ kanat yolu 3.2 km uzunluğundadır - Azərbaycanda ən uzun. Yol 15-20 dəqiqə çəkir.</p>
+                    
+                    <h3>Mənzərələr</h3>
+                    <p>Kanat yolunda Qəbələnin meşələri, dağları və vadilərinin panoramik görünüşü açılır.</p>
+                    
+                    <h3>Qiymətlər</h3>
+                    <ul>
+                        <li>Böyüklər: 15 AZN</li>
+                        <li>Uşaqlar: 10 AZN</li>
+                        <li>İş günləri endirimli</li>
+                    </ul>
+                    
+                    <h3>Zirvədə</h3>
+                    <p>Zirvədə kafe, baxış meydançası və yürüş cığırları var. Qışda xizək pistləri açılır.</p>
+                `
+            },
+            'safety': {
+                title: 'Dağda Təhlükəsizlik Qaydaları',
+                category: 'Məsləhətlər',
+                date: '20 Oktyabr 2024',
+                readTime: '5 dəq oxuma',
+                author: 'Rəşad Əliyev',
+                image: 'https://images.unsplash.com/photo-1533240332313-0db49b459ad6?q=80&w=2074',
+                content: `
+                    <p>Dağ yürüşlərində təhlükəsizliyi təmin etmək üçün bilməli olduğunuz əsas qaydalar.</p>
+                    
+                    <h3>Planlaşdırma</h3>
+                    <ul>
+                        <li>Hava proqnozunu yoxlayın</li>
+                        <li>Marşrutu öncədən öyrənin</li>
+                        <li>Kimisə məlumatlandırın</li>
+                    </ul>
+                    
+                    <h3>Yürüş Zamanı</h3>
+                    <ul>
+                        <li>Tək getməyin</li>
+                        <li>Cığırdan çıxmayın</li>
+                        <li>Tempinizi tənzimləyin</li>
+                        <li>Hidrasiyaya diqqət edin</li>
+                    </ul>
+                    
+                    <h3>Təcili Hallar</h3>
+                    <ul>
+                        <li>Sakit qalın</li>
+                        <li>112-yə zəng edin</li>
+                        <li>Yerinizdə qalın</li>
+                        <li>Görünən olun</li>
+                    </ul>
+                `
+            }
+        };
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                document.querySelectorAll('.blog-card').forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        function openBlogPost(postId) {
+            const post = blogPosts[postId];
+            if (!post) return;
+            
+            document.getElementById('modalImage').style.backgroundImage = `url('${post.image}')`;
+            document.getElementById('modalCategory').textContent = post.category;
+            document.getElementById('modalTitle').textContent = post.title;
+            document.getElementById('modalDate').textContent = '📅 ' + post.date;
+            document.getElementById('modalReadTime').textContent = '⏱️ ' + post.readTime;
+            document.getElementById('modalAuthor').textContent = '✍️ ' + post.author;
+            document.getElementById('modalText').innerHTML = post.content;
+            
+            document.getElementById('blogModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeBlogModal() {
+            document.getElementById('blogModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeBlogModal();
+        });
+        document.getElementById('blogModal').addEventListener('click', function(e) {
+            if (e.target === this) closeBlogModal();
+        });
+        function sharePost(platform) {
+            const url = window.location.href;
+            const title = document.getElementById('modalTitle').textContent;
+            
+            let shareUrl;
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
+                    break;
+            }
+            
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            alert('Təşəkkür edirik! ' + email + ' ünvanına abunə oldunuz.');
+            e.target.reset();
+        }
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>

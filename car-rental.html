@@ -1,0 +1,1105 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maşın Kirayəsi | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .rental-hero {
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.9), rgba(45, 90, 123, 0.9)),
+                        url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070') center/cover;
+            padding: 150px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .rental-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rental-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .rental-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Search Form */
+        .rental-search {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .search-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+        
+        .search-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+        
+        .search-group input,
+        .search-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-group input:focus,
+        .search-group select:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+        
+        .search-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+        
+        .search-btn:hover {
+            background: var(--color-secondary);
+        }
+        
+        /* Car Type Tabs */
+        .car-types {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .car-type-btn {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .car-type-btn:hover,
+        .car-type-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        /* Cars Grid */
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+        
+        .car-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .car-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .car-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-accent);
+            color: var(--color-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .car-type-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            padding: 0.4rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .car-content {
+            padding: 1.5rem;
+        }
+        
+        .car-name {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .car-category {
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .car-specs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .car-spec {
+            text-align: center;
+        }
+        
+        .car-spec-icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .car-spec-value {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+        }
+        
+        .car-features {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .car-feature {
+            background: var(--color-light);
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+        }
+        
+        .car-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        
+        .car-price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+        }
+        
+        .car-rent-btn {
+            background: var(--color-accent);
+            color: var(--color-dark);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .car-rent-btn:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Rental Modal */
+        .rental-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .rental-modal.active {
+            display: flex;
+        }
+        
+        .rental-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .rental-header {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .rental-car-image {
+            width: 200px;
+            height: 120px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .rental-car-info h2 {
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .rental-car-info p {
+            color: var(--color-text-light);
+        }
+        
+        .rental-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--color-light);
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .rental-close:hover {
+            background: #ff4757;
+            color: white;
+        }
+        
+        .rental-body {
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .rental-form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .rental-form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rental-form-group input,
+        .rental-form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        
+        .rental-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .rental-extras {
+            background: var(--color-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rental-extras h4 {
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        
+        .extra-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .extra-item:last-child {
+            border-bottom: none;
+        }
+        
+        .extra-item label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .extra-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .extra-price {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        
+        .rental-summary {
+            background: var(--color-primary);
+            color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rental-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .rental-summary-total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            margin-top: 0.5rem;
+        }
+        
+        .rental-submit {
+            width: 100%;
+            background: var(--color-accent);
+            color: var(--color-dark);
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .rental-submit:hover {
+            background: var(--color-accent-dark);
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            margin-top: 4rem;
+            padding: 3rem;
+            background: var(--color-light);
+            border-radius: 20px;
+        }
+        
+        .benefits-title {
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-card p {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            .rental-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .rental-form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .rental-header {
+                flex-direction: column;
+            }
+            
+            .rental-car-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item active">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="rental-hero">
+        <h1>🚗 Maşın Kirayəsi</h1>
+        <p>Dağ macəralarınız üçün etibarlı və rahat nəqliyyat</p>
+    </section>
+
+    
+    <div class="rental-container">
+        
+        <div class="rental-search">
+            <div class="search-grid">
+                <div class="search-group">
+                    <label>📍 Götürmə yeri</label>
+                    <select id="pickupLocation">
+                        <option value="baku">Bakı (Hava limanı)</option>
+                        <option value="baku-center">Bakı (Mərkəz)</option>
+                        <option value="quba">Quba</option>
+                        <option value="qebele">Qəbələ</option>
+                        <option value="sheki">Şəki</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label>📅 Götürmə tarixi</label>
+                    <input type="date" id="pickupDate">
+                </div>
+                <div class="search-group">
+                    <label>📅 Qaytarma tarixi</label>
+                    <input type="date" id="returnDate">
+                </div>
+                <div class="search-group">
+                    <label>🕐 Götürmə saatı</label>
+                    <select id="pickupTime">
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="12:00" selected>12:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="18:00">18:00</option>
+                    </select>
+                </div>
+                <button class="search-btn" onclick="searchCars()">🔍 Axtar</button>
+            </div>
+        </div>
+
+        
+        <div class="car-types">
+            <button class="car-type-btn active" data-type="all">🚗 Hamısı</button>
+            <button class="car-type-btn" data-type="economy">💰 Ekonom</button>
+            <button class="car-type-btn" data-type="comfort">🛋️ Komfort</button>
+            <button class="car-type-btn" data-type="suv">🏔️ SUV / 4x4</button>
+            <button class="car-type-btn" data-type="premium">⭐ Premium</button>
+        </div>
+
+        
+        <div class="cars-grid" id="carsGrid">
+            
+        </div>
+
+        
+        <div class="benefits-section">
+            <h2 class="benefits-title">Niyə Bizi Seçməlisiniz?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>Tam Sığorta</h3>
+                    <p>Bütün maşınlar tam sığorta ilə təmin olunur</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📍</div>
+                    <h3>Pulsuz Çatdırılma</h3>
+                    <p>Bakı daxilində pulsuz çatdırılma xidməti</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔧</div>
+                    <h3>24/7 Dəstək</h3>
+                    <p>Günün istənilən vaxtı texniki dəstək</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💳</div>
+                    <h3>Rahat Ödəniş</h3>
+                    <p>Nağd, kart və online ödəniş imkanı</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="rental-modal" id="rentalModal">
+        <div class="rental-content">
+            <div class="rental-body">
+                <button class="rental-close" onclick="closeRentalModal()">✕</button>
+                
+                <div class="rental-header">
+                    <div class="rental-car-image" id="modalCarImage"></div>
+                    <div class="rental-car-info">
+                        <h2 id="modalCarName">Maşın Adı</h2>
+                        <p id="modalCarCategory">Kateqoriya</p>
+                    </div>
+                </div>
+                
+                <form id="rentalForm" onsubmit="submitRental(event)">
+                    <div class="rental-form-row">
+                        <div class="rental-form-group">
+                            <label>Ad Soyad</label>
+                            <input type="text" required placeholder="Tam adınız">
+                        </div>
+                        <div class="rental-form-group">
+                            <label>Telefon</label>
+                            <input type="tel" required placeholder="+994 XX XXX XX XX">
+                        </div>
+                    </div>
+                    
+                    <div class="rental-form-group">
+                        <label>Email</label>
+                        <input type="email" required placeholder="email@example.com">
+                    </div>
+                    
+                    <div class="rental-form-row">
+                        <div class="rental-form-group">
+                            <label>Sürücülük vəsiqəsi №</label>
+                            <input type="text" required placeholder="AA1234567">
+                        </div>
+                        <div class="rental-form-group">
+                            <label>Yaş</label>
+                            <select required>
+                                <option value="">Seçin</option>
+                                <option value="21-25">21-25</option>
+                                <option value="26-35">26-35</option>
+                                <option value="36-50">36-50</option>
+                                <option value="50+">50+</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="rental-extras">
+                        <h4>🎁 Əlavə xidmətlər</h4>
+                        <div class="extra-item">
+                            <label>
+                                <input type="checkbox" id="extraGPS" onchange="updateTotal()">
+                                📍 GPS naviqasiya
+                            </label>
+                            <span class="extra-price">₼10/gün</span>
+                        </div>
+                        <div class="extra-item">
+                            <label>
+                                <input type="checkbox" id="extraChildSeat" onchange="updateTotal()">
+                                👶 Uşaq oturacağı
+                            </label>
+                            <span class="extra-price">₼15/gün</span>
+                        </div>
+                        <div class="extra-item">
+                            <label>
+                                <input type="checkbox" id="extraDriver" onchange="updateTotal()">
+                                👨‍✈️ Əlavə sürücü
+                            </label>
+                            <span class="extra-price">₼20/gün</span>
+                        </div>
+                        <div class="extra-item">
+                            <label>
+                                <input type="checkbox" id="extraInsurance" onchange="updateTotal()">
+                                🛡️ Tam sığorta
+                            </label>
+                            <span class="extra-price">₼25/gün</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rental-summary">
+                        <div class="rental-summary-row">
+                            <span>Maşın kirayəsi</span>
+                            <span id="carRentalPrice">₼0</span>
+                        </div>
+                        <div class="rental-summary-row">
+                            <span>Gün sayı</span>
+                            <span id="rentalDays">1 gün</span>
+                        </div>
+                        <div class="rental-summary-row">
+                            <span>Əlavə xidmətlər</span>
+                            <span id="extrasPrice">₼0</span>
+                        </div>
+                        <div class="rental-summary-row rental-summary-total">
+                            <span>Cəmi</span>
+                            <span id="totalRentalPrice">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="rental-submit">🚗 Kirayə Et</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>⛰️ PeakExplorer</h3>
+                <p>Azərbaycanın dağlarını kəşf edin</p>
+            </div>
+            <div class="footer-section">
+                <h4>Səhifələr</h4>
+                <a href="index (2).html">Ana Səhifə</a>
+                <a href="hotels.html">Otellər</a>
+                <a href="car-rental.html">Maşın Kirayəsi</a>
+            </div>
+            <div class="footer-section">
+                <h4>Əlaqə</h4>
+                <p>📧 info@peakexplorer.az</p>
+                <p>📞 +994 12 345 67 89</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        const cars = [
+            {
+                id: 1,
+                name: 'Hyundai Accent',
+                category: 'Ekonom sinif',
+                type: 'economy',
+                image: 'https://www.hyundai.com/content/dam/hyundai/ww/en/images/find-a-car/pip/cars/accent-hc/accent-hc-highlights-right-side-rear-view-silver-m.jpg',
+                price: 60,
+                seats: 5,
+                transmission: 'Avtomat',
+                fuel: 'Benzin',
+                luggage: 2,
+                features: ['A/C', 'USB', 'Bluetooth']
+            },
+            {
+                id: 2,
+                name: 'Toyota Corolla',
+                category: 'Komfort sinif',
+                type: 'comfort',
+                image: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800',
+                price: 85,
+                badge: 'Populyar',
+                seats: 5,
+                transmission: 'Avtomat',
+                fuel: 'Benzin',
+                luggage: 3,
+                features: ['A/C', 'USB', 'Bluetooth', 'Kamera']
+            },
+            {
+                id: 3,
+                name: 'Toyota Land Cruiser Prado',
+                category: 'SUV / 4x4',
+                type: 'suv',
+                image: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800',
+                price: 180,
+                badge: 'Dağ üçün',
+                seats: 7,
+                transmission: 'Avtomat',
+                fuel: 'Dizel',
+                luggage: 5,
+                features: ['4x4', 'A/C', 'USB', 'Kamera', 'Isıtma']
+            },
+            {
+                id: 4,
+                name: 'Nissan X-Trail',
+                category: 'SUV / 4x4',
+                type: 'suv',
+                image: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=800',
+                price: 120,
+                seats: 5,
+                transmission: 'Avtomat',
+                fuel: 'Benzin',
+                luggage: 4,
+                features: ['4x4', 'A/C', 'USB', 'Bluetooth']
+            },
+            {
+                id: 5,
+                name: 'Mercedes-Benz E-Class',
+                category: 'Premium sinif',
+                type: 'premium',
+                image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800',
+                price: 250,
+                badge: 'Lüks',
+                seats: 5,
+                transmission: 'Avtomat',
+                fuel: 'Benzin',
+                luggage: 3,
+                features: ['A/C', 'Dəri salon', 'Kamera', 'Isıtma', 'Bluetooth']
+            },
+            {
+                id: 6,
+                name: 'Kia Rio',
+                category: 'Ekonom sinif',
+                type: 'economy',
+                image: 'https://images.prismic.io/carwow/1993a4c8-cfbd-49ef-a6eb-22e942bfd0e6_Kia+Rio+Front+%C2%BE+static.jpg?auto=format&cs=tinysrgb&fit=max&q=60',
+                price: 50,
+                seats: 5,
+                transmission: 'Mexaniki',
+                fuel: 'Benzin',
+                luggage: 2,
+                features: ['A/C', 'USB']
+            },
+            {
+                id: 7,
+                name: 'Toyota Camry',
+                category: 'Komfort sinif',
+                type: 'comfort',
+                image: 'https://images.unsplash.com/photo-1621993202323-f438eec934ff?w=800',
+                price: 110,
+                seats: 5,
+                transmission: 'Avtomat',
+                fuel: 'Hibrid',
+                luggage: 3,
+                features: ['A/C', 'USB', 'Bluetooth', 'Kamera', 'Isıtma']
+            },
+            {
+                id: 8,
+                name: 'Mitsubishi Pajero',
+                category: 'SUV / 4x4',
+                type: 'suv',
+                image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800',
+                price: 150,
+                badge: 'Off-road',
+                seats: 7,
+                transmission: 'Avtomat',
+                fuel: 'Dizel',
+                luggage: 5,
+                features: ['4x4', 'A/C', 'USB', 'Bluetooth']
+            }
+        ];
+
+        let selectedCar = null;
+        let rentalDays = 1;
+        function renderCars(filteredCars = cars) {
+            const grid = document.getElementById('carsGrid');
+            grid.innerHTML = filteredCars.map(car => `
+                <div class="car-card" data-type="${car.type}">
+                    <div class="car-image" style="background-image: url('${car.image}')">
+                        ${car.badge ? `<span class="car-badge">${car.badge}</span>` : ''}
+                        <span class="car-type-badge">${car.category}</span>
+                    </div>
+                    <div class="car-content">
+                        <h3 class="car-name">${car.name}</h3>
+                        <p class="car-category">${car.category}</p>
+                        <div class="car-specs">
+                            <div class="car-spec">
+                                <div class="car-spec-icon">👥</div>
+                                <div class="car-spec-value">${car.seats} nəfər</div>
+                            </div>
+                            <div class="car-spec">
+                                <div class="car-spec-icon">⚙️</div>
+                                <div class="car-spec-value">${car.transmission}</div>
+                            </div>
+                            <div class="car-spec">
+                                <div class="car-spec-icon">⛽</div>
+                                <div class="car-spec-value">${car.fuel}</div>
+                            </div>
+                            <div class="car-spec">
+                                <div class="car-spec-icon">🧳</div>
+                                <div class="car-spec-value">${car.luggage} çamadan</div>
+                            </div>
+                        </div>
+                        <div class="car-features">
+                            ${car.features.map(f => `<span class="car-feature">${f}</span>`).join('')}
+                        </div>
+                        <div class="car-footer">
+                            <div class="car-price">
+                                ₼${car.price} <span>/gün</span>
+                            </div>
+                            <button class="car-rent-btn" onclick="openRentalModal(${car.id})">Kirayə Et</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        document.querySelectorAll('.car-type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.car-type-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const type = this.dataset.type;
+                if (type === 'all') {
+                    renderCars(cars);
+                } else {
+                    renderCars(cars.filter(c => c.type === type));
+                }
+            });
+        });
+        function openRentalModal(carId) {
+            selectedCar = cars.find(c => c.id === carId);
+            if (!selectedCar) return;
+            
+            document.getElementById('modalCarImage').style.backgroundImage = `url('${selectedCar.image}')`;
+            document.getElementById('modalCarName').textContent = selectedCar.name;
+            document.getElementById('modalCarCategory').textContent = selectedCar.category;
+            
+            calculateDays();
+            updateTotal();
+            
+            document.getElementById('rentalModal').classList.add('active');
+        }
+        function closeRentalModal() {
+            document.getElementById('rentalModal').classList.remove('active');
+        }
+        function calculateDays() {
+            const pickup = document.getElementById('pickupDate').value;
+            const returnD = document.getElementById('returnDate').value;
+            
+            if (pickup && returnD) {
+                const diff = new Date(returnD) - new Date(pickup);
+                rentalDays = Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+            } else {
+                rentalDays = 1;
+            }
+            
+            document.getElementById('rentalDays').textContent = rentalDays + ' gün';
+        }
+        function updateTotal() {
+            if (!selectedCar) return;
+            
+            const basePrice = selectedCar.price * rentalDays;
+            
+            let extras = 0;
+            if (document.getElementById('extraGPS')?.checked) extras += 10 * rentalDays;
+            if (document.getElementById('extraChildSeat')?.checked) extras += 15 * rentalDays;
+            if (document.getElementById('extraDriver')?.checked) extras += 20 * rentalDays;
+            if (document.getElementById('extraInsurance')?.checked) extras += 25 * rentalDays;
+            
+            document.getElementById('carRentalPrice').textContent = '₼' + basePrice;
+            document.getElementById('extrasPrice').textContent = '₼' + extras;
+            document.getElementById('totalRentalPrice').textContent = '₼' + (basePrice + extras);
+        }
+        function submitRental(e) {
+            e.preventDefault();
+            
+            const orderNumber = 'CAR-' + Date.now().toString().slice(-8);
+            
+            alert(`✅ Kirayə sifarişiniz təsdiqləndi!\n\nSifariş №: ${orderNumber}\nMaşın: ${selectedCar.name}\nMüddət: ${rentalDays} gün\n\nTəsdiq emaili göndəriləcək.`);
+            
+            closeRentalModal();
+        }
+        function searchCars() {
+            calculateDays();
+            alert('Axtarış nəticələri yeniləndi!');
+        }
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        document.getElementById('pickupDate').value = today.toISOString().split('T')[0];
+        document.getElementById('returnDate').value = tomorrow.toISOString().split('T')[0];
+        document.getElementById('pickupDate').addEventListener('change', () => {
+            calculateDays();
+            updateTotal();
+        });
+        document.getElementById('returnDate').addEventListener('change', () => {
+            calculateDays();
+            updateTotal();
+        });
+        renderCars();
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>

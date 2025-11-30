@@ -1,0 +1,713 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="profile-page">
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <button class="auth-btn logout-btn" id="logoutBtn">Çıxış</button>
+        </div>
+    </nav>
+
+    
+    <section class="profile-header profile-header-compact">
+        <div class="profile-info-container">
+            <div class="profile-avatar-large" id="profileAvatar">
+                <img src="" alt="Profile" id="avatarImage" style="display: none;">
+                <span id="avatarPlaceholder">👤</span>
+                <label class="avatar-upload-btn" for="avatarInput" title="Şəkil yüklə">
+                    📷
+                </label>
+                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+            </div>
+            <div class="profile-main-info">
+                <h1 id="profileName">İstifadəçi Adı</h1>
+                <p class="profile-email" id="profileEmail">email@example.com</p>
+                <p class="profile-joined" id="profileJoined">
+                    <span data-lang-az="Qoşulma tarixi:" data-lang-en="Joined:">Qoşulma tarixi:</span>
+                    <span id="joinedDate">-</span>
+                </p>
+                <div class="first-trip-discount-badge" id="discountBadge" style="display: none;">
+                    <span class="discount-icon">🎉</span>
+                    <span id="discountBadgeText" data-lang-az="İlk gediş üçün 15% endirim!" data-lang-en="15% off for your first trip!">İlk gediş üçün 15% endirim!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="profile-content">
+        <div class="profile-container">
+            
+            <aside class="profile-sidebar">
+                <nav class="profile-nav">
+                    <button class="profile-nav-item active" data-tab="info">
+                        <span class="nav-icon">👤</span>
+                        <span data-lang-az="Şəxsi Məlumatlar" data-lang-en="Personal Info">Şəxsi Məlumatlar</span>
+                    </button>
+                    <button class="profile-nav-item" data-tab="bookings">
+                        <span class="nav-icon">🎫</span>
+                        <span data-lang-az="Sifarişlərim" data-lang-en="My Bookings">Sifarişlərim</span>
+                    </button>
+                    <button class="profile-nav-item" data-tab="favorites">
+                        <span class="nav-icon">❤️</span>
+                        <span data-lang-az="Sevimlilər" data-lang-en="Favorites">Sevimlilər</span>
+                    </button>
+                    <button class="profile-nav-item" data-tab="reviews">
+                        <span class="nav-icon">⭐</span>
+                        <span data-lang-az="Rəylərim" data-lang-en="My Reviews">Rəylərim</span>
+                    </button>
+                    <button class="profile-nav-item" data-tab="settings">
+                        <span class="nav-icon">⚙️</span>
+                        <span data-lang-az="Tənzimləmələr" data-lang-en="Settings">Tənzimləmələr</span>
+                    </button>
+                </nav>
+            </aside>
+
+            
+            <main class="profile-main">
+                
+                <div class="profile-tab active" id="tab-info">
+                    <div class="tab-header">
+                        <h2 data-lang-az="Şəxsi Məlumatlar" data-lang-en="Personal Information">Şəxsi Məlumatlar</h2>
+                        <button class="edit-btn" id="editProfileBtn" data-lang-az="Redaktə et" data-lang-en="Edit">Redaktə et</button>
+                    </div>
+                    
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-lang-az="Ad Soyad" data-lang-en="Full Name">Ad Soyad</label>
+                                <input type="text" id="editName" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label data-lang-az="E-poçt" data-lang-en="Email">E-poçt</label>
+                                <input type="email" id="editEmail" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label data-lang-az="Telefon" data-lang-en="Phone">Telefon</label>
+                                <input type="tel" id="editPhone" disabled placeholder="+994 XX XXX XX XX">
+                            </div>
+                            <div class="form-group">
+                                <label data-lang-az="Doğum tarixi" data-lang-en="Birth Date">Doğum tarixi</label>
+                                <input type="date" id="editBirthdate" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang-az="Ünvan" data-lang-en="Address">Ünvan</label>
+                            <input type="text" id="editAddress" disabled placeholder="Şəhər, Rayon">
+                        </div>
+                        <div class="form-group full-width">
+                            <label data-lang-az="Haqqımda" data-lang-en="About Me">Haqqımda</label>
+                            <textarea id="editBio" rows="3" disabled placeholder="Özünüz haqqında qısa məlumat..."></textarea>
+                        </div>
+                        <div class="form-actions" id="formActions" style="display: none;">
+                            <button type="button" class="cancel-btn" id="cancelEditBtn" data-lang-az="Ləğv et" data-lang-en="Cancel">Ləğv et</button>
+                            <button type="submit" class="save-btn" data-lang-az="Yadda saxla" data-lang-en="Save">Yadda saxla</button>
+                        </div>
+                    </form>
+                </div>
+
+                
+                <div class="profile-tab" id="tab-bookings">
+                    <div class="tab-header">
+                        <h2 data-lang-az="Sifarişlərim" data-lang-en="My Bookings">Sifarişlərim</h2>
+                    </div>
+                    
+                    <div class="bookings-list" id="bookingsList">
+                        <div class="empty-state">
+                            <span class="empty-icon">🎫</span>
+                            <h3 data-lang-az="Hələ sifariş yoxdur" data-lang-en="No bookings yet">Hələ sifariş yoxdur</h3>
+                            <p data-lang-az="Turları kəşf edin və ilk sifarişinizi verin!" data-lang-en="Explore tours and make your first booking!">Turları kəşf edin və ilk sifarişinizi verin!</p>
+                            <a href="index (2).html#tours" class="explore-btn" data-lang-az="Turları Kəşf Et" data-lang-en="Explore Tours">Turları Kəşf Et</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="profile-tab" id="tab-favorites">
+                    <div class="tab-header">
+                        <h2 data-lang-az="Sevimlilər" data-lang-en="Favorites">Sevimlilər</h2>
+                    </div>
+                    
+                    
+                    <div class="favorites-section">
+                        <h3 class="favorites-section-title">
+                            <span>🏔️</span>
+                            <span data-lang-az="Sevimli Dağlar" data-lang-en="Favorite Mountains">Sevimli Dağlar</span>
+                        </h3>
+                        <div class="favorites-grid" id="favoriteMountainsList"></div>
+                    </div>
+                    
+                    
+                    <div class="favorites-section">
+                        <h3 class="favorites-section-title">
+                            <span>🎫</span>
+                            <span data-lang-az="Sevimli Turlar" data-lang-en="Favorite Tours">Sevimli Turlar</span>
+                        </h3>
+                        <div class="favorites-grid" id="favoriteToursList"></div>
+                    </div>
+                </div>
+
+                
+                <div class="profile-tab" id="tab-reviews">
+                    <div class="tab-header">
+                        <h2 data-lang-az="Rəylərim" data-lang-en="My Reviews">Rəylərim</h2>
+                    </div>
+                    
+                    <div class="reviews-list" id="reviewsList">
+                        <div class="empty-state">
+                            <span class="empty-icon">⭐</span>
+                            <h3 data-lang-az="Hələ rəy yoxdur" data-lang-en="No reviews yet">Hələ rəy yoxdur</h3>
+                            <p data-lang-az="Dağları ziyarət edin və rəyinizi paylaşın!" data-lang-en="Visit mountains and share your review!">Dağları ziyarət edin və rəyinizi paylaşın!</p>
+                            <a href="index (2).html#mountains" class="explore-btn" data-lang-az="Dağları Kəşf Et" data-lang-en="Explore Mountains">Dağları Kəşf Et</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="profile-tab" id="tab-settings">
+                    <div class="tab-header">
+                        <h2 data-lang-az="Tənzimləmələr" data-lang-en="Settings">Tənzimləmələr</h2>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3 data-lang-az="Şifrəni Dəyiş" data-lang-en="Change Password">Şifrəni Dəyiş</h3>
+                        <form class="settings-form" id="passwordForm">
+                            <div class="form-group">
+                                <label data-lang-az="Cari şifrə" data-lang-en="Current Password">Cari şifrə</label>
+                                <input type="password" id="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-lang-az="Yeni şifrə" data-lang-en="New Password">Yeni şifrə</label>
+                                <input type="password" id="newPassword" required minlength="6">
+                            </div>
+                            <div class="form-group">
+                                <label data-lang-az="Yeni şifrəni təsdiqlə" data-lang-en="Confirm New Password">Yeni şifrəni təsdiqlə</label>
+                                <input type="password" id="confirmNewPassword" required>
+                            </div>
+                            <div class="form-error" id="passwordError"></div>
+                            <button type="submit" class="save-btn" data-lang-az="Şifrəni Yenilə" data-lang-en="Update Password">Şifrəni Yenilə</button>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3 data-lang-az="Bildirişlər" data-lang-en="Notifications">Bildirişlər</h3>
+                        <div class="settings-options">
+                            <label class="toggle-option">
+                                <span data-lang-az="E-poçt bildirişləri" data-lang-en="Email notifications">E-poçt bildirişləri</span>
+                                <input type="checkbox" id="emailNotifications" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <label class="toggle-option">
+                                <span data-lang-az="Tur yenilikləri" data-lang-en="Tour updates">Tur yenilikləri</span>
+                                <input type="checkbox" id="tourUpdates" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <label class="toggle-option">
+                                <span data-lang-az="Xüsusi təkliflər" data-lang-en="Special offers">Xüsusi təkliflər</span>
+                                <input type="checkbox" id="specialOffers">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section danger-zone">
+                        <h3 data-lang-az="Təhlükəli Zona" data-lang-en="Danger Zone">Təhlükəli Zona</h3>
+                        <p data-lang-az="Hesabınızı silmək istəyirsiniz? Bu əməliyyat geri qaytarıla bilməz." data-lang-en="Want to delete your account? This action cannot be undone.">Hesabınızı silmək istəyirsiniz? Bu əməliyyat geri qaytarıla bilməz.</p>
+                        <button class="delete-account-btn" id="deleteAccountBtn" data-lang-az="Hesabı Sil" data-lang-en="Delete Account">Hesabı Sil</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang-az="© 2025 PeakExplorer. Bütün hüquqlar qorunur." data-lang-en="© 2025 PeakExplorer. All rights reserved.">© 2025 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = localStorage.getItem('language') || 'az';
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            document.querySelectorAll('[data-lang-az]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`);
+                if (text) el.textContent = text;
+            });
+            
+            document.documentElement.lang = lang;
+        }
+        const USERS_KEY = 'peakexplorer_users';
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        
+        function getCurrentUser() {
+            const user = localStorage.getItem(CURRENT_USER_KEY);
+            return user ? JSON.parse(user) : null;
+        }
+        
+        function getUsers() {
+            const users = localStorage.getItem(USERS_KEY);
+            return users ? JSON.parse(users) : [];
+        }
+        
+        function saveUsers(users) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        }
+        
+        function updateCurrentUser(userData) {
+            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(userData));
+        }
+        function loadProfile() {
+            const currentUser = getCurrentUser();
+            
+            if (!currentUser) {
+                window.location.href = 'index (2).html';
+                return;
+            }
+            const users = getUsers();
+            const fullUser = users.find(u => u.id === currentUser.id);
+            const user = fullUser || currentUser;
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('editName').value = user.name;
+            document.getElementById('editEmail').value = user.email;
+            document.getElementById('editPhone').value = user.phone || '';
+            document.getElementById('editBirthdate').value = user.birthdate || '';
+            document.getElementById('editAddress').value = user.address || '';
+            document.getElementById('editBio').value = user.bio || '';
+            if (user.createdAt) {
+                const date = new Date(user.createdAt);
+                document.getElementById('joinedDate').textContent = date.toLocaleDateString(currentLanguage === 'az' ? 'az-AZ' : 'en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            } else {
+                document.getElementById('joinedDate').textContent = new Date().toLocaleDateString(currentLanguage === 'az' ? 'az-AZ' : 'en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+            if (user.avatar) {
+                document.getElementById('avatarImage').src = user.avatar;
+                document.getElementById('avatarImage').style.display = 'block';
+                document.getElementById('avatarPlaceholder').style.display = 'none';
+            }
+            const discountBadge = document.getElementById('discountBadge');
+            if (user.firstTripDiscount && user.firstTripDiscount.active && !user.firstTripDiscount.used) {
+                discountBadge.style.display = 'flex';
+            } else {
+                discountBadge.style.display = 'none';
+            }
+            if (fullUser) {
+                updateCurrentUser(fullUser);
+            }
+            loadFavorites();
+            loadBookings();
+            loadReviews();
+        }
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 2 * 1024 * 1024) {
+                showNotification(currentLanguage === 'az' ? 'Şəkil 2MB-dan böyük olmamalıdır' : 'Image must be less than 2MB', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const avatarData = e.target.result;
+                document.getElementById('avatarImage').src = avatarData;
+                document.getElementById('avatarImage').style.display = 'block';
+                document.getElementById('avatarPlaceholder').style.display = 'none';
+                const user = getCurrentUser();
+                user.avatar = avatarData;
+                updateCurrentUser(user);
+                const users = getUsers();
+                const userIndex = users.findIndex(u => u.id === user.id);
+                if (userIndex !== -1) {
+                    users[userIndex].avatar = avatarData;
+                    saveUsers(users);
+                }
+                
+                showNotification(currentLanguage === 'az' ? 'Şəkil yükləndi!' : 'Photo uploaded!', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+        function loadFavorites() {
+            const currentUser = getCurrentUser();
+            const users = getUsers();
+            const fullUser = users.find(u => u.id === currentUser.id);
+            const user = fullUser || currentUser;
+            const favorites = user.favorites || [];
+            const mountains = favorites.filter(f => f.type === 'mountain' || !f.type);
+            const tours = favorites.filter(f => f.type === 'tour');
+            
+            const mountainsContainer = document.getElementById('favoriteMountainsList');
+            const toursContainer = document.getElementById('favoriteToursList');
+            if (mountains.length === 0) {
+                mountainsContainer.innerHTML = `
+                    <div class="empty-state-small">
+                        <p>${currentLanguage === 'az' ? 'Hələ sevimli dağ yoxdur' : 'No favorite mountains yet'}</p>
+                        <a href="index (2).html#map" class="explore-btn-small">${currentLanguage === 'az' ? 'Xəritəyə Keç' : 'Go to Map'}</a>
+                    </div>
+                `;
+            } else {
+                mountainsContainer.innerHTML = mountains.map(fav => `
+                    <div class="favorite-card">
+                        <div class="fav-image" style="background-image: url('${fav.image || 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400'}')">
+                            <span class="fav-type-badge">🏔️</span>
+                        </div>
+                        <div class="fav-info">
+                            <h3>${fav.name}</h3>
+                            <p>${fav.altitude || ''}</p>
+                            <span class="fav-country">${fav.country || ''}</span>
+                        </div>
+                        <button class="remove-fav-btn" onclick="removeFavorite('${fav.id}')" title="${currentLanguage === 'az' ? 'Sil' : 'Remove'}">✕</button>
+                    </div>
+                `).join('');
+            }
+            if (tours.length === 0) {
+                toursContainer.innerHTML = `
+                    <div class="empty-state-small">
+                        <p>${currentLanguage === 'az' ? 'Hələ sevimli tur yoxdur' : 'No favorite tours yet'}</p>
+                        <a href="index (2).html#tours" class="explore-btn-small">${currentLanguage === 'az' ? 'Turlara Keç' : 'Go to Tours'}</a>
+                    </div>
+                `;
+            } else {
+                toursContainer.innerHTML = tours.map(fav => `
+                    <div class="favorite-card tour-fav">
+                        <div class="fav-image" style="background-image: url('${fav.image || 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400'}')">
+                            <span class="fav-type-badge">🎫</span>
+                        </div>
+                        <div class="fav-info">
+                            <h3>${fav.name}</h3>
+                            <p class="fav-price">${fav.price || ''}</p>
+                        </div>
+                        <button class="remove-fav-btn" onclick="removeFavorite('${fav.id}')" title="${currentLanguage === 'az' ? 'Sil' : 'Remove'}">✕</button>
+                    </div>
+                `).join('');
+            }
+        }
+        function removeFavorite(favId) {
+            const user = getCurrentUser();
+            user.favorites = (user.favorites || []).filter(f => f.id !== favId);
+            updateCurrentUser(user);
+            const users = getUsers();
+            const userIndex = users.findIndex(u => u.id === user.id);
+            if (userIndex !== -1) {
+                users[userIndex].favorites = user.favorites;
+                saveUsers(users);
+            }
+            
+            loadFavorites();
+            showNotification(currentLanguage === 'az' ? 'Sevimlilərdən silindi' : 'Removed from favorites', 'success');
+        }
+        function loadBookings() {
+            const currentUser = getCurrentUser();
+            const users = getUsers();
+            const fullUser = users.find(u => u.id === currentUser.id);
+            const user = fullUser || currentUser;
+            const bookings = user.bookings || [];
+            const container = document.getElementById('bookingsList');
+            
+            if (bookings.length === 0) {
+                return;
+            }
+            
+            container.innerHTML = bookings.map(booking => `
+                <div class="booking-card">
+                    <div class="booking-icon">🎫</div>
+                    <div class="booking-info">
+                        <h3>${booking.tourName}</h3>
+                        <p class="booking-date">${booking.date}</p>
+                        <p class="booking-participants">${booking.participants} ${currentLanguage === 'az' ? 'nəfər' : 'people'}</p>
+                    </div>
+                    <div class="booking-status ${booking.status}">${booking.status}</div>
+                    <div class="booking-price">₼${booking.price}</div>
+                </div>
+            `).join('');
+        }
+        function loadReviews() {
+            const currentUser = getCurrentUser();
+            const users = getUsers();
+            const fullUser = users.find(u => u.id === currentUser.id);
+            const user = fullUser || currentUser;
+            const reviews = user.reviews || [];
+            const container = document.getElementById('reviewsList');
+            
+            if (reviews.length === 0) {
+                return;
+            }
+            
+            container.innerHTML = reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-mountain">
+                            <span class="review-icon">🏔️</span>
+                            <h3>${review.mountainName}</h3>
+                        </div>
+                        <div class="review-rating">
+                            ${'⭐'.repeat(review.rating)}
+                        </div>
+                    </div>
+                    <p class="review-text">${review.text}</p>
+                    <div class="review-footer">
+                        <span class="review-date">${new Date(review.createdAt).toLocaleDateString(currentLanguage === 'az' ? 'az-AZ' : 'en-US')}</span>
+                        <button class="delete-review-btn" onclick="deleteReview('${review.id}')" title="${currentLanguage === 'az' ? 'Sil' : 'Delete'}">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        function deleteReview(reviewId) {
+            if (!confirm(currentLanguage === 'az' ? 'Bu rəyi silmək istəyirsiniz?' : 'Do you want to delete this review?')) {
+                return;
+            }
+            
+            const user = getCurrentUser();
+            user.reviews = (user.reviews || []).filter(r => r.id !== reviewId);
+            updateCurrentUser(user);
+            
+            const users = getUsers();
+            const userIndex = users.findIndex(u => u.id === user.id);
+            if (userIndex !== -1) {
+                users[userIndex].reviews = user.reviews;
+                saveUsers(users);
+            }
+            
+            loadReviews();
+            showNotification(currentLanguage === 'az' ? 'Rəy silindi' : 'Review deleted', 'success');
+        }
+        let isEditing = false;
+        
+        function toggleEdit() {
+            isEditing = !isEditing;
+            const inputs = document.querySelectorAll('#profileForm input, #profileForm textarea');
+            const formActions = document.getElementById('formActions');
+            const editBtn = document.getElementById('editProfileBtn');
+            
+            inputs.forEach(input => {
+                if (input.id !== 'editEmail') {
+                    input.disabled = !isEditing;
+                }
+            });
+            
+            formActions.style.display = isEditing ? 'flex' : 'none';
+            editBtn.style.display = isEditing ? 'none' : 'block';
+        }
+        function saveProfile(e) {
+            e.preventDefault();
+            
+            const user = getCurrentUser();
+            const users = getUsers();
+            const userIndex = users.findIndex(u => u.id === user.id);
+            
+            const updatedUser = {
+                ...user,
+                name: document.getElementById('editName').value,
+                phone: document.getElementById('editPhone').value,
+                birthdate: document.getElementById('editBirthdate').value,
+                address: document.getElementById('editAddress').value,
+                bio: document.getElementById('editBio').value
+            };
+            
+            if (userIndex !== -1) {
+                users[userIndex] = { ...users[userIndex], ...updatedUser };
+                saveUsers(users);
+            }
+            
+            updateCurrentUser(updatedUser);
+            document.getElementById('profileName').textContent = updatedUser.name;
+            
+            toggleEdit();
+            showNotification(currentLanguage === 'az' ? 'Məlumatlar saxlanıldı!' : 'Information saved!', 'success');
+        }
+        function changePassword(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+            const errorEl = document.getElementById('passwordError');
+            
+            const user = getCurrentUser();
+            const users = getUsers();
+            const fullUser = users.find(u => u.id === user.id);
+            
+            if (!fullUser || fullUser.password !== currentPassword) {
+                errorEl.textContent = currentLanguage === 'az' ? 'Cari şifrə yanlışdır' : 'Current password is incorrect';
+                return;
+            }
+            
+            if (newPassword !== confirmNewPassword) {
+                errorEl.textContent = currentLanguage === 'az' ? 'Şifrələr uyğun gəlmir' : 'Passwords do not match';
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                errorEl.textContent = currentLanguage === 'az' ? 'Şifrə ən azı 6 simvol olmalıdır' : 'Password must be at least 6 characters';
+                return;
+            }
+            const userIndex = users.findIndex(u => u.id === user.id);
+            users[userIndex].password = newPassword;
+            saveUsers(users);
+            
+            document.getElementById('passwordForm').reset();
+            errorEl.textContent = '';
+            showNotification(currentLanguage === 'az' ? 'Şifrə yeniləndi!' : 'Password updated!', 'success');
+        }
+        function deleteAccount() {
+            const confirmMsg = currentLanguage === 'az' 
+                ? 'Hesabınızı silmək istədiyinizə əminsiniz? Bu əməliyyat geri qaytarıla bilməz.'
+                : 'Are you sure you want to delete your account? This action cannot be undone.';
+            
+            if (confirm(confirmMsg)) {
+                const user = getCurrentUser();
+                const users = getUsers();
+                const filteredUsers = users.filter(u => u.id !== user.id);
+                saveUsers(filteredUsers);
+                localStorage.removeItem(CURRENT_USER_KEY);
+                window.location.href = 'index (2).html';
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.href = 'index (2).html';
+        }
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.classList.add('show'), 10);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        function switchTab(tabId) {
+            document.querySelectorAll('.profile-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.profile-nav-item').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage(currentLanguage);
+            loadProfile();
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+            });
+            document.querySelectorAll('.profile-nav-item').forEach(btn => {
+                btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+            });
+            document.getElementById('editProfileBtn').addEventListener('click', toggleEdit);
+            document.getElementById('cancelEditBtn').addEventListener('click', toggleEdit);
+            document.getElementById('profileForm').addEventListener('submit', saveProfile);
+            document.getElementById('passwordForm').addEventListener('submit', changePassword);
+            document.getElementById('deleteAccountBtn').addEventListener('click', deleteAccount);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('avatarInput').addEventListener('change', handleAvatarUpload);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1722 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <title>PeakExplorer | Azərbaycan</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+</head>
+<body>
+    
+    <nav class="navbar">
+        <a href="index (2).html" class="logo" onclick="location.reload(); return false;">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home" data-lang-az="Ana Səhifə" data-lang-en="Home" data-lang-ru="Главная" data-lang-tr="Ana Sayfa">Ana Səhifə</a></li>
+            <li><a href="#mountains" data-lang-az="Dağlar" data-lang-en="Mountains" data-lang-ru="Горы" data-lang-tr="Dağlar">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="#tours" class="nav-dropdown-trigger" data-lang-az="Turlar" data-lang-en="Tours" data-lang-ru="Туры" data-lang-tr="Turlar">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="#tours" class="submenu-item" data-lang-az="Popular Turlar" data-lang-en="Popular Tours">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item" data-lang-az="Otellər" data-lang-en="Hotels">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item" data-lang-az="Restoranlar" data-lang-en="Restaurants">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item" data-lang-az="Maşın Kirayəsi" data-lang-en="Car Rental">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="#map" data-lang-az="Xəritə" data-lang-en="Map" data-lang-ru="Карта" data-lang-tr="Harita">Xəritə</a></li>
+            <li><a href="#gallery" data-lang-az="Qalereya" data-lang-en="Gallery" data-lang-ru="Галерея" data-lang-tr="Galeri">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" id="searchToggleBtn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn" id="menuDropdownBtn">
+                    <span>☰</span>
+                    <span data-lang-az="Menyu" data-lang-en="Menu" data-lang-ru="Меню" data-lang-tr="Menü">Menyu</span>
+                </button>
+                <div class="nav-dropdown-content" id="menuDropdownContent">
+                    <a href="about.html" data-lang-az="Haqqımızda" data-lang-en="About Us" data-lang-ru="О нас" data-lang-tr="Hakkımızda">Haqqımızda</a>
+                    <a href="contact.html" data-lang-az="Əlaqə" data-lang-en="Contact" data-lang-ru="Контакты" data-lang-tr="İletişim">Əlaqə</a>
+                    <a href="blog.html" data-lang-az="Blog" data-lang-en="Blog" data-lang-ru="Блог" data-lang-tr="Blog">Blog</a>
+                    <a href="faq.html" data-lang-az="FAQ" data-lang-en="FAQ" data-lang-ru="FAQ" data-lang-tr="SSS">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn" id="langDropdownBtn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content" id="langDropdownContent">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" id="loginBtn" data-lang-az="Giriş" data-lang-en="Login" data-lang-ru="Вход" data-lang-tr="Giriş">Giriş</button>
+                <button class="auth-btn signup-btn" id="signupBtn" data-lang-az="Qeydiyyat" data-lang-en="Sign Up" data-lang-ru="Регистрация" data-lang-tr="Kayıt">Qeydiyyat</button>
+            </div>
+            
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span data-lang-az="Profil" data-lang-en="Profile" data-lang-ru="Профиль" data-lang-tr="Profil">Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" id="logoutBtn">
+                        <span>🚪</span>
+                        <span data-lang-az="Çıxış" data-lang-en="Logout" data-lang-ru="Выход" data-lang-tr="Çıkış">Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="search-close-btn" id="searchCloseBtn">✕</button>
+            <div class="search-header">
+                <h2 data-lang-az="Axtar" data-lang-en="Search">Axtar</h2>
+            </div>
+            <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Dağ, tur və ya məkan axtar..." data-placeholder-az="Dağ, tur və ya məkan axtar..." data-placeholder-en="Search for mountains, tours or locations...">
+                <button class="search-clear-btn" id="searchClearBtn" style="display: none;">✕</button>
+            </div>
+            <div class="search-filters">
+                <button class="search-filter-btn active" data-filter="all" data-lang-az="Hamısı" data-lang-en="All">Hamısı</button>
+                <button class="search-filter-btn" data-filter="mountains" data-lang-az="Dağlar" data-lang-en="Mountains">Dağlar</button>
+                <button class="search-filter-btn" data-filter="tours" data-lang-az="Turlar" data-lang-en="Tours">Turlar</button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="search-placeholder">
+                    <span>🔍</span>
+                    <p data-lang-az="Axtarış nəticələri burada görünəcək" data-lang-en="Search results will appear here">Axtarış nəticələri burada görünəcək</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="auth-modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeLoginModal">✕</button>
+            <div class="modal-header">
+                <h2 data-lang-az="Giriş" data-lang-en="Login">Giriş</h2>
+                <p data-lang-az="Hesabınıza daxil olun" data-lang-en="Sign in to your account">Hesabınıza daxil olun</p>
+            </div>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label data-lang-az="E-poçt" data-lang-en="Email">E-poçt</label>
+                    <input type="email" id="loginEmail" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label data-lang-az="Şifrə" data-lang-en="Password">Şifrə</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••">
+                </div>
+                <div class="form-error" id="loginError"></div>
+                <button type="submit" class="auth-submit-btn" data-lang-az="Daxil ol" data-lang-en="Sign In">Daxil ol</button>
+            </form>
+            <div class="modal-footer">
+                <p data-lang-az="Hesabınız yoxdur?" data-lang-en="Don't have an account?">Hesabınız yoxdur?</p>
+                <button class="switch-modal-btn" id="switchToSignup" data-lang-az="Qeydiyyatdan keçin" data-lang-en="Sign up">Qeydiyyatdan keçin</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="auth-modal" id="signupModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeSignupModal">✕</button>
+            <div class="modal-header">
+                <h2 data-lang-az="Qeydiyyat" data-lang-en="Sign Up">Qeydiyyat</h2>
+                <p data-lang-az="Yeni hesab yaradın" data-lang-en="Create a new account">Yeni hesab yaradın</p>
+            </div>
+            <form class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <label data-lang-az="Ad Soyad" data-lang-en="Full Name">Ad Soyad</label>
+                    <input type="text" id="signupName" required placeholder="Adınız Soyadınız">
+                </div>
+                <div class="form-group">
+                    <label data-lang-az="E-poçt" data-lang-en="Email">E-poçt</label>
+                    <input type="email" id="signupEmail" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label data-lang-az="Telefon" data-lang-en="Phone">Telefon</label>
+                    <input type="tel" id="signupPhone" placeholder="+994 XX XXX XX XX">
+                </div>
+                <div class="form-group">
+                    <label data-lang-az="Şifrə" data-lang-en="Password">Şifrə</label>
+                    <input type="password" id="signupPassword" required placeholder="••••••••" minlength="6">
+                </div>
+                <div class="form-group">
+                    <label data-lang-az="Şifrəni təsdiqlə" data-lang-en="Confirm Password">Şifrəni təsdiqlə</label>
+                    <input type="password" id="signupConfirmPassword" required placeholder="••••••••">
+                </div>
+                <div class="form-error" id="signupError"></div>
+                <button type="submit" class="auth-submit-btn" data-lang-az="Qeydiyyatdan keç" data-lang-en="Sign Up">Qeydiyyatdan keç</button>
+            </form>
+            <div class="modal-footer">
+                <p data-lang-az="Artıq hesabınız var?" data-lang-en="Already have an account?">Artıq hesabınız var?</p>
+                <button class="switch-modal-btn" id="switchToLogin" data-lang-az="Daxil olun" data-lang-en="Login">Daxil olun</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="mountain-image"></div>
+            <div class="overlay"></div>
+            
+            
+            <div class="clouds-container">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="cloud cloud-3"></div>
+                <div class="cloud cloud-4"></div>
+                <div class="cloud cloud-5"></div>
+                <div class="cloud cloud-6"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <span class="hero-subtitle" data-lang-az="Azərbaycanın Zirvələrini Kəşf Et" data-lang-en="Discover the Peaks of Azerbaijan" data-lang-ru="Откройте вершины Азербайджана" data-lang-tr="Azerbaycan'ın Zirvelerini Keşfet">Azərbaycanın Zirvələrini Kəşf Et</span>
+            <h1 class="hero-title" data-lang-az="Dağ Turizmi" data-lang-en="Mountain Tourism" data-lang-ru="Горный Туризм" data-lang-tr="Dağ Turizmi">Dağ Turizmi</h1>
+            <p class="hero-description" data-lang-az="Qafqaz dağlarının əzəmətli zirvələrindən Talış dağlarının yaşıl yamaclarına qədər — Azərbaycanın ən gözəl dağ mənzərələrini bizimlə kəşf edin." data-lang-en="From the majestic peaks of the Caucasus to the green slopes of the Talysh mountains — discover the most beautiful mountain landscapes of Azerbaijan with us." data-lang-ru="От величественных вершин Кавказа до зеленых склонов Талышских гор — откройте самые красивые горные пейзажи Азербайджана вместе с нами." data-lang-tr="Kafkas dağlarının görkemli zirvelerinden Talış dağlarının yeşil yamaçlarına kadar — Azerbaycan'ın en güzel dağ manzaralarını bizimle keşfedin.">
+                Qafqaz dağlarının əzəmətli zirvələrindən Talış dağlarının yaşıl yamaclarına qədər 
+                — Azərbaycanın ən gözəl dağ mənzərələrini bizimlə kəşf edin.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label" data-lang-az="Uğurlu tur" data-lang-en="Successful tour" data-lang-ru="Успешный тур" data-lang-tr="Başarılı tur">Uğurlu tur</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label" data-lang-az="Dağ Marşrutu" data-lang-en="Mountain Routes" data-lang-ru="Горных маршрутов" data-lang-tr="Dağ Rotası">Dağ Marşrutu</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">5000+</span>
+                    <span class="stat-label" data-lang-az="Məmnun Turist" data-lang-en="Happy Tourists" data-lang-ru="Довольных туристов" data-lang-tr="Mutlu Turist">Məmnun Turist</span>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <a href="#tours" class="btn btn-primary" data-lang-az="Turları Kəşf Et" data-lang-en="Explore Tours" data-lang-ru="Исследовать туры" data-lang-tr="Turları Keşfet">Turları Kəşf Et</a>
+                <a href="#mountains" class="btn btn-secondary" data-lang-az="Dağlar Haqqında" data-lang-en="About Mountains" data-lang-ru="О горах" data-lang-tr="Dağlar Hakkında">Dağlar Haqqında</a>
+            </div>
+        </div>
+        
+    </section>
+
+    
+    <section id="ai-finder" class="ai-finder-section">
+        <div class="ai-finder-container">
+            <div class="ai-header">
+                <span class="ai-badge">🤖 AI</span>
+                <h2 data-lang-az="Sizə Uyğun Tur Tapın" data-lang-en="Find Your Perfect Tour">Sizə Uyğun Tur Tapın</h2>
+                <p data-lang-az="Maraqlarınızı bizə bildirin, süni intellekt sizə ən uyğun turları tövsiyə etsin" data-lang-en="Tell us your interests, AI will recommend the most suitable tours for you">Maraqlarınızı bizə bildirin, süni intellekt sizə ən uyğun turları tövsiyə etsin</p>
+            </div>
+            
+            <div class="ai-form">
+                <div class="ai-question">
+                    <label data-lang-az="Hansı aktivitələri sevirsiniz?" data-lang-en="What activities do you enjoy?">Hansı aktivitələri sevirsiniz?</label>
+                    <div class="ai-options" id="activityOptions">
+                        <button type="button" class="ai-option" data-value="hiking">🥾 <span data-lang-az="Trekking" data-lang-en="Hiking">Trekking</span></button>
+                        <button type="button" class="ai-option" data-value="skiing">⛷️ <span data-lang-az="Xizək" data-lang-en="Skiing">Xizək</span></button>
+                        <button type="button" class="ai-option" data-value="climbing">🧗 <span data-lang-az="Alpinizm" data-lang-en="Climbing">Alpinizm</span></button>
+                        <button type="button" class="ai-option" data-value="photography">📸 <span data-lang-az="Fotoqrafiya" data-lang-en="Photography">Fotoqrafiya</span></button>
+                        <button type="button" class="ai-option" data-value="culture">🏛️ <span data-lang-az="Mədəniyyət" data-lang-en="Culture">Mədəniyyət</span></button>
+                        <button type="button" class="ai-option" data-value="nature">🌿 <span data-lang-az="Təbiət" data-lang-en="Nature">Təbiət</span></button>
+                    </div>
+                </div>
+                
+                <div class="ai-question">
+                    <label data-lang-az="Fiziki hazırlıq səviyyəniz?" data-lang-en="Your fitness level?">Fiziki hazırlıq səviyyəniz?</label>
+                    <div class="ai-options" id="fitnessOptions">
+                        <button type="button" class="ai-option" data-value="beginner">😊 <span data-lang-az="Başlanğıc" data-lang-en="Beginner">Başlanğıc</span></button>
+                        <button type="button" class="ai-option" data-value="intermediate">💪 <span data-lang-az="Orta" data-lang-en="Intermediate">Orta</span></button>
+                        <button type="button" class="ai-option" data-value="advanced">🏋️ <span data-lang-az="Təcrübəli" data-lang-en="Advanced">Təcrübəli</span></button>
+                    </div>
+                </div>
+                
+                <div class="ai-question">
+                    <label data-lang-az="Tur müddəti?" data-lang-en="Tour duration?">Tur müddəti?</label>
+                    <div class="ai-options" id="durationOptions">
+                        <button type="button" class="ai-option" data-value="day">📅 <span data-lang-az="1 gün" data-lang-en="1 day">1 gün</span></button>
+                        <button type="button" class="ai-option" data-value="weekend">🗓️ <span data-lang-az="2-3 gün" data-lang-en="2-3 days">2-3 gün</span></button>
+                        <button type="button" class="ai-option" data-value="week">📆 <span data-lang-az="1 həftə" data-lang-en="1 week">1 həftə</span></button>
+                    </div>
+                </div>
+                
+                <div class="ai-question">
+                    <label data-lang-az="Büdcəniz?" data-lang-en="Your budget?">Büdcəniz?</label>
+                    <div class="ai-options" id="budgetOptions">
+                        <button type="button" class="ai-option" data-value="budget">💰 <span data-lang-az="Ekonom" data-lang-en="Budget">Ekonom</span></button>
+                        <button type="button" class="ai-option" data-value="mid">💵 <span data-lang-az="Orta" data-lang-en="Mid-range">Orta</span></button>
+                        <button type="button" class="ai-option" data-value="premium">💎 <span data-lang-az="Premium" data-lang-en="Premium">Premium</span></button>
+                    </div>
+                </div>
+                
+                <button class="ai-submit-btn" id="aiSubmitBtn" onclick="getAIRecommendations()" data-lang-az="🔮 Tövsiyələri Göstər" data-lang-en="🔮 Show Recommendations">🔮 Tövsiyələri Göstər</button>
+            </div>
+            
+            <div class="ai-results" id="aiResults" style="display: none;">
+                <h3 data-lang-az="Sizə Uyğun Turlar" data-lang-en="Tours For You">Sizə Uyğun Turlar</h3>
+                <div class="ai-recommendations" id="aiRecommendations">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="mountains" class="mountains-section">
+        <div class="section-header">
+            <span class="section-subtitle" data-lang-az="Əzəmətli Zirvələr" data-lang-en="Majestic Peaks">Əzəmətli Zirvələr</span>
+            <h2 class="section-title" data-lang-az="Azərbaycanın Dağları" data-lang-en="Mountains of Azerbaijan">Azərbaycanın Dağları</h2>
+        </div>
+        
+        <div class="mountains-grid">
+            <div class="mountain-card clickable" onclick="openMountainModal('bazarduzu')">
+                <div class="card-image card-bazarduzu"></div>
+                <div class="card-content">
+                    <h3>Bazardüzü</h3>
+                    <span class="altitude">4466 m</span>
+                    <p data-lang-az="Azərbaycanın ən hündür zirvəsi. Böyük Qafqaz silsiləsində yerləşir." data-lang-en="The highest peak of Azerbaijan. Located in the Greater Caucasus range.">Azərbaycanın ən hündür zirvəsi. Böyük Qafqaz silsiləsində yerləşir.</p>
+                    <div class="card-tags">
+                        <span class="tag" data-lang-az="Alpinizm" data-lang-en="Alpinism">Alpinizm</span>
+                        <span class="tag" data-lang-az="Mürəkkəb" data-lang-en="Difficult">Mürəkkəb</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+            
+            <div class="mountain-card clickable" onclick="openMountainModal('shahdag')">
+                <div class="card-image card-shahdag"></div>
+                <div class="card-content">
+                    <h3>Şahdağ</h3>
+                    <span class="altitude">4243 m</span>
+                    <p data-lang-az="Qış idman kurortları və heyrətamiz mənzərələri ilə məşhur." data-lang-en="Famous for winter sports resorts and stunning views.">Qış idman kurortları və heyrətamiz mənzərələri ilə məşhur.</p>
+                    <div class="card-tags">
+                        <span class="tag" data-lang-az="Xizək" data-lang-en="Skiing">Xizək</span>
+                        <span class="tag" data-lang-az="Orta" data-lang-en="Medium">Orta</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+            
+            <div class="mountain-card clickable" onclick="openMountainModal('tufandag')">
+                <div class="card-image card-tufandag"></div>
+                <div class="card-content">
+                    <h3>Tufandağ</h3>
+                    <span class="altitude">4191 m</span>
+                    <p data-lang-az="Müasir infrastruktur və füsunkar təbiət harmonyası." data-lang-en="Modern infrastructure in harmony with enchanting nature.">Müasir infrastruktur və füsunkar təbiət harmonyası.</p>
+                    <div class="card-tags">
+                        <span class="tag" data-lang-az="Kurort" data-lang-en="Resort">Kurort</span>
+                        <span class="tag" data-lang-az="Asan" data-lang-en="Easy">Asan</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+            
+            <div class="mountain-card clickable" onclick="openMountainModal('babadag')">
+                <div class="card-image card-babadaag"></div>
+                <div class="card-content">
+                    <h3>Babadağ</h3>
+                    <span class="altitude">3629 m</span>
+                    <p data-lang-az="Ziyarət yeri kimi tanınan, mənəvi əhəmiyyətli dağ." data-lang-en="A spiritually significant mountain known as a pilgrimage site.">Ziyarət yeri kimi tanınan, mənəvi əhəmiyyətli dağ.</p>
+                    <div class="card-tags">
+                        <span class="tag">Trekking</span>
+                        <span class="tag" data-lang-az="Orta" data-lang-en="Medium">Orta</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+            
+            
+            <div class="mountain-card clickable hidden-mountain" onclick="openMountainModal('kapaz')">
+                <div class="card-image card-kapaz"></div>
+                <div class="card-content">
+                    <h3>Kəpəz</h3>
+                    <span class="altitude">3066 m</span>
+                    <p data-lang-az="Göygöl gölünün yaxınlığında yerləşən gözəl dağ." data-lang-en="Beautiful mountain near Goygol lake.">Göygöl gölünün yaxınlığında yerləşən gözəl dağ.</p>
+                    <div class="card-tags">
+                        <span class="tag">Trekking</span>
+                        <span class="tag" data-lang-az="Orta" data-lang-en="Medium">Orta</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+            
+            <div class="mountain-card clickable hidden-mountain" onclick="openMountainModal('murovdag')">
+                <div class="card-image card-murovdag"></div>
+                <div class="card-content">
+                    <h3>Murovdağ</h3>
+                    <span class="altitude">3724 m</span>
+                    <p data-lang-az="Kiçik Qafqazın ən hündür zirvəsi." data-lang-en="The highest peak of the Lesser Caucasus.">Kiçik Qafqazın ən hündür zirvəsi.</p>
+                    <div class="card-tags">
+                        <span class="tag" data-lang-az="Alpinizm" data-lang-en="Alpinism">Alpinizm</span>
+                        <span class="tag" data-lang-az="Mürəkkəb" data-lang-en="Difficult">Mürəkkəb</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+            
+            <div class="mountain-card clickable hidden-mountain" onclick="openMountainModal('qobustan')">
+                <div class="card-image card-qobustan"></div>
+                <div class="card-content">
+                    <h3>Böyükdaş</h3>
+                    <span class="altitude">400 m</span>
+                    <p data-lang-az="Qobustan Milli Parkında qədim qaya rəsmləri." data-lang-en="Ancient rock carvings in Gobustan National Park.">Qobustan Milli Parkında qədim qaya rəsmləri.</p>
+                    <div class="card-tags">
+                        <span class="tag" data-lang-az="Tarix" data-lang-en="History">Tarix</span>
+                        <span class="tag" data-lang-az="Asan" data-lang-en="Easy">Asan</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+            
+            <div class="mountain-card clickable hidden-mountain" onclick="openMountainModal('qizilqaya')">
+                <div class="card-image card-qizilqaya"></div>
+                <div class="card-content">
+                    <h3>Qızılqaya</h3>
+                    <span class="altitude">3726 m</span>
+                    <p data-lang-az="Qızılı rəngli qayaları ilə tanınan dağ." data-lang-en="Mountain known for its golden-colored rocks.">Qızılı rəngli qayaları ilə tanınan dağ.</p>
+                    <div class="card-tags">
+                        <span class="tag">Trekking</span>
+                        <span class="tag" data-lang-az="Mürəkkəb" data-lang-en="Difficult">Mürəkkəb</span>
+                    </div>
+                    <button class="card-details-btn" data-lang-az="Ətraflı Bax" data-lang-en="View Details">Ətraflı Bax</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="show-more-container">
+            <button class="show-more-btn" id="showMoreMountainsBtn" onclick="toggleMoreMountains()">
+                <span data-lang-az="Daha Çox Gör" data-lang-en="Show More">Daha Çox Gör</span>
+                <span class="show-more-icon">▼</span>
+            </button>
+        </div>
+    </section>
+
+    
+    <div class="mountain-modal" id="mountainModal">
+        <div class="mountain-modal-content">
+            <button class="modal-close" onclick="closeMountainModal()">✕</button>
+            <button class="mountain-favorite-btn" id="modalFavoriteBtn" onclick="toggleModalFavorite()">🤍</button>
+            
+            <div class="mountain-modal-image" id="modalMountainImage"></div>
+            
+            <div class="mountain-modal-body">
+                <div class="modal-header-info">
+                    <div>
+                        <h2 id="modalMountainName">Dağ Adı</h2>
+                        <p class="modal-location" id="modalMountainLocation">📍 Məkan</p>
+                    </div>
+                    <div class="modal-altitude">
+                        <span id="modalMountainAltitude">0000</span>
+                        <small>metr</small>
+                    </div>
+                </div>
+                
+                <div class="modal-difficulty" id="modalDifficulty">
+                    <span class="difficulty-badge">Orta</span>
+                </div>
+                
+                <p class="modal-description" id="modalMountainDescription">
+                    Dağ haqqında ətraflı məlumat...
+                </p>
+                
+                <div class="modal-info-grid">
+                    <div class="modal-info-item">
+                        <span class="info-icon">🌡️</span>
+                        <div>
+                            <strong data-lang-az="Ən yaxşı vaxt" data-lang-en="Best Time">Ən yaxşı vaxt</strong>
+                            <p id="modalBestTime">May - Sentyabr</p>
+                        </div>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-icon">👥</span>
+                        <div>
+                            <strong data-lang-az="Qrup ölçüsü" data-lang-en="Group Size">Qrup ölçüsü</strong>
+                            <p id="modalGroupSize">5-15 nəfər</p>
+                        </div>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-icon">🚗</span>
+                        <div>
+                            <strong data-lang-az="Nəqliyyat" data-lang-en="Transport">Nəqliyyat</strong>
+                            <p id="modalTransport">Avtobus, Taksi</p>
+                        </div>
+                    </div>
+                    <div class="modal-info-item">
+                        <span class="info-icon">💰</span>
+                        <div>
+                            <strong data-lang-az="Tur qiyməti" data-lang-en="Tour Price">Tur qiyməti</strong>
+                            <p id="modalPrice">₼350-dən</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-activities">
+                    <h4 data-lang-az="Fəaliyyətlər" data-lang-en="Activities">Fəaliyyətlər</h4>
+                    <div class="activities-list" id="modalActivities">
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="modal-guide-section" id="modalGuideSection" style="display: none;">
+                    <h4 data-lang-az="Bələdçi" data-lang-en="Guide">Bələdçi</h4>
+                    <div class="guide-card" id="modalGuideCard" onclick="openGuideModalFromMountain()">
+                        <div class="guide-card-image">
+                            <img id="modalGuideImage" src="" alt="Guide">
+                        </div>
+                        <div class="guide-card-info">
+                            <h5 id="modalGuideName">Bələdçi Adı</h5>
+                            <span class="guide-card-role" id="modalGuideRole">Baş Bələdçi</span>
+                            <div class="guide-card-stats">
+                                <span><strong id="modalGuideExp">15</strong> il təcrübə</span>
+                                <span>⭐ <strong id="modalGuideRating">4.9</strong></span>
+                            </div>
+                            <p class="guide-card-hint" data-lang-az="Ətraflı məlumat üçün klikləyin" data-lang-en="Click for details">Ətraflı məlumat üçün klikləyin</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="modal-reviews">
+                    <div class="reviews-header">
+                        <h4 data-lang-az="Rəylər" data-lang-en="Reviews">Rəylər</h4>
+                        <div class="overall-rating">
+                            <span class="rating-stars" id="modalOverallStars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-score" id="modalOverallRating">4.8</span>
+                            <span class="rating-count" id="modalReviewCount">(24 rəy)</span>
+                        </div>
+                    </div>
+                    <div class="reviews-list" id="modalReviewsList">
+                        
+                    </div>
+                    <button class="write-review-btn" onclick="openReviewModal()" data-lang-az="Rəy Yaz" data-lang-en="Write Review">✍️ Rəy Yaz</button>
+                </div>
+                
+                <div class="modal-actions">
+                    <a href="#" class="modal-action-btn primary" id="modalDetailsBtn">
+                        <span>ℹ️</span> <span data-lang-az="Ətraflı Səhifə" data-lang-en="Full Details">Ətraflı Səhifə</span>
+                    </a>
+                    <button class="modal-action-btn secondary" id="modalMapBtn" onclick="showOnMap()">
+                        <span>🗺️</span> <span data-lang-az="Xəritədə Göstər" data-lang-en="Show on Map">Xəritədə Göstər</span>
+                    </button>
+                    <a href="#" class="modal-action-btn" id="modalGoogleMapsBtn" target="_blank">
+                        <span>📍</span> Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="review-modal" id="reviewModal">
+        <div class="review-modal-content">
+            <button class="modal-close" onclick="closeReviewModal()">✕</button>
+            <div class="review-modal-header">
+                <h2 data-lang-az="Rəy Yaz" data-lang-en="Write a Review">Rəy Yaz</h2>
+                <p id="reviewMountainName">Dağ adı</p>
+            </div>
+            
+            <form id="reviewForm">
+                <div class="rating-select">
+                    <label data-lang-az="Qiymətləndirməniz" data-lang-en="Your Rating">Qiymətləndirməniz</label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-rating="1">☆</span>
+                        <span class="star" data-rating="2">☆</span>
+                        <span class="star" data-rating="3">☆</span>
+                        <span class="star" data-rating="4">☆</span>
+                        <span class="star" data-rating="5">☆</span>
+                    </div>
+                    <input type="hidden" id="selectedRating" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label data-lang-az="Rəy başlığı" data-lang-en="Review Title">Rəy başlığı</label>
+                    <input type="text" id="reviewTitle" required placeholder="Qısa başlıq yazın" data-placeholder-az="Qısa başlıq yazın" data-placeholder-en="Write a short title">
+                </div>
+                
+                <div class="form-group">
+                    <label data-lang-az="Rəyiniz" data-lang-en="Your Review">Rəyiniz</label>
+                    <textarea id="reviewText" rows="4" required placeholder="Təcrübənizi paylaşın..." data-placeholder-az="Təcrübənizi paylaşın..." data-placeholder-en="Share your experience..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label data-lang-az="Ziyarət tarixi" data-lang-en="Visit Date">Ziyarət tarixi</label>
+                        <input type="month" id="visitDate">
+                    </div>
+                    <div class="form-group">
+                        <label data-lang-az="Kiminlə getdiniz?" data-lang-en="Who did you go with?">Kiminlə getdiniz?</label>
+                        <select id="travelType">
+                            <option value="solo" data-lang-az="Tək" data-lang-en="Solo">Tək</option>
+                            <option value="couple" data-lang-az="Cütlük" data-lang-en="Couple">Cütlük</option>
+                            <option value="family" data-lang-az="Ailə" data-lang-en="Family">Ailə</option>
+                            <option value="friends" data-lang-az="Dostlar" data-lang-en="Friends">Dostlar</option>
+                            <option value="group" data-lang-az="Qrup" data-lang-en="Group">Qrup</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="review-error" id="reviewError"></div>
+                
+                <button type="submit" class="submit-review-btn" data-lang-az="Rəy Göndər" data-lang-en="Submit Review">Rəy Göndər</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <section id="tours" class="tours-section">
+        
+        <div class="tours-bg-animation">
+            <div class="tours-cloud tours-cloud-1"></div>
+            <div class="tours-cloud tours-cloud-2"></div>
+            <div class="tours-cloud tours-cloud-3"></div>
+            <div class="tours-cloud tours-cloud-4"></div>
+            <div class="tours-cloud tours-cloud-5"></div>
+            <div class="tours-bird tours-bird-1">🦅</div>
+            <div class="tours-bird tours-bird-2">🦅</div>
+            <div class="tours-mountain-bg"></div>
+        </div>
+        
+        <div class="section-header">
+            <span class="section-subtitle" data-lang-az="Macəraya Hazır Olun" data-lang-en="Get Ready for Adventure">Macəraya Hazır Olun</span>
+            <h2 class="section-title" data-lang-az="Populyar Turlar" data-lang-en="Popular Tours">Populyar Turlar</h2>
+        </div>
+        
+        <div class="tours-container">
+            <div class="tour-card featured" data-tour-id="bazarduzu-expedition">
+                <button class="tour-favorite-btn" onclick="toggleTourFavorite(this)" title="Sevimlilərə əlavə et">🤍</button>
+                <div class="tour-icon">🏔️</div>
+                <h3 data-lang-az="Bazardüzü Ekspedisiyası" data-lang-en="Bazarduzu Expedition">Bazardüzü Ekspedisiyası</h3>
+                <p data-lang-az="7 günlük professional alpinizm turu ilə Azərbaycanın ən hündür zirvəsini fəth edin." data-lang-en="Conquer Azerbaijan's highest peak with a 7-day professional alpinism tour.">7 günlük professional alpinizm turu ilə Azərbaycanın ən hündür zirvəsini fəth edin.</p>
+                <ul class="tour-features">
+                    <li data-lang-az="✓ Professional bələdçi" data-lang-en="✓ Professional guide">✓ Professional bələdçi</li>
+                    <li data-lang-az="✓ Avadanlıq təminatı" data-lang-en="✓ Equipment provided">✓ Avadanlıq təminatı</li>
+                    <li data-lang-az="✓ Qidalanma daxil" data-lang-en="✓ Meals included">✓ Qidalanma daxil</li>
+                    <li data-lang-az="✓ Sığorta" data-lang-en="✓ Insurance">✓ Sığorta</li>
+                </ul>
+                <div class="tour-footer">
+                    <span class="tour-price">₼1200</span>
+                    <div class="tour-actions">
+                        <button class="tour-btn tour-info-btn" onclick="openTourModal('bazarduzu-expedition')" data-lang-az="Məlumat" data-lang-en="Info">Məlumat</button>
+                        <button class="tour-btn tour-book-btn" onclick="openTourBookingModal('bazarduzu-expedition')" data-lang-az="Sifariş" data-lang-en="Book">Sifariş</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tour-card" data-tour-id="shahdag-winter">
+                <button class="tour-favorite-btn" onclick="toggleTourFavorite(this)" title="Sevimlilərə əlavə et">🤍</button>
+                <div class="tour-icon">⛷️</div>
+                <h3 data-lang-az="Şahdağ Qış Turu" data-lang-en="Shahdag Winter Tour">Şahdağ Qış Turu</h3>
+                <p data-lang-az="Qış mövsümündə xizək və snowboard həyəcanı." data-lang-en="Skiing and snowboarding excitement in winter season.">Qış mövsümündə xizək və snowboard həyəcanı.</p>
+                <ul class="tour-features">
+                    <li data-lang-az="✓ Lift bileti" data-lang-en="✓ Lift ticket">✓ Lift bileti</li>
+                    <li data-lang-az="✓ Otel yerləşmə" data-lang-en="✓ Hotel accommodation">✓ Otel yerləşmə</li>
+                    <li data-lang-az="✓ Transfer" data-lang-en="✓ Transfer">✓ Transfer</li>
+                </ul>
+                <div class="tour-footer">
+                    <span class="tour-price">₼450</span>
+                    <div class="tour-actions">
+                        <button class="tour-btn tour-info-btn" onclick="openTourModal('shahdag-winter')" data-lang-az="Məlumat" data-lang-en="Info">Məlumat</button>
+                        <button class="tour-btn tour-book-btn" onclick="openTourBookingModal('shahdag-winter')" data-lang-az="Sifariş" data-lang-en="Book">Sifariş</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tour-card" data-tour-id="khinaliq-trekking">
+                <button class="tour-favorite-btn" onclick="toggleTourFavorite(this)" title="Sevimlilərə əlavə et">🤍</button>
+                <div class="tour-icon">🥾</div>
+                <h3 data-lang-az="Xınalıq Trekkinqi" data-lang-en="Khinaliq Trekking">Xınalıq Trekkinqi</h3>
+                <p data-lang-az="Qədim Xınalıq kəndinə 3 günlük trekking macərası." data-lang-en="3-day trekking adventure to the ancient Khinaliq village.">Qədim Xınalıq kəndinə 3 günlük trekking macərası.</p>
+                <ul class="tour-features">
+                    <li data-lang-az="✓ Yerli ev qonağı" data-lang-en="✓ Local homestay">✓ Yerli ev qonağı</li>
+                    <li data-lang-az="✓ Mədəni tur" data-lang-en="✓ Cultural tour">✓ Mədəni tur</li>
+                    <li data-lang-az="✓ Milli yeməklər" data-lang-en="✓ Traditional food">✓ Milli yeməklər</li>
+                </ul>
+                <div class="tour-footer">
+                    <span class="tour-price">₼350</span>
+                    <div class="tour-actions">
+                        <button class="tour-btn tour-info-btn" onclick="openTourModal('khinaliq-trekking')" data-lang-az="Məlumat" data-lang-en="Info">Məlumat</button>
+                        <button class="tour-btn tour-book-btn" onclick="openTourBookingModal('khinaliq-trekking')" data-lang-az="Sifariş" data-lang-en="Book">Sifariş</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <div class="tour-modal" id="tourInfoModal">
+        <div class="tour-modal-content">
+            <button class="modal-close" onclick="closeTourModal()">✕</button>
+            <div class="tour-modal-header" id="tourModalHeader">
+                <span class="tour-modal-icon">🏔️</span>
+                <h2 id="tourModalName">Tur Adı</h2>
+            </div>
+            <div class="tour-modal-body">
+                <p class="tour-modal-description" id="tourModalDescription">Tur haqqında ətraflı məlumat...</p>
+                
+                <div class="tour-info-grid">
+                    <div class="tour-info-item">
+                        <span class="info-icon">📅</span>
+                        <div>
+                            <strong data-lang-az="Müddət" data-lang-en="Duration">Müddət</strong>
+                            <p id="tourModalDuration">7 gün</p>
+                        </div>
+                    </div>
+                    <div class="tour-info-item">
+                        <span class="info-icon">👥</span>
+                        <div>
+                            <strong data-lang-az="Qrup" data-lang-en="Group">Qrup</strong>
+                            <p id="tourModalGroup">5-15 nəfər</p>
+                        </div>
+                    </div>
+                    <div class="tour-info-item">
+                        <span class="info-icon">⚡</span>
+                        <div>
+                            <strong data-lang-az="Çətinlik" data-lang-en="Difficulty">Çətinlik</strong>
+                            <p id="tourModalDifficulty">Orta</p>
+                        </div>
+                    </div>
+                    <div class="tour-info-item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <strong data-lang-az="Məkan" data-lang-en="Location">Məkan</strong>
+                            <p id="tourModalLocation">Azərbaycan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-includes">
+                    <h4 data-lang-az="Tura Daxildir" data-lang-en="Tour Includes">Tura Daxildir</h4>
+                    <ul id="tourModalIncludes">
+                        <li>Professional bələdçi</li>
+                    </ul>
+                </div>
+                
+                <div class="tour-itinerary">
+                    <h4 data-lang-az="Proqram" data-lang-en="Itinerary">Proqram</h4>
+                    <div id="tourModalItinerary">
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="tour-guide-section" id="tourGuideSection">
+                    <h4 data-lang-az="Bələdçi" data-lang-en="Guide" data-lang-ru="Гид" data-lang-tr="Rehber">Bələdçi</h4>
+                    <div class="guide-card" id="tourGuideCard" onclick="openGuideModalFromTour()">
+                        <div class="guide-card-image">
+                            <img id="tourGuideImage" src="" alt="Guide">
+                        </div>
+                        <div class="guide-card-info">
+                            <h5 id="tourGuideName">Bələdçi Adı</h5>
+                            <span class="guide-card-role" id="tourGuideRole">Baş Bələdçi</span>
+                            <div class="guide-card-stats">
+                                <span><strong id="tourGuideExp">15</strong> <span data-lang-az="il təcrübə" data-lang-en="years exp." data-lang-ru="лет опыта" data-lang-tr="yıl deneyim">il təcrübə</span></span>
+                                <span>⭐ <strong id="tourGuideRating">4.9</strong></span>
+                            </div>
+                            <p class="guide-card-hint" data-lang-az="Ətraflı məlumat üçün klikləyin" data-lang-en="Click for details" data-lang-ru="Нажмите для подробностей" data-lang-tr="Detaylar için tıklayın">Ətraflı məlumat üçün klikləyin</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tour-modal-footer">
+                    <div class="tour-modal-price">
+                        <span data-lang-az="Qiymət:" data-lang-en="Price:">Qiymət:</span>
+                        <strong id="tourModalPrice">₼1200</strong>
+                        <span class="per-person" data-lang-az="/nəfər" data-lang-en="/person">/nəfər</span>
+                    </div>
+                    <button class="book-tour-btn" onclick="openTourBookingFromModal()" data-lang-az="İndi Sifariş Et" data-lang-en="Book Now">İndi Sifariş Et</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="activity-modal" id="activityModal">
+        <div class="activity-modal-content">
+            <button class="modal-close" onclick="closeActivityModal()">✕</button>
+            <div class="activity-modal-header">
+                <span class="activity-modal-icon" id="activityModalIcon">🏔️</span>
+                <h2 id="activityModalName">Aktivitə</h2>
+            </div>
+            <div class="activity-modal-body">
+                <p class="activity-modal-desc" id="activityModalDesc"></p>
+                <div class="activity-modal-details">
+                    <div class="activity-detail">
+                        <span class="detail-icon">⏱️</span>
+                        <div>
+                            <span class="detail-label" data-lang-az="Müddət" data-lang-en="Duration">Müddət</span>
+                            <span class="detail-value" id="activityModalDuration"></span>
+                        </div>
+                    </div>
+                    <div class="activity-detail">
+                        <span class="detail-icon">📊</span>
+                        <div>
+                            <span class="detail-label" data-lang-az="Çətinlik" data-lang-en="Difficulty">Çətinlik</span>
+                            <span class="detail-value" id="activityModalDifficulty"></span>
+                        </div>
+                    </div>
+                    <div class="activity-detail">
+                        <span class="detail-icon">💰</span>
+                        <div>
+                            <span class="detail-label" data-lang-az="Qiymət" data-lang-en="Price">Qiymət</span>
+                            <span class="detail-value" id="activityModalPrice"></span>
+                        </div>
+                    </div>
+                    <div class="activity-detail">
+                        <span class="detail-icon">👥</span>
+                        <div>
+                            <span class="detail-label" data-lang-az="Qrup" data-lang-en="Group">Qrup</span>
+                            <span class="detail-value" id="activityModalGroup"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-modal-requirements">
+                    <h4 data-lang-az="Tələblər" data-lang-en="Requirements">Tələblər</h4>
+                    <ul id="activityModalRequirements"></ul>
+                </div>
+                <div class="activity-modal-equipment">
+                    <h4 data-lang-az="Lazımi Avadanlıq" data-lang-en="Required Equipment">Lazımi Avadanlıq</h4>
+                    <div id="activityModalEquipment"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="guide-modal" id="guideModal">
+        <div class="guide-modal-content">
+            <button class="modal-close" onclick="closeGuideModal()">✕</button>
+            <div class="guide-modal-body">
+                <div class="guide-modal-image">
+                    <img id="guideModalImage" src="" alt="">
+                </div>
+                <div class="guide-modal-info">
+                    <h2 id="guideModalName"></h2>
+                    <span class="guide-modal-role" id="guideModalRole"></span>
+                    <div class="guide-modal-stats">
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalExp"></span>
+                            <span class="guide-stat-label" data-lang-az="İl Təcrübə" data-lang-en="Years Experience" data-lang-ru="Лет опыта" data-lang-tr="Yıl Deneyim">İl Təcrübə</span>
+                        </div>
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalTours"></span>
+                            <span class="guide-stat-label" data-lang-az="Tur" data-lang-en="Tours" data-lang-ru="Туров" data-lang-tr="Tur">Tur</span>
+                        </div>
+                        <div class="guide-stat">
+                            <span class="guide-stat-value" id="guideModalRating"></span>
+                            <span class="guide-stat-label" data-lang-az="Reytinq" data-lang-en="Rating" data-lang-ru="Рейтинг" data-lang-tr="Puan">Reytinq</span>
+                        </div>
+                    </div>
+                    <p class="guide-modal-bio" id="guideModalBio"></p>
+                    <div class="guide-modal-certs">
+                        <h4 data-lang-az="Sertifikatlar" data-lang-en="Certifications" data-lang-ru="Сертификаты" data-lang-tr="Sertifikalar">Sertifikatlar</h4>
+                        <ul id="guideModalCerts"></ul>
+                    </div>
+                    <div class="guide-modal-langs">
+                        <h4 data-lang-az="Dillər" data-lang-en="Languages" data-lang-ru="Языки" data-lang-tr="Diller">Dillər</h4>
+                        <div id="guideModalLangs"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="tour-booking-modal" id="tourBookingModal">
+        <div class="tour-booking-content">
+            <button class="modal-close" onclick="closeTourBookingModal()">✕</button>
+            
+            <div class="booking-step" id="tourBookingStep1">
+                <div class="modal-header">
+                    <h2>🎫 <span data-lang-az="Tur Sifarişi" data-lang-en="Tour Booking">Tur Sifarişi</span></h2>
+                    <p id="bookingTourName">Tur adı</p>
+                </div>
+                
+                <form id="tourBookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-lang-az="Tarix" data-lang-en="Date">Tarix</label>
+                            <input type="date" id="tourDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang-az="İştirakçı sayı" data-lang-en="Participants">İştirakçı sayı</label>
+                            <select id="tourParticipants" required>
+                                <option value="1">1 nəfər</option>
+                                <option value="2" selected>2 nəfər</option>
+                                <option value="3">3 nəfər</option>
+                                <option value="4">4 nəfər</option>
+                                <option value="5">5 nəfər</option>
+                                <option value="6">6+ nəfər</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-lang-az="Ad Soyad" data-lang-en="Full Name">Ad Soyad</label>
+                        <input type="text" id="tourGuestName" required placeholder="Tam adınız">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-lang-az="E-poçt" data-lang-en="Email">E-poçt</label>
+                            <input type="email" id="tourGuestEmail" required placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang-az="Telefon" data-lang-en="Phone">Telefon</label>
+                            <input type="tel" id="tourGuestPhone" required placeholder="+994 XX XXX XX XX">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-lang-az="Qeydlər (opsional)" data-lang-en="Notes (optional)">Qeydlər (opsional)</label>
+                        <textarea id="tourNotes" rows="2" placeholder="Xüsusi istəklər, allergiyalar və s."></textarea>
+                    </div>
+                    
+                    <div class="booking-summary">
+                        <div class="summary-row">
+                            <span data-lang-az="Tur:" data-lang-en="Tour:">Tur:</span>
+                            <span id="tourSummaryName">-</span>
+                        </div>
+                        <div class="summary-row">
+                            <span data-lang-az="İştirakçı:" data-lang-en="Participants:">İştirakçı:</span>
+                            <span id="tourSummaryParticipants">2 nəfər</span>
+                        </div>
+                        <div class="summary-row">
+                            <span data-lang-az="Qiymət:" data-lang-en="Price:">Qiymət:</span>
+                            <span id="tourSummaryPrice">₼0</span>
+                        </div>
+                        <div class="summary-row discount" id="discountRow" style="display: none;">
+                            <span data-lang-az="🎉 İlk gediş endirimi (15%):" data-lang-en="🎉 First trip discount (15%):">🎉 İlk gediş endirimi (15%):</span>
+                            <span id="tourSummaryDiscount" class="discount-amount">-₼0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span data-lang-az="Cəmi:" data-lang-en="Total:">Cəmi:</span>
+                            <span id="tourSummaryTotal">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="proceed-btn" data-lang-az="Sifarişi Təsdiqlə" data-lang-en="Confirm Booking">Sifarişi Təsdiqlə</button>
+                </form>
+            </div>
+            
+            <div class="booking-step" id="tourBookingStep2" style="display: none;">
+                <div class="modal-header">
+                    <h2>💳 <span data-lang-az="Ödəniş" data-lang-en="Payment">Ödəniş</span></h2>
+                    <p data-lang-az="Sifarişinizi tamamlamaq üçün ödəniş məlumatlarını daxil edin" data-lang-en="Enter payment information to complete your booking">Sifarişinizi tamamlamaq üçün ödəniş məlumatlarını daxil edin</p>
+                </div>
+                
+                <div class="payment-summary">
+                    <div class="summary-row">
+                        <span data-lang-az="Tur:" data-lang-en="Tour:">Tur:</span>
+                        <span id="paymentTourName">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span data-lang-az="İştirakçı:" data-lang-en="Participants:">İştirakçı:</span>
+                        <span id="paymentParticipants">-</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span data-lang-az="Ödəniləcək məbləğ:" data-lang-en="Amount to pay:">Ödəniləcək məbləğ:</span>
+                        <span id="paymentAmount">₼0</span>
+                    </div>
+                </div>
+                
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label data-lang-az="Kart nömrəsi" data-lang-en="Card Number">Kart nömrəsi</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-lang-az="Son istifadə tarixi" data-lang-en="Expiry Date">Son istifadə tarixi</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang-az="CVV" data-lang-en="CVV">CVV</label>
+                            <input type="text" id="cardCVV" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label data-lang-az="Kart sahibinin adı" data-lang-en="Cardholder Name">Kart sahibinin adı</label>
+                        <input type="text" id="cardName" placeholder="AD SOYAD" required>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="paymentCard" name="paymentMethod" value="card" checked>
+                            <label for="paymentCard">
+                                <span>💳</span>
+                                <span data-lang-az="Bank kartı" data-lang-en="Credit/Debit Card">Bank kartı</span>
+                            </label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="paymentCash" name="paymentMethod" value="cash">
+                            <label for="paymentCash">
+                                <span>💵</span>
+                                <span data-lang-az="Nağd ödəniş" data-lang-en="Cash Payment">Nağd ödəniş</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-note" id="cashPaymentNote" style="display: none;">
+                        <p data-lang-az="ℹ️ Nağd ödəniş seçildi. Tur günü ödəniş edə bilərsiniz." data-lang-en="ℹ️ Cash payment selected. You can pay on the tour day.">ℹ️ Nağd ödəniş seçildi. Tur günü ödəniş edə bilərsiniz.</p>
+                    </div>
+                    
+                    <button type="submit" class="proceed-btn" data-lang-az="Ödənişi Tamamla" data-lang-en="Complete Payment">Ödənişi Tamamla</button>
+                    <button type="button" class="back-btn" onclick="goBackToBookingForm()" data-lang-az="Geri" data-lang-en="Back">Geri</button>
+                </form>
+            </div>
+            
+            <div class="booking-step" id="tourBookingStep3" style="display: none;">
+                <div class="confirmation-content">
+                    <div class="success-icon">✓</div>
+                    <h2 data-lang-az="Sifariş Qəbul Edildi!" data-lang-en="Booking Confirmed!">Sifariş Qəbul Edildi!</h2>
+                    <p data-lang-az="Təşəkkür edirik! Sifarişiniz uğurla qeydə alındı." data-lang-en="Thank you! Your booking has been recorded successfully.">Təşəkkür edirik! Sifarişiniz uğurla qeydə alındı.</p>
+                    
+                    <div class="confirmation-details">
+                        <div class="conf-row">
+                            <span data-lang-az="Sifariş №:" data-lang-en="Order #:">Sifariş №:</span>
+                            <span id="tourOrderNumber">DT-000000</span>
+                        </div>
+                        <div class="conf-row">
+                            <span data-lang-az="Tur:" data-lang-en="Tour:">Tur:</span>
+                            <span id="tourConfName">-</span>
+                        </div>
+                        <div class="conf-row">
+                            <span data-lang-az="Tarix:" data-lang-en="Date:">Tarix:</span>
+                            <span id="tourConfDate">-</span>
+                        </div>
+                        <div class="conf-row">
+                            <span data-lang-az="Məbləğ:" data-lang-en="Amount:">Məbləğ:</span>
+                            <span id="tourConfAmount">₼0</span>
+                        </div>
+                    </div>
+                    
+                    <p class="conf-email" data-lang-az="Təsdiq e-poçtu göndərildi:" data-lang-en="Confirmation email sent to:">Təsdiq e-poçtu göndərildi: <strong id="tourConfEmail">email@example.com</strong></p>
+                    
+                    <button class="close-conf-btn" onclick="closeTourBookingModal()" data-lang-az="Bağla" data-lang-en="Close">Bağla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <section id="map" class="map-section">
+        <div class="section-header">
+            <span class="section-subtitle" data-lang-az="İnteraktiv Xəritə" data-lang-en="Interactive Map">İnteraktiv Xəritə</span>
+            <h2 class="section-title" data-lang-az="Azərbaycan Dağları" data-lang-en="Mountains of Azerbaijan">Azərbaycan Dağları</h2>
+        </div>
+        
+        <div class="map-container">
+            <div id="azerbaijan-map"></div>
+            
+            <div class="mountain-info-panel" id="mountainInfoPanel">
+                <div class="info-placeholder" id="infoPlaceholder">
+                    <div class="placeholder-icon">🗺️</div>
+                    <h3 data-lang-az="Dağ Seçin" data-lang-en="Select a Mountain">Dağ Seçin</h3>
+                    <p data-lang-az="Xəritədə dağ nişanına klikləyərək ətraflı məlumat əldə edin" data-lang-en="Click on a mountain marker on the map to get detailed information">Xəritədə dağ nişanına klikləyərək ətraflı məlumat əldə edin</p>
+                </div>
+                
+                <div class="info-content" id="infoContent" style="display: none;">
+                    <button style="margin-right: 5px;" class="close-info-btn" id="closeInfoBtn" title="Bağla">✕</button>
+                    <button style="margin-right: 5px;" class="favorite-btn-top" id="favoriteBtn" title="Sevimlilərə əlavə et">
+                        <span class="fav-icon">🤍</span>
+                    </button>
+                    <div class="info-header">
+                        <h3 id="mountainName">Dağ Adı</h3>
+                        <span style="margin-top: 40px; float: right;" class="info-altitude" id="mountainAltitude">0000 m</span>
+                    </div>
+                    
+                    <p style="margin-top: -40px;" class="info-country" id="mountainCountry">Ölkə • Region</p>
+                    
+                    <div class="info-difficulty" id="mountainDifficulty">
+                        <span class="difficulty-badge">Orta</span>
+                    </div>
+                    
+                    <p class="info-description" id="mountainDescription">
+                        Dağ haqqında məlumat...
+                    </p>
+                    
+                    <div class="info-section">
+                        <h4 data-lang-az="🚗 Nəqliyyat Variantları" data-lang-en="🚗 Transport Options">🚗 Nəqliyyat Variantları</h4>
+                        <ul class="transport-list" id="transportList">
+                        </ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h4 data-lang-az="🛤️ Yol Tarifi" data-lang-en="🛤️ Route Directions">🛤️ Yol Tarifi</h4>
+                        <div class="routes-list" id="routesList">
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h4 data-lang-az="🎯 Fəaliyyətlər" data-lang-en="🎯 Activities">🎯 Fəaliyyətlər</h4>
+                        <div class="activities-list" id="mapActivities">
+                        </div>
+                    </div>
+                    
+                    <div class="info-actions">
+                        <button class="action-btn route-btn" id="showRouteBtn">
+                            <span>📍</span> <span data-lang-az="Marşrut Göstər" data-lang-en="Show Route">Marşrut Göstər</span>
+                        </button>
+                        <a href="#" class="action-btn details-btn" id="detailsBtn">
+                            <span>ℹ️</span> <span data-lang-az="Ətraflı Məlumat" data-lang-en="More Info">Ətraflı Məlumat</span>
+                        </a>
+                        <a href="#" class="action-btn maps-btn" id="googleMapsBtn" target="_blank">
+                            <span>🗺️</span> Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="map-legend">
+            <button class="my-location-btn" id="myLocationBtn" title="Mənim mövqeyim">
+                <span>📍</span> <span data-lang-az="Mənim Mövqeyim" data-lang-en="My Location">Mənim Mövqeyim</span>
+            </button>
+            <div class="legend-item">
+                <span class="legend-marker user-marker"></span>
+                <span data-lang-az="Sizin Mövqeyiniz" data-lang-en="Your Location">Sizin Mövqeyiniz</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-marker easy-marker"></span>
+                <span data-lang-az="Asan" data-lang-en="Easy">Asan</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-marker medium-marker"></span>
+                <span data-lang-az="Orta" data-lang-en="Medium">Orta</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-marker hard-marker"></span>
+                <span data-lang-az="Mürəkkəb" data-lang-en="Difficult">Mürəkkəb</span>
+            </div>
+        </div>
+        
+    </section>
+
+    
+    <section id="gallery" class="gallery-section">
+        <div class="section-header">
+            <span class="section-subtitle" data-lang-az="Vizual Səyahət" data-lang-en="Visual Journey">Vizual Səyahət</span>
+            <h2 class="section-title" data-lang-az="Foto Qalereya" data-lang-en="Photo Gallery">Foto Qalereya</h2>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item large">
+                <div class="gallery-image gi-1"></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <span class="gallery-title" data-lang-az="Qafqaz Dağları" data-lang-en="Caucasus Mountains">Qafqaz Dağları</span>
+                        <p class="gallery-desc" data-lang-az="Böyük Qafqaz silsiləsinin əzəmətli zirvələri. Azərbaycanın ən hündür dağları burada yerləşir." data-lang-en="Majestic peaks of the Greater Caucasus range. Azerbaijan's highest mountains are located here.">Böyük Qafqaz silsiləsinin əzəmətli zirvələri. Azərbaycanın ən hündür dağları burada yerləşir.</p>
+                        <span class="gallery-location">📍 Qusar, Azərbaycan</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image gi-2"></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <span class="gallery-title" data-lang-az="Günəş Doğuşu" data-lang-en="Sunrise">Günəş Doğuşu</span>
+                        <p class="gallery-desc" data-lang-az="Dağ zirvəsindən sehirli günəş doğuşu mənzərəsi. Ən yaxşı foto anlarından biri." data-lang-en="Magical sunrise view from the mountain peak. One of the best photo moments.">Dağ zirvəsindən sehirli günəş doğuşu mənzərəsi. Ən yaxşı foto anlarından biri.</p>
+                        <span class="gallery-location">📍 Şahdağ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image gi-3"></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <span class="gallery-title" data-lang-az="Dağ Gölü" data-lang-en="Mountain Lake">Dağ Gölü</span>
+                        <p class="gallery-desc" data-lang-az="Göygöl - 1139-cu il zəlzələsi nəticəsində yaranan təbii göl. UNESCO qoruğu." data-lang-en="Goygol - natural lake formed by earthquake in 1139. UNESCO protected area.">Göygöl - 1139-cu il zəlzələsi nəticəsində yaranan təbii göl. UNESCO qoruğu.</p>
+                        <span class="gallery-location">📍 Göygöl</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item tall">
+                <div class="gallery-image gi-4"></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <span class="gallery-title" data-lang-az="Trekking Yolu" data-lang-en="Trekking Trail">Trekking Yolu</span>
+                        <p class="gallery-desc" data-lang-az="Xınalıqdan keçən qədim karvan yolu. 5000 illik tarixə malik kənd." data-lang-en="Ancient caravan route passing through Khinalig. Village with 5000 years of history.">Xınalıqdan keçən qədim karvan yolu. 5000 illik tarixə malik kənd.</p>
+                        <span class="gallery-location">📍 Xınalıq, Quba</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image gi-5"></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <span class="gallery-title" data-lang-az="Qış Mənzərəsi" data-lang-en="Winter Scenery">Qış Mənzərəsi</span>
+                        <p class="gallery-desc" data-lang-az="Tufandağ qış kurortunun ağ örtüklü yamacları. Xizək həvəskarları üçün cənnət." data-lang-en="Snow-covered slopes of Tufandag winter resort. Paradise for skiing enthusiasts.">Tufandağ qış kurortunun ağ örtüklü yamacları. Xizək həvəskarları üçün cənnət.</p>
+                        <span class="gallery-location">📍 Qəbələ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-image gi-6"></div>
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <span class="gallery-title" data-lang-az="Dağ Kəndləri" data-lang-en="Mountain Villages">Dağ Kəndləri</span>
+                        <p class="gallery-desc" data-lang-az="Ənənəvi dağ kəndləri. Qonaqpərvərlik və milli mətbəx mədəniyyəti." data-lang-en="Traditional mountain villages. Hospitality and national cuisine culture.">Ənənəvi dağ kəndləri. Qonaqpərvərlik və milli mətbəx mədəniyyəti.</p>
+                        <span class="gallery-location">📍 Lahıc, İsmayıllı</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="contact" class="contact-section">
+        
+        <div class="contact-bg-animation">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+            <div class="mountain-silhouette"></div>
+                        </div>
+        
+        <div class="contact-header">
+            <span class="section-subtitle" data-lang-az="Bizimlə Əlaqə" data-lang-en="Contact Us">Bizimlə Əlaqə</span>
+            <h2 class="section-title contact-title-animated" data-lang-az="Sualınız Var?" data-lang-en="Have Questions?">Sualınız Var?</h2>
+            <p class="contact-subtitle">7/24 sizin xidmətinizdəyik</p>
+                    </div>
+        
+        <div class="contact-container-new">
+            
+            <div class="contact-cards-grid">
+                <div class="contact-card glass-card">
+                    <div class="contact-card-icon">📍</div>
+                    <h3>Ünvan</h3>
+                    <p>Bakı şəhəri, Nizami küçəsi 45</p>
+                    <a href="https://maps.google.com/?q=Baku,+Nizami+street+45" target="_blank" class="contact-card-link">Xəritədə Bax →</a>
+                    </div>
+                
+                <div class="contact-card glass-card">
+                    <div class="contact-card-icon">📞</div>
+                    <h3>Telefon</h3>
+                            <p>+994 12 345 67 89</p>
+                    <p>+994 50 123 45 67</p>
+                    <a href="tel:+994123456789" class="contact-card-link">Zəng Et →</a>
+                        </div>
+                
+                <div class="contact-card glass-card">
+                    <div class="contact-card-icon">✉️</div>
+                    <h3>E-poçt</h3>
+                            <p>info@dagtur.az</p>
+                    <p>booking@dagtur.az</p>
+                    <a href="mailto:info@dagtur.az" class="contact-card-link">E-poçt Göndər →</a>
+                        </div>
+                
+                <div class="contact-card glass-card">
+                    <div class="contact-card-icon">🕐</div>
+                    <h3>İş Saatları</h3>
+                    <p>7/24 Açıqdır</p>
+                    <p>Həmişə sizin xidmətinizdə</p>
+                    <span class="contact-card-badge">● 7/24</span>
+                </div>
+            </div>
+            
+            
+            <div class="contact-form-card">
+                <h3>Mesaj Göndər</h3>
+                <form class="contact-form-new" id="contactFormNew">
+                    <div class="form-row">
+                        <div class="form-group-new">
+                            <label>Ad Soyad</label>
+                            <input type="text" id="contactName" placeholder="Adınız Soyadınız" required>
+                </div>
+                        <div class="form-group-new">
+                            <label>Telefon</label>
+                            <input type="tel" id="contactPhone" placeholder="+994 XX XXX XX XX" required>
+                </div>
+                    </div>
+                    <div class="form-group-new">
+                        <label>E-poçt</label>
+                        <input type="email" id="contactEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group-new">
+                        <label>Mövzu</label>
+                        <select id="contactSubject" required>
+                            <option value="">Mövzu seçin</option>
+                            <option value="tour">Tur Sifarişi</option>
+                            <option value="info">Məlumat Almaq</option>
+                            <option value="complaint">Şikayət</option>
+                        <option value="other">Digər</option>
+                    </select>
+                </div>
+                    <div class="form-group-new">
+                        <label>Mesajınız</label>
+                        <textarea id="contactMessage" placeholder="Sualınızı və ya mesajınızı yazın..." rows="4"></textarea>
+                </div>
+                    <button type="submit" class="submit-btn-new" id="contactSubmitBtn">Göndər →</button>
+            </form>
+            </div>
+        </div>
+        
+        
+        <div class="contact-social">
+            <a href="#" class="social-link" title="Instagram">📷</a>
+            <a href="#" class="social-link" title="Facebook">👤</a>
+            <a href="#" class="social-link" title="WhatsApp">💬</a>
+            <a href="#" class="social-link" title="YouTube">▶️</a>
+        </div>
+    </section>
+
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-icon">⛰️</span>
+                <span class="logo-text">PeakExplorer</span>
+                <p data-lang-az="Azərbaycanın dağ zirvələrini bizimlə kəşf edin. Təhlükəsiz və unudulmaz səyahətlər üçün yanınızdayıq." data-lang-en="Discover the mountain peaks of Azerbaijan with us. We are here for safe and unforgettable journeys.">Azərbaycanın dağ zirvələrini bizimlə kəşf edin. Təhlükəsiz və unudulmaz səyahətlər üçün yanınızdayıq.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4 data-lang-az="Keçidlər" data-lang-en="Links">Keçidlər</h4>
+                <a href="#home" data-lang-az="Ana Səhifə" data-lang-en="Home">Ana Səhifə</a>
+                <a href="#mountains" data-lang-az="Dağlar" data-lang-en="Mountains">Dağlar</a>
+                <a href="#tours" data-lang-az="Turlar" data-lang-en="Tours">Turlar</a>
+                <a href="#contact" data-lang-az="Əlaqə" data-lang-en="Contact">Əlaqə</a>
+            </div>
+            
+            <div class="footer-links">
+                <h4 data-lang-az="Turlar" data-lang-en="Tours">Turlar</h4>
+                <a href="#">Bazardüzü</a>
+                <a href="#">Şahdağ</a>
+                <a href="#">Xınalıq</a>
+                <a href="#">Tufandağ</a>
+            </div>
+            
+            <div class="footer-social">
+                <h4 data-lang-az="Sosial Şəbəkələr" data-lang-en="Social Networks">Sosial Şəbəkələr</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📺</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p data-lang-az="© 2025 PeakExplorer. Bütün hüquqlar qorunur." data-lang-en="© 2025 PeakExplorer. All rights reserved.">© 2025 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    
+    <button class="scroll-to-top" id="scrollToTop" title="Yuxarı get">
+        <span>↑</span>
+    </button>
+
+    
+    <div class="chatbot-container" id="chatbotContainer">
+        <button class="chatbot-toggle" id="chatbotToggle" onclick="toggleChatbot()">
+            <span class="chatbot-icon">🤖</span>
+            <span class="chatbot-badge" id="chatbotBadge">1</span>
+        </button>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <span class="chatbot-avatar">🤖</span>
+                    <div>
+                        <h4>PeakBot</h4>
+                        <span class="chatbot-status">🟢 Online</span>
+                    </div>
+                </div>
+                <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chat-message bot">
+                    <span class="message-avatar">🤖</span>
+                    <div class="message-content">
+                        <p>Salam! Mən PeakBot-am 👋</p>
+                        <p>Azərbaycanın dağları, turlar və səyahətlər haqqında suallarınıza cavab verə bilərəm.</p>
+                    </div>
+                </div>
+                <div class="chat-suggestions">
+                    <button onclick="sendSuggestion('Ən yaxşı dağ turları hansılardır?')">🏔️ Ən yaxşı turlar</button>
+                    <button onclick="sendSuggestion('Şahdağ haqqında məlumat')">⛷️ Şahdağ</button>
+                    <button onclick="sendSuggestion('Otel tövsiyəsi')">🏨 Otellər</button>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Sualınızı yazın..." onkeypress="handleChatKeypress(event)">
+                <button onclick="sendMessage()">📤</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* AI Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 9999;
+        }
+        
+        .chatbot-toggle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 30px rgba(26, 58, 82, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: chatbotPulse 2s ease-in-out infinite, chatbotBounce 3s ease-in-out infinite;
+        }
+        
+        @keyframes chatbotPulse {
+            0%, 100% { box-shadow: 0 5px 30px rgba(26, 58, 82, 0.4), 0 0 0 0 rgba(232, 165, 75, 0.4); }
+            50% { box-shadow: 0 5px 30px rgba(26, 58, 82, 0.4), 0 0 0 15px rgba(232, 165, 75, 0); }
+        }
+        
+        @keyframes chatbotBounce {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-8px); }
+            50% { transform: translateY(0); }
+            75% { transform: translateY(-4px); }
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 40px rgba(26, 58, 82, 0.5);
+            animation: none;
+        }
+        
+        .chatbot-icon {
+            font-size: 2rem;
+            animation: chatbotIconWiggle 2.5s ease-in-out infinite;
+        }
+        
+        @keyframes chatbotIconWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            10% { transform: rotate(-10deg); }
+            20% { transform: rotate(10deg); }
+            30% { transform: rotate(-10deg); }
+            40% { transform: rotate(10deg); }
+            50%, 100% { transform: rotate(0deg); }
+        }
+        
+        .chatbot-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 22px;
+            height: 22px;
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        .chatbot-badge.hidden {
+            display: none;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 520px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .chatbot-window.active {
+            display: flex;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-header-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .chatbot-avatar {
+            font-size: 2rem;
+        }
+        
+        .chatbot-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .chatbot-status {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+        
+        .chatbot-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        
+        .chatbot-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .chat-message {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 85%;
+        }
+        
+        .chat-message.bot {
+            align-self: flex-start;
+        }
+        
+        .chat-message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .message-content {
+            background: var(--color-light);
+            padding: 0.75rem 1rem;
+            border-radius: 16px;
+            border-top-left-radius: 4px;
+        }
+        
+        .chat-message.user .message-content {
+            background: var(--color-primary);
+            color: white;
+            border-radius: 16px;
+            border-top-right-radius: 4px;
+        }
+        
+        .message-content p {
+            margin: 0;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .chat-suggestions button {
+            background: white;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 0.4rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-suggestions button:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+        
+        .chatbot-input input:focus {
+            border-color: var(--color-primary);
+        }
+        
+        .chatbot-input button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-input button:hover {
+            background: var(--color-secondary);
+            transform: scale(1.05);
+        }
+        
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem;
+        }
+        
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--color-text-light);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: calc(100vw - 2rem);
+                right: -1rem;
+                height: 70vh;
+            }
+        }
+    </style>
+    <script src="main.js"></script>
+</body>
+</html>

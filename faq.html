@@ -1,0 +1,401 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="faq-page">
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html" class="active">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="faq-hero">
+        <div class="faq-hero-content">
+            <h1 data-lang-az="Tez-tez Verilən Suallar" data-lang-en="Frequently Asked Questions">Tez-tez Verilən Suallar</h1>
+            <p data-lang-az="Dağ turları və xidmətlərimiz haqqında suallarınızın cavabları" data-lang-en="Answers to your questions about mountain tours and our services">Dağ turları və xidmətlərimiz haqqında suallarınızın cavabları</p>
+        </div>
+    </section>
+
+    
+    <section class="faq-content">
+        <div class="faq-container">
+            
+            <div class="faq-categories">
+                <button class="faq-cat-btn active" data-category="all" data-lang-az="Hamısı" data-lang-en="All">Hamısı</button>
+                <button class="faq-cat-btn" data-category="booking" data-lang-az="Sifariş" data-lang-en="Booking">Sifariş</button>
+                <button class="faq-cat-btn" data-category="tours" data-lang-az="Turlar" data-lang-en="Tours">Turlar</button>
+                <button class="faq-cat-btn" data-category="payment" data-lang-az="Ödəniş" data-lang-en="Payment">Ödəniş</button>
+                <button class="faq-cat-btn" data-category="safety" data-lang-az="Təhlükəsizlik" data-lang-en="Safety">Təhlükəsizlik</button>
+                <button class="faq-cat-btn" data-category="equipment" data-lang-az="Avadanlıq" data-lang-en="Equipment">Avadanlıq</button>
+            </div>
+
+            
+            <div class="faq-list">
+                
+                <div class="faq-item" data-category="booking">
+                    <button class="faq-question">
+                        <span data-lang-az="Turu necə sifariş edə bilərəm?" data-lang-en="How can I book a tour?">Turu necə sifariş edə bilərəm?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Turu sifariş etmək üçün bir neçə yol var: 1) Saytımızda istədiyiniz turu seçib 'Sifariş' düyməsinə basın, 2) Bizimlə telefon vasitəsilə əlaqə saxlayın: +994 12 345 67 89, 3) E-poçt göndərin: info@peakexplorer.az. Sifariş zamanı şəxsi məlumatlarınızı, tur tarixini və iştirakçı sayını bildirməlisiniz." data-lang-en="There are several ways to book a tour: 1) Select your desired tour on our website and click 'Book', 2) Contact us by phone: +994 12 345 67 89, 3) Send an email: info@peakexplorer.az. When booking, you need to provide your personal information, tour date, and number of participants.">Turu sifariş etmək üçün bir neçə yol var: 1) Saytımızda istədiyiniz turu seçib 'Sifariş' düyməsinə basın, 2) Bizimlə telefon vasitəsilə əlaqə saxlayın: +994 12 345 67 89, 3) E-poçt göndərin: info@peakexplorer.az. Sifariş zamanı şəxsi məlumatlarınızı, tur tarixini və iştirakçı sayını bildirməlisiniz.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="booking">
+                    <button class="faq-question">
+                        <span data-lang-az="Sifarişi ləğv etmək mümkündürmü?" data-lang-en="Is it possible to cancel a booking?">Sifarişi ləğv etmək mümkündürmü?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Bəli, sifarişi ləğv etmək mümkündür. Ləğv şərtləri: Turdan 14 gün əvvəl - tam geri ödəmə, 7-14 gün əvvəl - 50% geri ödəmə, 7 gündən az - geri ödəmə yoxdur. Fövqəladə hallarda (xəstəlik, ailə problemləri) fərdi yanaşma tətbiq olunur." data-lang-en="Yes, it is possible to cancel a booking. Cancellation terms: 14 days before tour - full refund, 7-14 days before - 50% refund, less than 7 days - no refund. In emergency cases (illness, family problems), individual approach is applied.">Bəli, sifarişi ləğv etmək mümkündür. Ləğv şərtləri: Turdan 14 gün əvvəl - tam geri ödəmə, 7-14 gün əvvəl - 50% geri ödəmə, 7 gündən az - geri ödəmə yoxdur. Fövqəladə hallarda (xəstəlik, ailə problemləri) fərdi yanaşma tətbiq olunur.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="booking">
+                    <button class="faq-question">
+                        <span data-lang-az="Qrup ölçüsü nə qədərdir?" data-lang-en="What is the group size?">Qrup ölçüsü nə qədərdir?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Qrup ölçüsü tura görə dəyişir. Ümumiyyətlə: Trekking turları - 4-12 nəfər, Alpinizm ekspedisiyaları - 5-15 nəfər, Qış turları - 2-20 nəfər. Fərdi turlar da mümkündür - əlavə ödənişlə." data-lang-en="Group size varies by tour. Generally: Trekking tours - 4-12 people, Alpinism expeditions - 5-15 people, Winter tours - 2-20 people. Private tours are also available - with additional payment.">Qrup ölçüsü tura görə dəyişir. Ümumiyyətlə: Trekking turları - 4-12 nəfər, Alpinizm ekspedisiyaları - 5-15 nəfər, Qış turları - 2-20 nəfər. Fərdi turlar da mümkündür - əlavə ödənişlə.</p>
+                    </div>
+                </div>
+
+                
+                <div class="faq-item" data-category="tours">
+                    <button class="faq-question">
+                        <span data-lang-az="Turlar hansı dildə keçirilir?" data-lang-en="In what language are tours conducted?">Turlar hansı dildə keçirilir?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Turlarımız əsasən Azərbaycan və Rus dillərində keçirilir. İngilis dilli bələdçilər əvvəlcədən sifariş əsasında təmin edilə bilər. Bələdçilərimiz peşəkar təhsilli və təcrübəlidir." data-lang-en="Our tours are mainly conducted in Azerbaijani and Russian. English-speaking guides can be provided upon advance request. Our guides are professionally trained and experienced.">Turlarımız əsasən Azərbaycan və Rus dillərində keçirilir. İngilis dilli bələdçilər əvvəlcədən sifariş əsasında təmin edilə bilər. Bələdçilərimiz peşəkar təhsilli və təcrübəlidir.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="tours">
+                    <button class="faq-question">
+                        <span data-lang-az="Ən yaxşı tur mövsümü hansıdır?" data-lang-en="What is the best tour season?">Ən yaxşı tur mövsümü hansıdır?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Mövsüm tur növünə görə dəyişir: Trekking və alpinizm - May-Oktyabr (ən yaxşısı İyun-Sentyabr), Qış idmanları - Dekabr-Mart, Mədəni turlar - Bütün il boyu. Hava şəraiti dağlarda tez dəyişə bilər, ona görə hazırlıqlı olun." data-lang-en="Season varies by tour type: Trekking and alpinism - May-October (best June-September), Winter sports - December-March, Cultural tours - Year-round. Weather conditions can change quickly in the mountains, so be prepared.">Mövsüm tur növünə görə dəyişir: Trekking və alpinizm - May-Oktyabr (ən yaxşısı İyun-Sentyabr), Qış idmanları - Dekabr-Mart, Mədəni turlar - Bütün il boyu. Hava şəraiti dağlarda tez dəyişə bilər, ona görə hazırlıqlı olun.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="tours">
+                    <button class="faq-question">
+                        <span data-lang-az="Fiziki hazırlıq tələb olunurmu?" data-lang-en="Is physical fitness required?">Fiziki hazırlıq tələb olunurmu?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Fiziki hazırlıq tələbi turun çətinlik səviyyəsinə görə dəyişir. Asan turlar - xüsusi hazırlıq tələb olunmur, Orta turlar - müntəzəm gəzinti/qaçış təcrübəsi, Mürəkkəb turlar - yaxşı fiziki forma və əvvəlki dağ təcrübəsi tövsiyə olunur." data-lang-en="Physical fitness requirements vary by tour difficulty level. Easy tours - no special preparation required, Medium tours - regular walking/running experience, Difficult tours - good physical shape and previous mountain experience recommended.">Fiziki hazırlıq tələbi turun çətinlik səviyyəsinə görə dəyişir. Asan turlar - xüsusi hazırlıq tələb olunmur, Orta turlar - müntəzəm gəzinti/qaçış təcrübəsi, Mürəkkəb turlar - yaxşı fiziki forma və əvvəlki dağ təcrübəsi tövsiyə olunur.</p>
+                    </div>
+                </div>
+
+                
+                <div class="faq-item" data-category="payment">
+                    <button class="faq-question">
+                        <span data-lang-az="Hansı ödəniş üsulları qəbul edilir?" data-lang-en="What payment methods are accepted?">Hansı ödəniş üsulları qəbul edilir?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Biz müxtəlif ödəniş üsullarını qəbul edirik: Bank kartları (Visa, Mastercard), Nağd ödəniş (ofisdə və ya tura başlayarkən), Bank köçürməsi. Onlayn ödənişlər təhlükəsiz şifrələmə ilə qorunur." data-lang-en="We accept various payment methods: Bank cards (Visa, Mastercard), Cash payment (at office or at tour start), Bank transfer. Online payments are protected with secure encryption.">Biz müxtəlif ödəniş üsullarını qəbul edirik: Bank kartları (Visa, Mastercard), Nağd ödəniş (ofisdə və ya tura başlayarkən), Bank köçürməsi. Onlayn ödənişlər təhlükəsiz şifrələmə ilə qorunur.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="payment">
+                    <button class="faq-question">
+                        <span data-lang-az="Qiymətə nələr daxildir?" data-lang-en="What is included in the price?">Qiymətə nələr daxildir?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Hər turun qiymətinə daxil olanlar fərqlidir. Ümumiyyətlə daxildir: Professional bələdçi, Transfer (göstərilən marşrut üzrə), Qidalanma (tur təsvirində qeyd edildiyi kimi), Sığorta. Daxil deyil: Şəxsi xərclər, Əlavə fəaliyyətlər, Tip/bəxşiş." data-lang-en="What's included varies by tour. Generally included: Professional guide, Transfer (on specified route), Meals (as stated in tour description), Insurance. Not included: Personal expenses, Additional activities, Tips/gratuities.">Hər turun qiymətinə daxil olanlar fərqlidir. Ümumiyyətlə daxildir: Professional bələdçi, Transfer (göstərilən marşrut üzrə), Qidalanma (tur təsvirində qeyd edildiyi kimi), Sığorta. Daxil deyil: Şəxsi xərclər, Əlavə fəaliyyətlər, Tip/bəxşiş.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="payment">
+                    <button class="faq-question">
+                        <span data-lang-az="Endirimlər varmı?" data-lang-en="Are there any discounts?">Endirimlər varmı?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Bəli, müxtəlif endirimlərimiz var: Qrup endirimi (5+ nəfər) - 10%, Erkən sifariş (30+ gün əvvəl) - 15%, Sadiq müştəri (3+ tur) - 20%, Tələbə/pensiyaçı - 10%. Endirimlər birləşdirilə bilməz." data-lang-en="Yes, we have various discounts: Group discount (5+ people) - 10%, Early booking (30+ days in advance) - 15%, Loyal customer (3+ tours) - 20%, Student/pensioner - 10%. Discounts cannot be combined.">Bəli, müxtəlif endirimlərimiz var: Qrup endirimi (5+ nəfər) - 10%, Erkən sifariş (30+ gün əvvəl) - 15%, Sadiq müştəri (3+ tur) - 20%, Tələbə/pensiyaçı - 10%. Endirimlər birləşdirilə bilməz.</p>
+                    </div>
+                </div>
+
+                
+                <div class="faq-item" data-category="safety">
+                    <button class="faq-question">
+                        <span data-lang-az="Turlar təhlükəsizdirmi?" data-lang-en="Are tours safe?">Turlar təhlükəsizdirmi?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Təhlükəsizlik bizim əsas prioritetimizdir. Bütün turlarımızda: Sertifikatlı bələdçilər, İlk yardım dəstləri, Rabitə avadanlığı, Hava monitorinqi, Fövqəladə hal planları mövcuddur. Bütün iştirakçılar sığortalanır." data-lang-en="Safety is our top priority. All our tours include: Certified guides, First aid kits, Communication equipment, Weather monitoring, Emergency plans. All participants are insured.">Təhlükəsizlik bizim əsas prioritetimizdir. Bütün turlarımızda: Sertifikatlı bələdçilər, İlk yardım dəstləri, Rabitə avadanlığı, Hava monitorinqi, Fövqəladə hal planları mövcuddur. Bütün iştirakçılar sığortalanır.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="safety">
+                    <button class="faq-question">
+                        <span data-lang-az="Sığorta daxildirmi?" data-lang-en="Is insurance included?">Sığorta daxildirmi?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Bəli, bütün turlarımıza əsas tibbi sığorta daxildir. Bu sığorta tur müddətində baş verə biləcək qəzaları əhatə edir. Əlavə genişləndirilmiş sığorta (helikopter evakuasiyası, xəstəlik və s.) əlavə ödənişlə təmin edilə bilər." data-lang-en="Yes, basic medical insurance is included in all our tours. This insurance covers accidents that may occur during the tour. Additional extended insurance (helicopter evacuation, illness, etc.) can be provided for an extra fee.">Bəli, bütün turlarımıza əsas tibbi sığorta daxildir. Bu sığorta tur müddətində baş verə biləcək qəzaları əhatə edir. Əlavə genişləndirilmiş sığorta (helikopter evakuasiyası, xəstəlik və s.) əlavə ödənişlə təmin edilə bilər.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="safety">
+                    <button class="faq-question">
+                        <span data-lang-az="Pis hava şəraitində tur keçiriləcəkmi?" data-lang-en="Will the tour proceed in bad weather?">Pis hava şəraitində tur keçiriləcəkmi?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Hava şəraiti təhlükəli olduqda (güclü yağış, fırtına, dumanlılıq) tur təxirə salına və ya alternativ marşrut təklif edilə bilər. Qərar bələdçi tərəfindən iştirakçıların təhlükəsizliyini nəzərə alaraq verilir. Hava səbəbindən ləğv olunan turlarda tam geri ödəmə və ya yenidən planlaşdırma təklif edilir." data-lang-en="When weather conditions are dangerous (heavy rain, storm, fog), the tour may be postponed or an alternative route may be offered. The decision is made by the guide considering participants' safety. Tours cancelled due to weather receive full refund or rescheduling.">Hava şəraiti təhlükəli olduqda (güclü yağış, fırtına, dumanlılıq) tur təxirə salına və ya alternativ marşrut təklif edilə bilər. Qərar bələdçi tərəfindən iştirakçıların təhlükəsizliyini nəzərə alaraq verilir. Hava səbəbindən ləğv olunan turlarda tam geri ödəmə və ya yenidən planlaşdırma təklif edilir.</p>
+                    </div>
+                </div>
+
+                
+                <div class="faq-item" data-category="equipment">
+                    <button class="faq-question">
+                        <span data-lang-az="Nə gətirməliyəm?" data-lang-en="What should I bring?">Nə gətirməliyəm?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Əsas siyahı: Rahat trekking ayaqqabıları, Qatlı geyim (termal, fleece, yağmurluk), Günəş eynəyi və günəş kremi, Su qabı (1-2 litr), Şəxsi dərmanlar, Kiçik bel çantası. Xüsusi avadanlıq (alpinizm, xizək) bizdən icarəyə götürülə bilər." data-lang-en="Essential list: Comfortable trekking shoes, Layered clothing (thermal, fleece, rain jacket), Sunglasses and sunscreen, Water bottle (1-2 liters), Personal medications, Small backpack. Special equipment (alpinism, skiing) can be rented from us.">Əsas siyahı: Rahat trekking ayaqqabıları, Qatlı geyim (termal, fleece, yağmurluk), Günəş eynəyi və günəş kremi, Su qabı (1-2 litr), Şəxsi dərmanlar, Kiçik bel çantası. Xüsusi avadanlıq (alpinizm, xizək) bizdən icarəyə götürülə bilər.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="equipment">
+                    <button class="faq-question">
+                        <span data-lang-az="Avadanlıq icarəyə götürmək olarmı?" data-lang-en="Can I rent equipment?">Avadanlıq icarəyə götürmək olarmı?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Bəli, müxtəlif avadanlıqları icarəyə verə bilərik: Trekking çubuqları - ₼10/gün, Yataq torbası - ₼15/gün, Çadır (2 nəfərlik) - ₼25/gün, Xizək dəsti - ₼50/gün, Alpinizm dəsti - ₼40/gün. Əvvəlcədən sifariş tövsiyə olunur." data-lang-en="Yes, we can rent various equipment: Trekking poles - ₼10/day, Sleeping bag - ₼15/day, Tent (2-person) - ₼25/day, Ski set - ₼50/day, Alpinism set - ₼40/day. Advance booking recommended.">Bəli, müxtəlif avadanlıqları icarəyə verə bilərik: Trekking çubuqları - ₼10/gün, Yataq torbası - ₼15/gün, Çadır (2 nəfərlik) - ₼25/gün, Xizək dəsti - ₼50/gün, Alpinizm dəsti - ₼40/gün. Əvvəlcədən sifariş tövsiyə olunur.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="equipment">
+                    <button class="faq-question">
+                        <span data-lang-az="Qidalanma necə təşkil olunur?" data-lang-en="How is food organized?">Qidalanma necə təşkil olunur?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-lang-az="Qidalanma tur növünə görə dəyişir: Günübirlik turlar - snack və su təmin edilir, Çoxgünlük turlar - tam qidalanma (səhər, günorta, axşam), Otel turları - səhər yeməyi daxildir. Xüsusi pəhriz tələbləri (vegetarian, allergiya) əvvəlcədən bildirin." data-lang-en="Food varies by tour type: Day tours - snacks and water provided, Multi-day tours - full meals (breakfast, lunch, dinner), Hotel tours - breakfast included. Special dietary requirements (vegetarian, allergies) should be notified in advance.">Qidalanma tur növünə görə dəyişir: Günübirlik turlar - snack və su təmin edilir, Çoxgünlük turlar - tam qidalanma (səhər, günorta, axşam), Otel turları - səhər yeməyi daxildir. Xüsusi pəhriz tələbləri (vegetarian, allergiya) əvvəlcədən bildirin.</p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="faq-contact">
+                <h3 data-lang-az="Sualınız cavablanmadı?" data-lang-en="Question not answered?">Sualınız cavablanmadı?</h3>
+                <p data-lang-az="Bizimlə əlaqə saxlayın, sizə kömək etməyə hazırıq!" data-lang-en="Contact us, we're ready to help!">Bizimlə əlaqə saxlayın, sizə kömək etməyə hazırıq!</p>
+                <div class="faq-contact-buttons">
+                    <a href="tel:+994123456789" class="faq-contact-btn">
+                        <span>📞</span> +994 12 345 67 89
+                    </a>
+                    <a href="mailto:info@peakexplorer.az" class="faq-contact-btn">
+                        <span>✉️</span> info@peakexplorer.az
+                    </a>
+                    <a href="index (2).html#contact" class="faq-contact-btn primary">
+                        <span>💬</span> <span data-lang-az="Mesaj Göndər" data-lang-en="Send Message">Mesaj Göndər</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang-az="© 2025 PeakExplorer. Bütün hüquqlar qorunur." data-lang-en="© 2025 PeakExplorer. All rights reserved.">© 2025 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = localStorage.getItem('language') || 'az';
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            document.querySelectorAll('[data-lang-az]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`);
+                if (text) el.textContent = text;
+            });
+            
+            document.documentElement.lang = lang;
+        }
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage(currentLanguage);
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+            });
+        });
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>

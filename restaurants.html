@@ -1,0 +1,948 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restoranlar | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .restaurants-hero {
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.9), rgba(45, 90, 123, 0.9)),
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070') center/cover;
+            padding: 150px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .restaurants-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .restaurants-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .restaurants-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Cuisine Tabs */
+        .cuisine-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .cuisine-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .cuisine-tab:hover,
+        .cuisine-tab.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        /* Restaurants Grid */
+        .restaurants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+        
+        .restaurant-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .restaurant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .restaurant-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .restaurant-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-accent);
+            color: var(--color-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .restaurant-rating-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            padding: 0.4rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .restaurant-content {
+            padding: 1.5rem;
+        }
+        
+        .restaurant-cuisine {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--color-light);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-bottom: 0.75rem;
+        }
+        
+        .restaurant-name {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .restaurant-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .restaurant-info {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+        
+        .restaurant-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        /* Popular Dishes */
+        .popular-dishes {
+            margin-bottom: 1rem;
+        }
+        
+        .popular-dishes-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .dishes-list {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .dish-tag {
+            background: var(--color-light);
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+        }
+        
+        .restaurant-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .restaurant-price {
+            font-size: 1.1rem;
+            color: var(--color-primary);
+        }
+        
+        .restaurant-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .restaurant-btn {
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            border: none;
+        }
+        
+        .restaurant-btn.primary {
+            background: var(--color-accent);
+            color: var(--color-dark);
+        }
+        
+        .restaurant-btn.primary:hover {
+            background: var(--color-accent-dark);
+        }
+        
+        .restaurant-btn.secondary {
+            background: var(--color-light);
+            color: var(--color-text);
+        }
+        
+        .restaurant-btn.secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        /* Restaurant Detail Modal */
+        .restaurant-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .restaurant-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: white;
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: #ff4757;
+            color: white;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .modal-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .modal-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-light);
+        }
+        
+        .modal-description {
+            color: var(--color-text);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        /* Menu Section */
+        .menu-section {
+            margin-bottom: 2rem;
+        }
+        
+        .menu-section h3 {
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .menu-item {
+            background: var(--color-light);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            background: #e8e8e8;
+        }
+        
+        .menu-item-name {
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 0.25rem;
+        }
+        
+        .menu-item-price {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        
+        /* Reservation Form */
+        .reservation-section {
+            background: var(--color-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        
+        .reservation-section h3 {
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .reservation-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .reservation-form .full-width {
+            grid-column: span 2;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .reservation-submit {
+            grid-column: span 2;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .reservation-submit:hover {
+            background: var(--color-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .restaurants-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .restaurants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reservation-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .reservation-form .full-width,
+            .reservation-submit {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item active">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="restaurants-hero">
+        <h1>🍽️ Restoranlar</h1>
+        <p>Azərbaycan mətbəxinin ən yaxşı nümunələri - dağ bölgələrinin dadlı yeməkləri</p>
+    </section>
+
+    
+    <div class="restaurants-container">
+        
+        <div class="cuisine-tabs">
+            <button class="cuisine-tab active" data-cuisine="all">🍴 Hamısı</button>
+            <button class="cuisine-tab" data-cuisine="azerbaijani">🇦🇿 Azərbaycan</button>
+            <button class="cuisine-tab" data-cuisine="kebab">🍖 Kabab</button>
+            <button class="cuisine-tab" data-cuisine="traditional">🥘 Ənənəvi</button>
+            <button class="cuisine-tab" data-cuisine="modern">🍳 Müasir</button>
+        </div>
+
+        
+        <div class="restaurants-grid" id="restaurantsGrid">
+            
+        </div>
+    </div>
+
+    
+    <div class="restaurant-modal" id="restaurantModal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalImage">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title" id="modalTitle">Restoran Adı</h2>
+                <div class="modal-meta">
+                    <span>📍 <span id="modalLocation">Məkan</span></span>
+                    <span>⭐ <span id="modalRating">4.8</span></span>
+                    <span>💰 <span id="modalPrice">₼₼</span></span>
+                    <span>🕐 <span id="modalHours">10:00 - 23:00</span></span>
+                </div>
+                <p class="modal-description" id="modalDescription">Restoran haqqında məlumat...</p>
+                
+                
+                <div class="menu-section">
+                    <h3>🌟 Məşhur Yeməklər</h3>
+                    <div class="menu-grid" id="menuGrid">
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="reservation-section">
+                    <h3>📅 Masa Rezervasiyası</h3>
+                    <form class="reservation-form" onsubmit="submitReservation(event)">
+                        <div class="form-group">
+                            <label>Ad Soyad</label>
+                            <input type="text" required placeholder="Tam adınız">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="tel" required placeholder="+994 XX XXX XX XX">
+                        </div>
+                        <div class="form-group">
+                            <label>Tarix</label>
+                            <input type="date" required id="reservationDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Saat</label>
+                            <select required>
+                                <option value="">Seçin</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                                <option value="21:00">21:00</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Qonaq sayı</label>
+                            <select required>
+                                <option value="2">2 nəfər</option>
+                                <option value="3">3 nəfər</option>
+                                <option value="4">4 nəfər</option>
+                                <option value="5">5 nəfər</option>
+                                <option value="6">6+ nəfər</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Xüsusi istəklər</label>
+                            <input type="text" placeholder="Pəncərə kənarı, uşaq oturacağı və s.">
+                        </div>
+                        <button type="submit" class="reservation-submit">Rezerv Et</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>⛰️ PeakExplorer</h3>
+                <p>Azərbaycanın dağlarını kəşf edin</p>
+            </div>
+            <div class="footer-section">
+                <h4>Səhifələr</h4>
+                <a href="index (2).html">Ana Səhifə</a>
+                <a href="hotels.html">Otellər</a>
+                <a href="restaurants.html">Restoranlar</a>
+            </div>
+            <div class="footer-section">
+                <h4>Əlaqə</h4>
+                <p>📧 info@peakexplorer.az</p>
+                <p>📞 +994 12 345 67 89</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        const restaurants = [
+            {
+                id: 1,
+                name: 'Şahdağ Dağ Restoranı',
+                location: 'Şahdağ Resort, Qusar',
+                cuisine: 'azerbaijani',
+                image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800',
+                rating: 4.9,
+                price: '₼₼₼',
+                hours: '08:00 - 23:00',
+                badge: 'Premium',
+                description: 'Şahdağ kurortunun ən yaxşı restoranı. Panoramik dağ mənzərəsi və mükəmməl Azərbaycan mətbəxi ilə qonaqlarına xidmət edir.',
+                popularDishes: ['Qutab', 'Dağ kababı', 'Xəngəl', 'Piti'],
+                menu: [
+                    { name: 'Qutab (ət)', price: '₼8' },
+                    { name: 'Qutab (göy)', price: '₼6' },
+                    { name: 'Dağ kababı', price: '₼25' },
+                    { name: 'Xəngəl', price: '₼12' },
+                    { name: 'Piti', price: '₼15' },
+                    { name: 'Dolma', price: '₼14' }
+                ]
+            },
+            {
+                id: 2,
+                name: 'Xınalıq Ev Yeməkləri',
+                location: 'Xınalıq kəndi, Quba',
+                cuisine: 'traditional',
+                image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800',
+                rating: 4.8,
+                price: '₼',
+                hours: '09:00 - 21:00',
+                badge: 'Autentik',
+                description: 'Xınalıq kəndinin ənənəvi ev yeməkləri. 5000 illik tarixə malik mədəniyyətin dadı.',
+                popularDishes: ['Xınalıq xəngəli', 'Dağ pendiri', 'Ayran', 'Ev çörəyi'],
+                menu: [
+                    { name: 'Xınalıq xəngəli', price: '₼10' },
+                    { name: 'Dağ pendiri', price: '₼5' },
+                    { name: 'Ev çörəyi', price: '₼3' },
+                    { name: 'Ayran', price: '₼2' },
+                    { name: 'Bal', price: '₼8' }
+                ]
+            },
+            {
+                id: 3,
+                name: 'Qəbələ Kabab Evi',
+                location: 'Qəbələ şəhəri',
+                cuisine: 'kebab',
+                image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800',
+                rating: 4.7,
+                price: '₼₼',
+                hours: '11:00 - 23:00',
+                badge: 'Populyar',
+                description: 'Qəbələnin ən məşhur kabab restoranı. Təzə ət və ənənəvi hazırlama üsulları.',
+                popularDishes: ['Təndir kababı', 'Lülə kabab', 'Tikə kabab', 'Cız-bız'],
+                menu: [
+                    { name: 'Təndir kababı', price: '₼30' },
+                    { name: 'Lülə kabab', price: '₼18' },
+                    { name: 'Tikə kabab', price: '₼22' },
+                    { name: 'Cız-bız', price: '₼16' },
+                    { name: 'Qazan kababı', price: '₼35' }
+                ]
+            },
+            {
+                id: 4,
+                name: 'Şəki Piti Evi',
+                location: 'Şəki şəhəri',
+                cuisine: 'traditional',
+                image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800',
+                rating: 4.9,
+                price: '₼',
+                hours: '10:00 - 22:00',
+                badge: 'Ən yaxşı',
+                description: 'Şəkinin məşhur pitisi. Ənənəvi gil qablarda hazırlanır. UNESCO qeyri-maddi mədəni irs.',
+                popularDishes: ['Şəki pitisi', 'Şəki halvası', 'Paxlava', 'Qutab'],
+                menu: [
+                    { name: 'Şəki pitisi', price: '₼12' },
+                    { name: 'Şəki halvası', price: '₼15' },
+                    { name: 'Paxlava', price: '₼10' },
+                    { name: 'Qutab', price: '₼6' }
+                ]
+            },
+            {
+                id: 5,
+                name: 'Tufandağ Panorama',
+                location: 'Tufandağ Resort, Qəbələ',
+                cuisine: 'modern',
+                image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800',
+                rating: 4.6,
+                price: '₼₼₼',
+                hours: '09:00 - 00:00',
+                description: 'Tufandağ kanat yolunun zirvəsində müasir restoran. Möhtəşəm mənzərə və fusion mətbəx.',
+                popularDishes: ['Steak', 'Pasta', 'Salat', 'Desert'],
+                menu: [
+                    { name: 'Beef Steak', price: '₼45' },
+                    { name: 'Pasta Carbonara', price: '₼22' },
+                    { name: 'Caesar Salad', price: '₼16' },
+                    { name: 'Tiramisu', price: '₼12' }
+                ]
+            },
+            {
+                id: 6,
+                name: 'Qusar Milli Mətbəx',
+                location: 'Qusar şəhəri',
+                cuisine: 'azerbaijani',
+                image: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800',
+                rating: 4.5,
+                price: '₼₼',
+                hours: '10:00 - 22:00',
+                description: 'Qusar rayonunun ənənəvi mətbəxi. Ləzgi və Azərbaycan yeməklərinin birləşməsi.',
+                popularDishes: ['Xingal', 'Çığırtma', 'Düşbərə', 'Aş'],
+                menu: [
+                    { name: 'Xingal', price: '₼14' },
+                    { name: 'Çığırtma', price: '₼18' },
+                    { name: 'Düşbərə', price: '₼10' },
+                    { name: 'Aş', price: '₼20' }
+                ]
+            },
+            {
+                id: 7,
+                name: 'İsmayıllı Bağ Restoranı',
+                location: 'İsmayıllı',
+                cuisine: 'traditional',
+                image: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800',
+                rating: 4.7,
+                price: '₼',
+                hours: '09:00 - 21:00',
+                badge: 'Təbiətdə',
+                description: 'İsmayıllının meşələri arasında yerləşən bağ restoranı. Təbii mühit və ev yeməkləri.',
+                popularDishes: ['Sac üstü', 'Balıq', 'Toyuq', 'Qatıq'],
+                menu: [
+                    { name: 'Sac üstü ət', price: '₼25' },
+                    { name: 'Qızarmış balıq', price: '₼20' },
+                    { name: 'Toyuq sac', price: '₼18' },
+                    { name: 'Qatıq', price: '₼3' }
+                ]
+            },
+            {
+                id: 8,
+                name: 'Lahıc Mis Qab',
+                location: 'Lahıc kəndi, İsmayıllı',
+                cuisine: 'azerbaijani',
+                image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+                rating: 4.8,
+                price: '₼',
+                hours: '10:00 - 20:00',
+                badge: 'Tarixi',
+                description: 'Lahıcın məşhur mis qablarında hazırlanan yeməklər. Qədim sənətkarlıq və dad birlikdə.',
+                popularDishes: ['Mis qazanda plov', 'Dolma', 'Xaş', 'Çay'],
+                menu: [
+                    { name: 'Mis qazanda plov', price: '₼18' },
+                    { name: 'Dolma', price: '₼14' },
+                    { name: 'Xaş', price: '₼12' },
+                    { name: 'Çay dəsti', price: '₼5' }
+                ]
+            }
+        ];
+
+        let selectedRestaurant = null;
+        function renderRestaurants(filteredRestaurants = restaurants) {
+            const grid = document.getElementById('restaurantsGrid');
+            grid.innerHTML = filteredRestaurants.map(rest => `
+                <div class="restaurant-card" data-cuisine="${rest.cuisine}" onclick="openModal(${rest.id})">
+                    <div class="restaurant-image" style="background-image: url('${rest.image}')">
+                        ${rest.badge ? `<span class="restaurant-badge">${rest.badge}</span>` : ''}
+                        <span class="restaurant-rating-badge">⭐ ${rest.rating}</span>
+                    </div>
+                    <div class="restaurant-content">
+                        <span class="restaurant-cuisine">🍴 ${getCuisineName(rest.cuisine)}</span>
+                        <h3 class="restaurant-name">${rest.name}</h3>
+                        <div class="restaurant-location">📍 ${rest.location}</div>
+                        <div class="restaurant-info">
+                            <span>💰 ${rest.price}</span>
+                            <span>🕐 ${rest.hours}</span>
+                        </div>
+                        <div class="popular-dishes">
+                            <div class="popular-dishes-title">Məşhur yeməklər:</div>
+                            <div class="dishes-list">
+                                ${rest.popularDishes.slice(0, 3).map(d => `<span class="dish-tag">${d}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="restaurant-footer">
+                            <div class="restaurant-price">${rest.price}</div>
+                            <div class="restaurant-actions">
+                                <button class="restaurant-btn secondary">📞 Zəng</button>
+                                <button class="restaurant-btn primary">Rezerv Et</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        function getCuisineName(cuisine) {
+            const names = {
+                'azerbaijani': 'Azərbaycan',
+                'kebab': 'Kabab',
+                'traditional': 'Ənənəvi',
+                'modern': 'Müasir'
+            };
+            return names[cuisine] || cuisine;
+        }
+        document.querySelectorAll('.cuisine-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.cuisine-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const cuisine = this.dataset.cuisine;
+                if (cuisine === 'all') {
+                    renderRestaurants(restaurants);
+                } else {
+                    renderRestaurants(restaurants.filter(r => r.cuisine === cuisine));
+                }
+            });
+        });
+        function openModal(id) {
+            selectedRestaurant = restaurants.find(r => r.id === id);
+            if (!selectedRestaurant) return;
+            
+            document.getElementById('modalImage').style.backgroundImage = `url('${selectedRestaurant.image}')`;
+            document.getElementById('modalTitle').textContent = selectedRestaurant.name;
+            document.getElementById('modalLocation').textContent = selectedRestaurant.location;
+            document.getElementById('modalRating').textContent = selectedRestaurant.rating;
+            document.getElementById('modalPrice').textContent = selectedRestaurant.price;
+            document.getElementById('modalHours').textContent = selectedRestaurant.hours;
+            document.getElementById('modalDescription').textContent = selectedRestaurant.description;
+            document.getElementById('menuGrid').innerHTML = selectedRestaurant.menu.map(item => `
+                <div class="menu-item">
+                    <div class="menu-item-name">${item.name}</div>
+                    <div class="menu-item-price">${item.price}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('restaurantModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('restaurantModal').classList.remove('active');
+        }
+        function submitReservation(e) {
+            e.preventDefault();
+            
+            const orderNumber = 'RST-' + Date.now().toString().slice(-8);
+            
+            alert(`✅ Rezervasiyanız təsdiqləndi!\n\nSifariş №: ${orderNumber}\nRestoran: ${selectedRestaurant.name}\n\nTəsdiq SMS-i göndəriləcək.`);
+            
+            closeModal();
+        }
+        const today = new Date();
+        document.getElementById('reservationDate').value = today.toISOString().split('T')[0];
+        renderRestaurants();
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>

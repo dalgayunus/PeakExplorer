@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Əlaqə | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="contact-page">
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html" class="active">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="page-hero contact-hero">
+        <div class="page-hero-content">
+            <h1 data-lang-az="Əlaqə" data-lang-en="Contact Us" data-lang-ru="Контакты" data-lang-tr="İletişim">Əlaqə</h1>
+            <p data-lang-az="Suallarınız var? Bizimlə əlaqə saxlayın" data-lang-en="Have questions? Get in touch with us" data-lang-ru="Есть вопросы? Свяжитесь с нами" data-lang-tr="Sorularınız mı var? Bizimle iletişime geçin">Suallarınız var? Bizimlə əlaqə saxlayın</p>
+        </div>
+    </section>
+
+    
+    <section class="contact-content">
+        <div class="contact-container">
+            
+            <div class="contact-info-section">
+                <h2 data-lang-az="Əlaqə Məlumatları" data-lang-en="Contact Information" data-lang-ru="Контактная информация" data-lang-tr="İletişim Bilgileri">Əlaqə Məlumatları</h2>
+                <p data-lang-az="Sizinlə əlaqə saxlamaq üçün aşağıdakı vasitələrdən istifadə edə bilərsiniz" data-lang-en="You can use the following methods to contact us" data-lang-ru="Вы можете связаться с нами следующими способами" data-lang-tr="Bizimle iletişime geçmek için aşağıdaki yöntemleri kullanabilirsiniz">Sizinlə əlaqə saxlamaq üçün aşağıdakı vasitələrdən istifadə edə bilərsiniz</p>
+                
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <span class="contact-card-icon">📍</span>
+                        <h3 data-lang-az="Ünvan" data-lang-en="Address" data-lang-ru="Адрес" data-lang-tr="Adres">Ünvan</h3>
+                        <p>Nizami küçəsi 123<br>Bakı, Azərbaycan AZ1000</p>
+                    </div>
+                    <div class="contact-card">
+                        <span class="contact-card-icon">📞</span>
+                        <h3 data-lang-az="Telefon" data-lang-en="Phone" data-lang-ru="Телефон" data-lang-tr="Telefon">Telefon</h3>
+                        <p><a href="tel:+994123456789">+994 12 345 67 89</a></p>
+                        <p><a href="tel:+994501234567">+994 50 123 45 67</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <span class="contact-card-icon">✉️</span>
+                        <h3 data-lang-az="E-poçt" data-lang-en="Email" data-lang-ru="Эл. почта" data-lang-tr="E-posta">E-poçt</h3>
+                        <p><a href="mailto:info@peakexplorer.az">info@peakexplorer.az</a></p>
+                        <p><a href="mailto:booking@peakexplorer.az">booking@peakexplorer.az</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <span class="contact-card-icon">🕐</span>
+                        <h3 data-lang-az="İş Saatları" data-lang-en="Working Hours" data-lang-ru="Рабочие часы" data-lang-tr="Çalışma Saatleri">İş Saatları</h3>
+                        <p data-lang-az="Bazar ertəsi - Şənbə" data-lang-en="Monday - Saturday" data-lang-ru="Понедельник - Суббота" data-lang-tr="Pazartesi - Cumartesi">Bazar ertəsi - Şənbə</p>
+                        <p>09:00 - 18:00</p>
+                    </div>
+                </div>
+
+                
+                <div class="contact-social">
+                    <h3 data-lang-az="Sosial Şəbəkələr" data-lang-en="Social Media" data-lang-ru="Социальные сети" data-lang-tr="Sosyal Medya">Sosial Şəbəkələr</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">📘</a>
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link" title="YouTube">🎬</a>
+                        <a href="#" class="social-link" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="contact-form-section">
+                <h2 data-lang-az="Mesaj Göndərin" data-lang-en="Send a Message" data-lang-ru="Отправить сообщение" data-lang-tr="Mesaj Gönderin">Mesaj Göndərin</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-lang-az="Ad Soyad" data-lang-en="Full Name" data-lang-ru="Полное имя" data-lang-tr="Ad Soyad">Ad Soyad</label>
+                            <input type="text" id="contactName" required data-placeholder-az="Adınız Soyadınız" data-placeholder-en="Your Full Name" data-placeholder-ru="Ваше полное имя" data-placeholder-tr="Adınız Soyadınız" placeholder="Adınız Soyadınız">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang-az="E-poçt" data-lang-en="Email" data-lang-ru="Эл. почта" data-lang-tr="E-posta">E-poçt</label>
+                            <input type="email" id="contactEmail" required placeholder="email@example.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label data-lang-az="Telefon" data-lang-en="Phone" data-lang-ru="Телефон" data-lang-tr="Telefon">Telefon</label>
+                            <input type="tel" id="contactPhone" placeholder="+994 XX XXX XX XX">
+                        </div>
+                        <div class="form-group">
+                            <label data-lang-az="Mövzu" data-lang-en="Subject" data-lang-ru="Тема" data-lang-tr="Konu">Mövzu</label>
+                            <select id="contactSubject" required>
+                                <option value="" data-lang-az="Mövzu Seçin" data-lang-en="Select Subject" data-lang-ru="Выберите тему" data-lang-tr="Konu Seçin">Mövzu Seçin</option>
+                                <option value="tour" data-lang-az="Tur Sorğusu" data-lang-en="Tour Inquiry" data-lang-ru="Запрос тура" data-lang-tr="Tur Sorgusu">Tur Sorğusu</option>
+                                <option value="booking" data-lang-az="Sifariş" data-lang-en="Booking" data-lang-ru="Бронирование" data-lang-tr="Rezervasyon">Sifariş</option>
+                                <option value="complaint" data-lang-az="Şikayət" data-lang-en="Complaint" data-lang-ru="Жалоба" data-lang-tr="Şikayet">Şikayət</option>
+                                <option value="partnership" data-lang-az="Əməkdaşlıq" data-lang-en="Partnership" data-lang-ru="Партнерство" data-lang-tr="Ortaklık">Əməkdaşlıq</option>
+                                <option value="other" data-lang-az="Digər" data-lang-en="Other" data-lang-ru="Другое" data-lang-tr="Diğer">Digər</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-lang-az="Mesajınız" data-lang-en="Your Message" data-lang-ru="Ваше сообщение" data-lang-tr="Mesajınız">Mesajınız</label>
+                        <textarea id="contactMessage" rows="5" required data-placeholder-az="Mesajınızı buraya yazın..." data-placeholder-en="Write your message here..." data-placeholder-ru="Напишите ваше сообщение здесь..." data-placeholder-tr="Mesajınızı buraya yazın..." placeholder="Mesajınızı buraya yazın..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-lang-az="Göndər" data-lang-en="Send" data-lang-ru="Отправить" data-lang-tr="Gönder">Göndər</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="contact-map-section">
+        <h2 data-lang-az="Bizi Tapın" data-lang-en="Find Us" data-lang-ru="Найдите нас" data-lang-tr="Bizi Bulun">Bizi Tapın</h2>
+        <div class="contact-map">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3039.4!2d49.8671!3d40.4093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI0JzMzLjUiTiA0OcKwNTInMDEuNiJF!5e0!3m2!1sen!2saz!4v1234567890"
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
+
+    
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang-az="© 2025 PeakExplorer. Bütün hüquqlar qorunur." data-lang-en="© 2025 PeakExplorer. All rights reserved." data-lang-ru="© 2025 PeakExplorer. Все права защищены." data-lang-tr="© 2025 PeakExplorer. Tüm hakları saklıdır.">© 2025 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    
+    <div class="notification" id="notification"></div>
+
+    <script>
+        let currentLanguage = localStorage.getItem('language') || 'az';
+        
+        const langNames = { 'az': 'AZ', 'en': 'EN', 'ru': 'RU', 'tr': 'TR' };
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+            
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            const langBtn = document.getElementById('langDropdownBtn');
+            if (langBtn) {
+                langBtn.querySelector('.lang-current').textContent = langNames[lang];
+            }
+            
+            document.querySelectorAll('[data-lang-az]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`) || el.getAttribute('data-lang-az');
+                if (text) el.textContent = text;
+            });
+            document.querySelectorAll('[data-placeholder-az]').forEach(el => {
+                const placeholder = el.getAttribute(`data-placeholder-${lang}`) || el.getAttribute('data-placeholder-az');
+                if (placeholder) el.placeholder = placeholder;
+            });
+            document.querySelectorAll('select option[data-lang-az]').forEach(option => {
+                const text = option.getAttribute(`data-lang-${lang}`) || option.getAttribute('data-lang-az');
+                if (text) option.textContent = text;
+            });
+            
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+        }
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const phone = document.getElementById('contactPhone').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            const messages = {
+                az: 'Mesajınız uğurla göndərildi! Tezliklə sizinlə əlaqə saxlayacağıq.',
+                en: 'Your message has been sent successfully! We will contact you soon.',
+                ru: 'Ваше сообщение успешно отправлено! Мы скоро свяжемся с вами.',
+                tr: 'Mesajınız başarıyla gönderildi! En kısa sürede sizinle iletişime geçeceğiz.'
+            };
+
+            showNotification(messages[currentLanguage] || messages.az, 'success');
+            this.reset();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage(currentLanguage);
+            document.querySelectorAll('.nav-dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.closest('.nav-dropdown');
+                    const isActive = dropdown.classList.contains('active');
+                    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+                    if (!isActive) dropdown.classList.add('active');
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.nav-dropdown')) {
+                    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+                }
+            });
+            
+            document.querySelectorAll('.lang-option').forEach(btn => {
+                btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+            });
+        });
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,964 @@
+﻿<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otellər | PeakExplorer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⛰️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .hotels-hero {
+            background: linear-gradient(135deg, rgba(26, 58, 82, 0.9), rgba(45, 90, 123, 0.9)),
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070') center/cover;
+            padding: 150px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .hotels-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hotels-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .hotels-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Search & Filters */
+        .hotels-filters {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            margin-top: -60px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+        
+        .filter-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+        
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-group input:focus,
+        .filter-group select:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+        
+        .search-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+        
+        .search-btn:hover {
+            background: var(--color-secondary);
+        }
+        
+        /* Region Tabs */
+        .region-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .region-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .region-tab:hover,
+        .region-tab.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        /* Hotels Grid */
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+        
+        .hotel-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hotel-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .hotel-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--color-accent);
+            color: var(--color-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .hotel-favorite {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.25rem;
+        }
+        
+        .hotel-favorite:hover {
+            transform: scale(1.1);
+        }
+        
+        .hotel-favorite.active {
+            background: #ff4757;
+            color: white;
+        }
+        
+        .hotel-content {
+            padding: 1.5rem;
+        }
+        
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hotel-name {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hotel-stars {
+            color: #ffc107;
+        }
+        
+        .hotel-score {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .hotel-reviews {
+            color: var(--color-text-light);
+            font-size: 0.85rem;
+        }
+        
+        .hotel-amenities {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .amenity {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+        }
+        
+        .hotel-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .hotel-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        
+        .hotel-price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+        }
+        
+        .hotel-book-btn {
+            background: var(--color-accent);
+            color: var(--color-dark);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .hotel-book-btn:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Booking Modal */
+        .booking-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .booking-modal.active {
+            display: flex;
+        }
+        
+        .booking-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .booking-header {
+            padding: 2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .booking-header h2 {
+            font-family: var(--font-heading);
+            color: var(--color-primary);
+        }
+        
+        .booking-close {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--color-light);
+            border-radius: 50%;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .booking-close:hover {
+            background: #ff4757;
+            color: white;
+        }
+        
+        .booking-body {
+            padding: 2rem;
+        }
+        
+        .booking-hotel-info {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .booking-hotel-image {
+            width: 120px;
+            height: 80px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .booking-hotel-details h3 {
+            color: var(--color-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .booking-form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .booking-form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .booking-form-group input,
+        .booking-form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+        
+        .booking-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .booking-summary {
+            background: var(--color-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .booking-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .booking-summary-total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            padding-top: 0.5rem;
+            border-top: 1px solid #ddd;
+            margin-top: 0.5rem;
+        }
+        
+        .booking-submit {
+            width: 100%;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .booking-submit:hover {
+            background: var(--color-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .hotels-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .hotels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark">
+        <a href="index (2).html" class="logo">
+            <span class="logo-icon">⛰️</span>
+            <span class="logo-text">PeakExplorer</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index (2).html">Ana Səhifə</a></li>
+            <li><a href="index (2).html#mountains">Dağlar</a></li>
+            <li class="nav-dropdown-item">
+                <a href="index (2).html#tours" class="nav-dropdown-trigger">Turlar ▾</a>
+                <div class="nav-submenu">
+                    <a href="index (2).html#tours" class="submenu-item">
+                        <span class="submenu-icon">🌟</span>
+                        <span>Popular Turlar</span>
+                    </a>
+                    <a href="hotels.html" class="submenu-item active">
+                        <span class="submenu-icon">🏨</span>
+                        <span>Otellər</span>
+                    </a>
+                    <a href="restaurants.html" class="submenu-item">
+                        <span class="submenu-icon">🍽️</span>
+                        <span>Restoranlar</span>
+                    </a>
+                    <a href="car-rental.html" class="submenu-item">
+                        <span class="submenu-icon">🚗</span>
+                        <span>Maşın Kirayəsi</span>
+                    </a>
+                </div>
+            </li>
+            <li><a href="index (2).html#map">Xəritə</a></li>
+            <li><a href="index (2).html#gallery">Qalereya</a></li>
+        </ul>
+        <div class="nav-actions">
+            
+            <div class="nav-search">
+                <button class="search-toggle-btn" title="Axtar">🔍</button>
+            </div>
+            
+            
+            <div class="nav-dropdown menu-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span>☰</span>
+                    <span>Menyu</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <a href="about.html">Haqqımızda</a>
+                    <a href="contact.html">Əlaqə</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+            
+            
+            <div class="nav-dropdown lang-dropdown">
+                <button class="nav-dropdown-btn">
+                    <span class="lang-current">AZ</span>
+                </button>
+                <div class="nav-dropdown-content">
+                    <button class="lang-option active" data-lang="az">
+                        <span class="lang-flag">🇦🇿</span>
+                        <span>Azərbaycan</span>
+                    </button>
+                    <button class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                    </button>
+                    <button class="lang-option" data-lang="ru">
+                        <span class="lang-flag">🇷🇺</span>
+                        <span>Русский</span>
+                    </button>
+                    <button class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="auth-buttons" id="authButtons">
+                <button class="auth-btn login-btn" onclick="window.location.href='index (2).html'">Giriş</button>
+                <button class="auth-btn signup-btn" onclick="window.location.href='index (2).html'">Qeydiyyat</button>
+            </div>
+            
+            <div class="nav-dropdown user-dropdown" id="userProfile" style="display: none;">
+                <button class="nav-dropdown-btn user-dropdown-btn" id="userDropdownBtn">
+                    <span class="user-avatar" id="userAvatarNav">👤</span>
+                    <span class="user-name" id="userName"></span>
+                </button>
+                <div class="nav-dropdown-content" id="userDropdownContent">
+                    <a href="profile.html" class="dropdown-item">
+                        <span>👤</span>
+                        <span>Profil</span>
+                    </a>
+                    <button class="dropdown-item logout-item" onclick="logout()">
+                        <span>🚪</span>
+                        <span>Çıxış</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="hotels-hero">
+        <h1>🏨 Otellər</h1>
+        <p>Azərbaycanın dağ kurortlarında ən yaxşı otellər və qonaq evləri</p>
+    </section>
+
+    
+    <div class="hotels-container">
+        
+        <div class="hotels-filters">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>📍 Məkan</label>
+                    <select id="locationFilter">
+                        <option value="">Bütün regionlar</option>
+                        <option value="shahdag">Şahdağ</option>
+                        <option value="quba">Quba</option>
+                        <option value="qebele">Qəbələ</option>
+                        <option value="ismayilli">İsmayıllı</option>
+                        <option value="sheki">Şəki</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>📅 Giriş</label>
+                    <input type="date" id="checkIn">
+                </div>
+                <div class="filter-group">
+                    <label>📅 Çıxış</label>
+                    <input type="date" id="checkOut">
+                </div>
+                <div class="filter-group">
+                    <label>👥 Qonaqlar</label>
+                    <select id="guests">
+                        <option value="1">1 nəfər</option>
+                        <option value="2" selected>2 nəfər</option>
+                        <option value="3">3 nəfər</option>
+                        <option value="4">4 nəfər</option>
+                        <option value="5">5+ nəfər</option>
+                    </select>
+                </div>
+                <button class="search-btn" onclick="searchHotels()">🔍 Axtar</button>
+            </div>
+        </div>
+
+        
+        <div class="region-tabs">
+            <button class="region-tab active" data-region="all">Hamısı</button>
+            <button class="region-tab" data-region="shahdag">Şahdağ</button>
+            <button class="region-tab" data-region="quba">Quba</button>
+            <button class="region-tab" data-region="qebele">Qəbələ</button>
+            <button class="region-tab" data-region="ismayilli">İsmayıllı</button>
+            <button class="region-tab" data-region="sheki">Şəki</button>
+        </div>
+
+        
+        <div class="hotels-grid" id="hotelsGrid">
+            
+        </div>
+    </div>
+
+    
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-content">
+            <div class="booking-header">
+                <h2>🏨 Otel Rezervasiyası</h2>
+                <button class="booking-close" onclick="closeBookingModal()">✕</button>
+            </div>
+            <div class="booking-body">
+                <div class="booking-hotel-info">
+                    <div class="booking-hotel-image" id="modalHotelImage"></div>
+                    <div class="booking-hotel-details">
+                        <h3 id="modalHotelName">Otel Adı</h3>
+                        <p id="modalHotelLocation">📍 Məkan</p>
+                        <p id="modalHotelStars">⭐⭐⭐⭐⭐</p>
+                    </div>
+                </div>
+                
+                <form id="bookingForm" onsubmit="submitBooking(event)">
+                    <div class="booking-form-row">
+                        <div class="booking-form-group">
+                            <label>Ad Soyad</label>
+                            <input type="text" required placeholder="Tam adınız">
+                        </div>
+                        <div class="booking-form-group">
+                            <label>Telefon</label>
+                            <input type="tel" required placeholder="+994 XX XXX XX XX">
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form-group">
+                        <label>Email</label>
+                        <input type="email" required placeholder="email@example.com">
+                    </div>
+                    
+                    <div class="booking-form-row">
+                        <div class="booking-form-group">
+                            <label>Giriş tarixi</label>
+                            <input type="date" id="modalCheckIn" required>
+                        </div>
+                        <div class="booking-form-group">
+                            <label>Çıxış tarixi</label>
+                            <input type="date" id="modalCheckOut" required>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form-row">
+                        <div class="booking-form-group">
+                            <label>Otaq tipi</label>
+                            <select id="roomType">
+                                <option value="standard">Standart Otaq</option>
+                                <option value="deluxe">Deluxe Otaq</option>
+                                <option value="suite">Suite</option>
+                                <option value="family">Ailə Otağı</option>
+                            </select>
+                        </div>
+                        <div class="booking-form-group">
+                            <label>Qonaq sayı</label>
+                            <select id="modalGuests">
+                                <option value="1">1 nəfər</option>
+                                <option value="2" selected>2 nəfər</option>
+                                <option value="3">3 nəfər</option>
+                                <option value="4">4 nəfər</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-summary">
+                        <div class="booking-summary-row">
+                            <span>Otaq qiyməti (1 gecə)</span>
+                            <span id="roomPrice">₼250</span>
+                        </div>
+                        <div class="booking-summary-row">
+                            <span>Gecə sayı</span>
+                            <span id="nightCount">1</span>
+                        </div>
+                        <div class="booking-summary-row">
+                            <span>Xidmət haqqı</span>
+                            <span>₼25</span>
+                        </div>
+                        <div class="booking-summary-row booking-summary-total">
+                            <span>Cəmi</span>
+                            <span id="totalPrice">₼275</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="booking-submit">Rezerv Et</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>⛰️ PeakExplorer</h3>
+                <p>Azərbaycanın dağlarını kəşf edin</p>
+            </div>
+            <div class="footer-section">
+                <h4>Səhifələr</h4>
+                <a href="index (2).html">Ana Səhifə</a>
+                <a href="hotels.html">Otellər</a>
+                <a href="restaurants.html">Restoranlar</a>
+            </div>
+            <div class="footer-section">
+                <h4>Əlaqə</h4>
+                <p>📧 info@peakexplorer.az</p>
+                <p>📞 +994 12 345 67 89</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 PeakExplorer. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <script>
+        const hotels = [
+            {
+                id: 1,
+                name: 'Şahdağ Hotel & Spa',
+                location: 'Şahdağ, Qusar',
+                region: 'shahdag',
+                image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800',
+                stars: 5,
+                score: 9.2,
+                reviews: 342,
+                price: 350,
+                badge: 'Premium',
+                amenities: ['🏊 Hovuz', '💆 Spa', '🎿 Xizək', '🍽️ Restoran']
+            },
+            {
+                id: 2,
+                name: 'Pik Palace Hotel',
+                location: 'Şahdağ, Qusar',
+                region: 'shahdag',
+                image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800',
+                stars: 5,
+                score: 9.0,
+                reviews: 289,
+                price: 400,
+                badge: 'Lüks',
+                amenities: ['🏊 Hovuz', '💆 Spa', '🏋️ Fitness', '🍽️ Restoran']
+            },
+            {
+                id: 3,
+                name: 'Qafqaz Tufandağ Resort',
+                location: 'Tufandağ, Qəbələ',
+                region: 'qebele',
+                image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800',
+                stars: 5,
+                score: 8.9,
+                reviews: 456,
+                price: 280,
+                badge: 'Populyar',
+                amenities: ['🚡 Kanat yolu', '🏊 Hovuz', '🎿 Xizək', '🍽️ Restoran']
+            },
+            {
+                id: 4,
+                name: 'Quba Palace Hotel',
+                location: 'Quba şəhəri',
+                region: 'quba',
+                image: 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800',
+                stars: 4,
+                score: 8.5,
+                reviews: 198,
+                price: 150,
+                amenities: ['📶 WiFi', '🅿️ Parking', '🍽️ Restoran', '☕ Bar']
+            },
+            {
+                id: 5,
+                name: 'Xınalıq Guest House',
+                location: 'Xınalıq kəndi, Quba',
+                region: 'quba',
+                image: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800',
+                stars: 3,
+                score: 8.8,
+                reviews: 87,
+                price: 80,
+                badge: 'Unikal',
+                amenities: ['🏔️ Mənzərə', '🍲 Ev yeməyi', '🔥 Şömine']
+            },
+            {
+                id: 6,
+                name: 'Qafqaz Riverside Resort',
+                location: 'Qəbələ',
+                region: 'qebele',
+                image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800',
+                stars: 5,
+                score: 9.1,
+                reviews: 523,
+                price: 320,
+                badge: 'Tövsiyə',
+                amenities: ['🏊 Hovuz', '🎣 Balıq tutma', '🍽️ Restoran', '🎮 Əyləncə']
+            },
+            {
+                id: 7,
+                name: 'Şəki Saray Hotel',
+                location: 'Şəki şəhəri',
+                region: 'sheki',
+                image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800',
+                stars: 4,
+                score: 8.7,
+                reviews: 234,
+                price: 180,
+                amenities: ['📶 WiFi', '🍽️ Restoran', '🅿️ Parking', '☕ Çay evi']
+            },
+            {
+                id: 8,
+                name: 'İsmayıllı Resort',
+                location: 'İsmayıllı',
+                region: 'ismayilli',
+                image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800',
+                stars: 4,
+                score: 8.4,
+                reviews: 156,
+                price: 140,
+                amenities: ['🏔️ Mənzərə', '🍽️ Restoran', '🏊 Hovuz']
+            }
+        ];
+
+        let selectedHotel = null;
+        function renderHotels(filteredHotels = hotels) {
+            const grid = document.getElementById('hotelsGrid');
+            grid.innerHTML = filteredHotels.map(hotel => `
+                <div class="hotel-card" data-region="${hotel.region}">
+                    <div class="hotel-image" style="background-image: url('${hotel.image}')">
+                        ${hotel.badge ? `<span class="hotel-badge">${hotel.badge}</span>` : ''}
+                        <span class="hotel-favorite" onclick="toggleFavorite(this)">🤍</span>
+                    </div>
+                    <div class="hotel-content">
+                        <div class="hotel-location">📍 ${hotel.location}</div>
+                        <h3 class="hotel-name">${hotel.name}</h3>
+                        <div class="hotel-rating">
+                            <span class="hotel-stars">${'⭐'.repeat(hotel.stars)}</span>
+                            <span class="hotel-score">${hotel.score}</span>
+                            <span class="hotel-reviews">(${hotel.reviews} rəy)</span>
+                        </div>
+                        <div class="hotel-amenities">
+                            ${hotel.amenities.map(a => `<span class="amenity">${a}</span>`).join('')}
+                        </div>
+                        <div class="hotel-footer">
+                            <div class="hotel-price">
+                                ₼${hotel.price} <span>/gecə</span>
+                            </div>
+                            <button class="hotel-book-btn" onclick="openBookingModal(${hotel.id})">Rezerv Et</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        document.querySelectorAll('.region-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.region-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                const region = this.dataset.region;
+                if (region === 'all') {
+                    renderHotels(hotels);
+                } else {
+                    renderHotels(hotels.filter(h => h.region === region));
+                }
+            });
+        });
+        function toggleFavorite(el) {
+            el.classList.toggle('active');
+            el.textContent = el.classList.contains('active') ? '❤️' : '🤍';
+        }
+        function openBookingModal(hotelId) {
+            selectedHotel = hotels.find(h => h.id === hotelId);
+            if (!selectedHotel) return;
+            
+            document.getElementById('modalHotelImage').style.backgroundImage = `url('${selectedHotel.image}')`;
+            document.getElementById('modalHotelName').textContent = selectedHotel.name;
+            document.getElementById('modalHotelLocation').textContent = '📍 ' + selectedHotel.location;
+            document.getElementById('modalHotelStars').textContent = '⭐'.repeat(selectedHotel.stars);
+            document.getElementById('roomPrice').textContent = '₼' + selectedHotel.price;
+            
+            updateTotalPrice();
+            document.getElementById('bookingModal').classList.add('active');
+        }
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+        function updateTotalPrice() {
+            const checkIn = document.getElementById('modalCheckIn').value;
+            const checkOut = document.getElementById('modalCheckOut').value;
+            
+            let nights = 1;
+            if (checkIn && checkOut) {
+                const diff = new Date(checkOut) - new Date(checkIn);
+                nights = Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+            }
+            
+            document.getElementById('nightCount').textContent = nights;
+            const total = (selectedHotel?.price || 0) * nights + 25;
+            document.getElementById('totalPrice').textContent = '₼' + total;
+        }
+        function submitBooking(e) {
+            e.preventDefault();
+            const orderNumber = 'HTL-' + Date.now().toString().slice(-8);
+            
+            alert(`✅ Rezervasiyanız təsdiqləndi!\n\nSifariş №: ${orderNumber}\nOtel: ${selectedHotel.name}\n\nTəsdiq emaili göndəriləcək.`);
+            
+            closeBookingModal();
+        }
+        function searchHotels() {
+            const location = document.getElementById('locationFilter').value;
+            let filtered = hotels;
+            
+            if (location) {
+                filtered = hotels.filter(h => h.region === location);
+            }
+            
+            renderHotels(filtered);
+        }
+        document.getElementById('modalCheckIn').addEventListener('change', updateTotalPrice);
+        document.getElementById('modalCheckOut').addEventListener('change', updateTotalPrice);
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        document.getElementById('checkIn').value = today.toISOString().split('T')[0];
+        document.getElementById('checkOut').value = tomorrow.toISOString().split('T')[0];
+        renderHotels();
+        
+        const CURRENT_USER_KEY = 'peakexplorer_current_user';
+        function checkSession() {
+            const savedUser = localStorage.getItem(CURRENT_USER_KEY);
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    document.getElementById('authButtons').style.display = 'none';
+                    document.getElementById('userProfile').style.display = 'block';
+                    document.getElementById('userName').textContent = user.name || 'İstifadəçi';
+                } catch (e) {}
+            }
+        }
+        function logout() {
+            localStorage.removeItem(CURRENT_USER_KEY);
+            window.location.reload();
+        }
+        checkSession();
+        
+        document.getElementById('userDropdownBtn')?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.nav-dropdown');
+            const isActive = dropdown.classList.contains('active');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+            if (!isActive) dropdown.classList.add('active');
+        });
+    </script>
+</body>
+</html>
